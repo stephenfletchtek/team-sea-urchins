@@ -95,7 +95,13 @@ window.addEventListener('load', function () {
 		}
 	}
 
-	class Background { }
+	class Background {
+		constructor() {
+			this.gameWidth = gameWidth;
+			this.gameHeight = gameHeight;
+			this.image = document.getElementById()
+		}
+	}
 
 	class Enemy { }
 
