@@ -42,64 +42,65 @@ window.addEventListener('load', function () {
 			this.x = 0;
 			this.y = this.gameHeight - this.height; //(this.gameHeight - this.height)/2 for sub;
 			this.image = document.getElementById('playerImage');
-      this.frameX = 1; //these move along the spritesheet to grab whichever animation frame  
-      this.frameY = 1;
-      this.speed = 0;
-      this.vy = 0; // y-velocity (remember negative sign means go up)
-      this.weight = 1;
+			this.frameX = 1; //these move along the spritesheet to grab whichever animation frame  
+			this.frameY = 1;
+			this.speed = 0;
+			this.vy = 0; // y-velocity (remember negative sign means go up)
+			this.weight = 1;
 
 		}
+
 		draw(context) {
 			context.fillStyle = 'white';
 			context.fillRect(this.x, this.y, this.width, this.height);
 			context.drawImage(
-			  this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height
+				this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height
 			); //s_ = coords in spritesheet
 		}
-		update(input) {
-      if (input.keys.indexOf('ArrowRight') > -1 ){
-        this.speed = 5;
-      } else if (input.keys.indexOf('ArrowLeft') > -1 ){
-          this.speed = -5; //should this be -3 to make the left/right movement the same 
-      } else if (input.keys.indexOf('ArrowUp') > -1 ){
-          this.vy = -5
-      } 
-      
-      else {
-        this.speed = 0;
-      }
-      // set limits so you can't go off screen
-          // horizontal movement
-			this.x += this.speed;
-      if (this.x < 0) this.x = 0;
-      else if (this.x > this.gameWidth - this.width) this.x = this.gameWidth - this.width;
-      // vertical movemet 
-      if (!this.onGround()) {
-        this.vy += this.weight; // acceleration due to gravity
-      }
-      else {
-        this.vy = 0;
-      }
-      }
-		}  
 
-    onGround(){
-      return this.y >= this.gameHeight - this.height;
-    }
+		update(input) {
+			if (input.keys.indexOf('ArrowRight') > -1) {
+				this.speed = 5;
+			} else if (input.keys.indexOf('ArrowLeft') > -1) {
+				this.speed = -5; //should this be -3 to make the left/right movement the same 
+			} else if (input.keys.indexOf('ArrowUp') > -1) {
+				this.vy = -5
+			}
+
+			else {
+				this.speed = 0;
+			}
+			// set limits so you can't go off screen
+			// horizontal movement
+			this.x += this.speed;
+			if (this.x < 0) this.x = 0;
+			else if (this.x > this.gameWidth - this.width) this.x = this.gameWidth - this.width;
+			// vertical movemet 
+			if (!this.onGround()) {
+				this.vy += this.weight; // acceleration due to gravity
+			}
+			else {
+				this.vy = 0;
+			}
+		}
+
+		onGround() {
+			return this.y >= this.gameHeight - this.height;
+		}
 	}
 
-	class Background {}
+	class Background { }
 
-	class Enemy {}
+	class Enemy { }
 
-	const handleEnemies = () => {};
+	const handleEnemies = () => { };
 
-	const diplayStatusText = () => {};
+	const diplayStatusText = () => { };
 
 	const input = new InputHandler();
 	const player = new Player(canvas.width, canvas.height);
 	player.draw(ctx);
-	player.update();
+	player.update(input);
 
 	const animate = () => {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
