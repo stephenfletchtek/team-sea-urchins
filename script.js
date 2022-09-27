@@ -106,7 +106,7 @@ window.addEventListener('load', function () {
 			this.height = 2000
 		}
 		draw(context) {
-			context.drawImage(this.image, this.x, this.y);
+			context.drawImage(this.image, this.x, this.y, this.width, this.height);
 		}
 	}
 
@@ -125,9 +125,9 @@ window.addEventListener('load', function () {
 
 	const animate = () => {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		background.draw(ctx);
 		player.draw(ctx);
 		player.update(input);
-		background.draw(ctx);
 		this.requestAnimationFrame(animate);
 	};
 	animate();
