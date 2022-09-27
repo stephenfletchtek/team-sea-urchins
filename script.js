@@ -96,10 +96,17 @@ window.addEventListener('load', function () {
 	}
 
 	class Background {
-		constructor() {
+		constructor(gameWidth, gameHeight) {
 			this.gameWidth = gameWidth;
 			this.gameHeight = gameHeight;
-			this.image = document.getElementById()
+			this.image = document.getElementById('backgroundImage')
+			this.x = 0
+			this.y = 0
+			this.width = 3000
+			this.height = 2000
+		}
+		draw(context) {
+			context.drawImage(this.image, this.x, this.y);
 		}
 	}
 
@@ -111,6 +118,8 @@ window.addEventListener('load', function () {
 
 	const input = new InputHandler();
 	const player = new Player(canvas.width, canvas.height);
+	const background = new Background(canvas.width, canvas.height);
+
 	player.draw(ctx);
 	player.update(input);
 
@@ -118,6 +127,7 @@ window.addEventListener('load', function () {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		player.draw(ctx);
 		player.update(input);
+		background.draw(ctx);
 		this.requestAnimationFrame(animate);
 	};
 	animate();
