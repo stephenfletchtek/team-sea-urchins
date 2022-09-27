@@ -42,8 +42,8 @@ window.addEventListener('load', function () {
 			this.x = 0;
 			this.y = this.gameHeight - this.height; //(this.gameHeight - this.height)/2 for sub;
 			this.image = document.getElementById('playerImage');
-			this.frameX = 1; //these move along the spritesheet to grab whichever animation frame  
-			this.frameY = 1;
+			this.frameX = 0; //these move along the spritesheet to grab whichever animation frame  
+			this.frameY = 0;
 			this.speed = 0;
 			this.vy = 0; // y-velocity (remember negative sign means go up)
 			this.weight = 1;
@@ -54,7 +54,7 @@ window.addEventListener('load', function () {
 			context.fillStyle = 'white';
 			context.fillRect(this.x, this.y, this.width, this.height);
 			context.drawImage(
-				this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height
+				this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height
 			); //s_ = coords in spritesheet
 		}
 
@@ -79,8 +79,11 @@ window.addEventListener('load', function () {
 			this.y += this.vy
 			if (!this.onGround()) {
 				this.vy += this.weight; // acceleration due to gravity
+				// animate the jump (pick a different sprite image)
+				this.frameY = 1;
 			} else {
 				this.vy = 0;
+				this.frameY = 0;
 			}
 
 			// stops it partly dropping off bottom
