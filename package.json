@@ -1,0 +1,26 @@
+{
+  "name": "sea-urchin-vanilla-spike-",
+  "version": "1.0.0",
+  "description": "Hello friends",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naomischlosser/team-sea-urchins.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naomischlosser/team-sea-urchins/issues"
+  },
+  "homepage": "https://github.com/naomischlosser/team-sea-urchins#readme"
+}
