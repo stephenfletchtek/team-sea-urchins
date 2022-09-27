@@ -657,11 +657,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 9a442b29-d636-448d-8453-2afafb18fc5c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: 2D Endless runner
+  organizationId: rubenwilsonskate
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
