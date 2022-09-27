@@ -1,7 +1,7 @@
 window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const ctx = canvas.getContext('2d');
-	canvas.width = 800;
+	canvas.width = 1080;
 	canvas.height = 720;
 
 	class InputHandler {
@@ -37,8 +37,8 @@ window.addEventListener('load', function () {
 		constructor(gameWidth, gameHeight) {
 			this.gameWidth = gameWidth;
 			this.gameHeight = gameHeight;
-			this.width = 200;
-			this.height = 200;
+			this.width = 500;
+			this.height = 320;
 			this.x = 0;
 			this.y = this.gameHeight - this.height; //(this.gameHeight - this.height)/2 for sub;
 			this.image = document.getElementById('playerImage');
@@ -63,25 +63,28 @@ window.addEventListener('load', function () {
 				this.speed = 5;
 			} else if (input.keys.indexOf('ArrowLeft') > -1) {
 				this.speed = -5; //should this be -3 to make the left/right movement the same 
-			} else if (input.keys.indexOf('ArrowUp') > -1) {
-				this.vy = -5
-			}
-
-			else {
+			} else if (input.keys.indexOf('ArrowUp') > -1 && this.onGround()) {
+				this.vy -= 25
+			} else {
 				this.speed = 0;
 			}
+
 			// set limits so you can't go off screen
 			// horizontal movement
 			this.x += this.speed;
 			if (this.x < 0) this.x = 0;
 			else if (this.x > this.gameWidth - this.width) this.x = this.gameWidth - this.width;
-			// vertical movemet 
+
+			// vertical movemet
+			this.y += this.vy
 			if (!this.onGround()) {
 				this.vy += this.weight; // acceleration due to gravity
-			}
-			else {
+			} else {
 				this.vy = 0;
 			}
+
+			// stops it partly dropping off bottom
+			if (this.y > this.gameHeight - this.height) this.y = this.gameHeight - this.height
 		}
 
 		onGround() {
