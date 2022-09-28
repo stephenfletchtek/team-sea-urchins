@@ -17,7 +17,7 @@ function updateScene(){};
     init: initScene,
     preload: preloadScene,
     create: createScene,
-    update: updateScene,
+    update: updateScene
   },
 };
 

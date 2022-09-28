@@ -20,5 +20,8 @@
   "dependencies": {
     "jest": "^29.1.1",
     "serve": "^14.0.1"
+  },
+  "devDependencies": {
+    "cypress": "^10.9.0"
   }
 }
