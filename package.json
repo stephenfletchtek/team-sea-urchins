@@ -4,7 +4,8 @@
   "description": "Hello friends",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "3030": "PORT=3030 serve",
+    "test": "cypress run"
   },
   "repository": {
     "type": "git",
