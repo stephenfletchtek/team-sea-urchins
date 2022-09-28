@@ -1,0 +1,24 @@
+{
+  "name": "team-sea-urchins",
+  "version": "1.0.0",
+  "description": "Hello friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naomischlosser/team-sea-urchins.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naomischlosser/team-sea-urchins/issues"
+  },
+  "homepage": "https://github.com/naomischlosser/team-sea-urchins#readme",
+  "dependencies": {
+    "jest": "^29.1.1",
+    "serve": "^14.0.1"
+  }
+}
