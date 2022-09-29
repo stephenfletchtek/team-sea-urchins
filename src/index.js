@@ -20,22 +20,11 @@
 
 const game = new Phaser.Game(config);
 
-function initScene(){};
-// var swipe = this.rexGestures.add.swipe(config);  
+function initScene(){}; 
 
 function preloadScene() {
-  // load rex-gestures-plugin
   // swipe player
-  // this.load.scenePlugin({
-  //   key: 'rexgesturesplugin',
-  //   url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgesturesplugin.min.js',
-  //   sceneKey: 'rexGestures'
-  // });
 
-  // drag player
-  // let url;
-  // url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdragplugin.min.js';
-  // this.load.plugin('rexdragplugin', url, true);
 
   // load background
   this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
@@ -47,28 +36,9 @@ function preloadScene() {
   this.load.svg('rockObstacle', 'assets/obstacles/rock.svg');
 };
 
-function createImg(pointer) {
-  var img = this.add.image(pointer.x, pointer.y, 'player');
-  img.drag = this.plugins.get('rexdragplugin').add(this.player);
-  img.drag.drag();
-
-  img.on('dragend', img.destroy, img);
-      
-};
-
 function createScene() {
   // swipe player
-  // this.print = print = this.add.text(0, 0, '')
-  // this.swipeInput = this.rexGestures.add.swipe({ velocityThreshold: 1000 })
-  //           .on('swipe', function (swipe) {
-  //               print.text += `swipe, v = ${swipe.dragVelocity}\n`;
-  //           }, this);
 
-  // drag player
-  // this.input.addPointer(3);
-  // this.input.on('pointerdown', this.createImg, this);
-  // this.add.text(10,10, 'Pointer down: create object and drag it\nPointer up: destroy object', {fontSize: '20px'});
-    
 
   // background
   window.addEventListener('resize', resize);
@@ -105,18 +75,6 @@ function updateScene(){
     this.player.setVelocityY(0)
   }
   
-  // if (this.swipeInput.isSwiped) {
-  //   this.player.setVelocityY(-5000)
-  //   // this.print.text += `update(): swipe ${dumpDirectionStates(this.swipeInput)}\n`;
-  //   console.log(dumpDirectionStates(this.swipeInput));
-
-  //   if (dumpDirectionStates(this.swipeInput) === 'up') {
-  //     console.log('swiped up!')
-  //     this.player.setVelocityY(-velocity)
-  //   }
-  //   // console.log(this.print.text)
-
-
   };
 
 
@@ -140,16 +98,3 @@ let obstacleArray = [
   {x: 2200,y: 900, name: 'rockObstacle', time: 4000}, 
   {x: 2200,y: 900, name: 'rockObstacle', time: 7000}
   ];
-
-let directions = ['left', 'right', 'up', 'down'];
-let dumpDirectionStates = function (swipe) {
-    let s = '';
-    let dir;
-    for (let i = 0, cnt = directions.length; i < cnt; i++) {
-        dir = directions[i];
-        if (swipe[dir]) {
-            s += ' ' + dir;
-        }
-    }
-    return s;
-}
