@@ -36,14 +36,6 @@ function preloadScene() {
   this.load.image('obstacle-ship', 'assets/obstacles/obstacle-ship-wreck.png');
 };
 
-let obstacleArray = [
-  { x: 2200, y: 700, name: 'rockObstacle', outline: "rock", time: 1000 },
-  { x: 2200, y: 900, name: 'rockObstacle', outline: "rock", time: 4000 },
-  // {x: 2200,y: 900, name: 'rockObstacle', time: 7000}
-  { x: 2200, y: 1000, name: 'obstacle-ship', outline: "ship", time: 7000 }
-];
-
-
 function createScene() {
   // turn gravity off 
   this.matter.world.disableGravity();
@@ -149,9 +141,9 @@ function resize() {
 
 }
 
-
 let obstacleArray = [
-  { x: 2200, y: 900, name: 'rockObstacle', time: 1000 },
-  { x: 2200, y: 900, name: 'rockObstacle', time: 4000 },
-  { x: 2200, y: 900, name: 'rockObstacle', time: 7000 }
+  { x: 2200, y: 700, name: 'rockObstacle', outline: "rock", time: 1000 },
+  { x: 2200, y: 900, name: 'rockObstacle', outline: "rock", time: 4000 },
+  // {x: 2200,y: 900, name: 'rockObstacle', time: 7000}
+  { x: 2200, y: 1000, name: 'obstacle-ship', outline: "ship", time: 7000 }
 ];
