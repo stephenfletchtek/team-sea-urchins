@@ -1,5 +1,15 @@
 # Welcome to our Under the Sea game!
 
+## dev - delete me 
+got to https://www.codeandweb.com/physicseditor, get physics editor 
+open it, load in an image file (not svg)
+try the magic wand tool, the shape should have a red outline
+to do manually, right click on the object where you want a vertex to add one
+Publish 
+this give you a json file with the fixtures of the object for collision physics  
+
+
+
 ## Dependencies
 
 ### Update npm and install dependencies
