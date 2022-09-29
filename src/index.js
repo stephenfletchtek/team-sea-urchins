@@ -90,9 +90,7 @@ function updateScene() {
     movePlayer = "down"
   } else if (cursors.up.isDown) {
     movePlayer = "up"
-  } else if (cursors.down.isUp) {
-    movePlayer = null
-  } else if (cursors.up.isUp) {
+  } else {
     movePlayer = null
   }
 
