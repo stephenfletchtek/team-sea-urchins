@@ -15,8 +15,8 @@ describe("our game", () => {
     .should('be.equal', 720)
   });
 
-it("contains the player", () => {
-  
-})
+  it("contains the player", () => {
+    
+  })
 });
 

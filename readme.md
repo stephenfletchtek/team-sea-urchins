@@ -51,5 +51,5 @@ npx cypress open -->
   ```
 - Run a check
   ```bash
-    npx cypress run --spec <FILE PATH>
+  npx cypress run --spec <FILE PATH>
   ```
