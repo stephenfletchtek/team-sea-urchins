@@ -1,3 +1,18 @@
+ const config = {
+  type: Phaser.AUTO,
+  parent: "game",
+  width: 1920,
+  height: 1080,
+  scene: {
+    init: initScene,
+    preload: preloadScene,
+    create: createScene,
+    update: updateScene
+  },
+};
+
+const game = new Phaser.Game(config);
+
 function initScene(){};
 
 function preloadScene(){
@@ -37,19 +52,3 @@ function updateScene(){
   // player moves up or down
 
 };
-
- 
- const config = {
-  type: Phaser.AUTO,
-  parent: "game",
-  width: 1920,
-  height: 1080,
-  scene: {
-    init: initScene,
-    preload: preloadScene,
-    create: createScene,
-    update: updateScene
-  },
-};
-
-const game = new Phaser.Game(config);
