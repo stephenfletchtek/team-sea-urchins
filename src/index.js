@@ -3,12 +3,19 @@
   parent: "game",
   width: 1920,
   height: 1080,
+  physics: {
+		default: 'arcade',
+		arcade: {
+			debug: true,
+		},
+	},
+
   scene: {
     init: initScene,
     preload: preloadScene,
     create: createScene,
     update: updateScene
-  },
+  }
 };
 
 const game = new Phaser.Game(config);
@@ -19,9 +26,22 @@ function preloadScene(){
   this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
   // this.load.svg('player', 'assets/players/player-fish.svg', { width: 150, height: 150 });
   this.load.svg('player', 'assets/players/player-fish.svg', { width: 300, height: 300 });
+  // load rock obstacle 
+  this.load.svg('rockObstacle', 'assets/obstacles/rock.svg');
+
+  //obstacle array
+  // let array = []
 };
 
+let obstacleArray = [
+{x: 2200,y: 900, name: 'rockObstacle', time: 1000}, 
+{x: 2200,y: 900, name: 'rockObstacle', time: 4000}, 
+{x: 2200,y: 900, name: 'rockObstacle', time: 7000}
+];
+
+
 function createScene(){
+
   // background
   window.addEventListener('resize', resize);
   resize();
@@ -36,7 +56,15 @@ function createScene(){
   const screenCenterY = this.cameras.main.height / 2;
   const player = this.add.image(150, screenCenterY, 'player').setOrigin(0, 0.5);
   player.setScale(0.7).setScrollFactor(0);
+
+  // obstacle
+  for(const obstacle of obstacleArray){
+    setTimeout(()=>{const rock = this.physics.add.image(obstacle.x, obstacle.y, obstacle.name)
+                    rock.setVelocityX(-300); }, obstacle.time)
+  }
+ 
 };
+
 
 function resize() {
   let canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
@@ -50,6 +78,7 @@ function resize() {
       canvas.style.height = height + "px";
   }
 }
+
 
 function updateScene(){
   // player moves up or down
