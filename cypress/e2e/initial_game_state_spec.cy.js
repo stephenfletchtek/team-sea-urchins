@@ -14,9 +14,5 @@ describe("our game", () => {
     .and('have.prop', 'height')
     .should('be.equal', 720)
   });
-
-  it("contains the player", () => {
-    
-  })
 });
 
