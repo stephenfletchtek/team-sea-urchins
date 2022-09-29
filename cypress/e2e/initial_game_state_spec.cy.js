@@ -1,5 +1,5 @@
 describe("our game", () => {
-  it("contains the background image", () => {
+  it("contains the canvas", () => {
     cy.visit("http://localhost:3030");
     cy.url().should("contain", "http://localhost:3030");
 
@@ -7,12 +7,16 @@ describe("our game", () => {
     cy.get('canvas')
     .should('be.visible')
     .and('have.prop', 'width')
-    .should('be.greaterThan', 1199)
+    .should('be.equal', 1280)
     
     cy.get('canvas')
     .should('be.visible')
     .and('have.prop', 'height')
-    .should('be.greaterThan', 719)
+    .should('be.equal', 720)
   });
+
+it("contains the player", () => {
+  
+})
 });
 
