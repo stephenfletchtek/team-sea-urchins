@@ -56,8 +56,8 @@ function createScene() {
   physics = this.cache.json.get("physics");
 
   // create player sprite
-  player = this.matter.add.sprite(150, screenCenterY, "player", null, { shape: physics.fish });
-  player.setScale(0.7).setScrollFactor(0);
+  this.player = this.matter.add.sprite(150, screenCenterY, "player", null, { shape: physics.fish });
+  this.player.setScale(0.7).setScrollFactor(0);
 
   // obstacles = this.matter.add.sprite(600, 700, 'rockObstacle', null, {shape: physics.rock});
   // obstacles.setVelocityX(-15);
