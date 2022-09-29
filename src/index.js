@@ -75,7 +75,7 @@ function createScene() {
 
 function updateScene() {
   // setting the speed that the player moves
-  const velocity = 300;
+  const velocity = 30;
 
   // swipe 'dead band' ie a small movement is not a swipe
   const deadBand = 10
