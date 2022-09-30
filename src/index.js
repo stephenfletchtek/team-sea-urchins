@@ -23,7 +23,7 @@ const game = new Phaser.Game(config);
 function initScene() { };
 
 function preloadScene() {
-  // load in physics file 
+  // load in physics files 
   this.load.json('physics', 'assets/physics.json')
   this.load.json('fish-physics', 'assets/players/fish-physics.json')
 
@@ -41,8 +41,12 @@ function preloadScene() {
 function createScene() {
   // turn gravity off and set bounds of screen
   this.matter.world.disableGravity();
-  this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, true, true);
+  this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
+  // load in physics files
+  physics = this.cache.json.get("physics");
+  fishPhysics = this.cache.json.get("fish-physics");
+  
   // background
   window.addEventListener('resize', resize);
   resize();
@@ -52,10 +56,6 @@ function createScene() {
   let scaleY = this.cameras.main.height / background.height;
   let scale = Math.min(scaleX, scaleY);
   background.setScale(scale).setScrollFactor(0);
-
-  // load in physics files
-  physics = this.cache.json.get("physics");
-  fishPhysics = this.cache.json.get("fish-physics");
 
   // player 
   let fishSwim = {
