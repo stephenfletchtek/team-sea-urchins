@@ -158,3 +158,32 @@ function resize() {
   }
 
 }
+
+// animation code example code here if https://www.thepolyglotdeveloper.com/2020/08/use-matterjs-physics-sprite-collisions-phaser-game/
+// this.matter.world.on('collisionactive', listener).event.pairs
+
+// check out collisionFilter.group to be able to control colliding classes
+
+// this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
+//   console.log("listening to event");
+//   console.log({a: bodyA, b: bodyB})
+//   if(bodyA.parent.label == "player-fish"){
+//     console.log("1");
+//     if(bodyA.bounds.max.x < 119){
+//       console.log(bodyA); 
+//       this.matter.pause();
+//     }
+//     }else if(bodyB.parent.label == "player-fish"){
+//       console.log("2");
+//         console.log(bodyB); 
+//         this.matter.pause();
+//       }
+      
+//     });
+
+let obstacleArray = [
+  { x: 2200, y: 700, name: 'rockObstacle', outline: "rock", time: 1000 },
+  { x: 2200, y: 900, name: 'rockObstacle', outline: "rock", time: 4000 },
+  // {x: 2200,y: 900, name: 'rockObstacle', time: 7000}
+  { x: 2200, y: 1000, name: 'obstacle-ship', outline: "ship", time: 7000 }
+];
