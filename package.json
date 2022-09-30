@@ -20,6 +20,7 @@
   "homepage": "https://github.com/naomischlosser/team-sea-urchins#readme",
   "dependencies": {
     "jest": "^29.1.1",
+    "phaser3-rex-plugins": "^1.1.73",
     "serve": "^14.0.1"
   },
   "devDependencies": {
