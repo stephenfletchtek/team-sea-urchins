@@ -7,12 +7,12 @@ describe("our game", () => {
     cy.get('canvas')
     .should('be.visible')
     .and('have.prop', 'width')
-    .should('be.equal', 1280)
+    .should('be.equal', 1920)
     
     cy.get('canvas')
     .should('be.visible')
     .and('have.prop', 'height')
-    .should('be.equal', 720)
+    .should('be.equal', 1080)
   });
 });
 
