@@ -75,7 +75,7 @@ function createScene() {
 
 function updateScene() {
   // setting the speed that the player moves
-  const velocity = 30;
+  const velocity = 25;
 
   // swipe 'dead band' ie a small movement is not a swipe
   const deadBand = 10
@@ -84,20 +84,10 @@ function updateScene() {
   const upperLim = this.player.height / 2;
   const lowerLim = game.canvas.height - upperLim;
 
-  // player direction responds to the up and down keys
-  const cursors = this.input.keyboard.createCursorKeys();
-  if (cursors.down.isDown) {
-    movePlayer = "down"
-  } else if (cursors.up.isDown) {
-    movePlayer = "up"
-  } else {
-    movePlayer = null
-  }
-
   // player direction responds to up and down swipe
   const pointer = this.input.activePointer
   if (pointer.isDown) {
-    isClicking = true
+    wasClicked = true
     if ((pointer.downY - pointer.y) > deadBand) {
       movePlayer = "up"
     } else if ((pointer.y - pointer.downY) > deadBand) {
@@ -105,8 +95,21 @@ function updateScene() {
     } else {
       movePlayer = null
     }
-  } else if (!pointer.isDown && isClicking == true) {
-    isClicking = false
+  } else if (wasClicked == true) {
+    wasClicked = false
+    movePlayer = null
+  }
+
+  // player direction responds to the up and down keys
+  const cursors = this.input.keyboard.createCursorKeys();
+  if (cursors.down.isDown) {
+    wasPushed = true
+    movePlayer = "down"
+  } else if (cursors.up.isDown) {
+    wasPushed = true
+    movePlayer = "up"
+  } else if (wasPushed == true) {
+    wasPushed = false
     movePlayer = null
   }
 
@@ -122,7 +125,8 @@ function updateScene() {
 }
 
 // Additional code
-let isClicking = false;
+let wasClicked = false;
+let wasPushed = false;
 let movePlayer;
 
 function resize() {
