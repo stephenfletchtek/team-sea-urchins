@@ -23,13 +23,15 @@ const game = new Phaser.Game(config);
 function initScene() { };
 
 function preloadScene() {
-  //load in physics file 
+  // load in physics files 
   this.load.json('physics', 'assets/physics.json')
+  this.load.json('fish-physics', 'assets/players/fish-physics.json')
 
+  // load background
   this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
-  // load player
-  this.load.svg('player', 'assets/players/player-fish.svg', { width: 200, height: 200 });
-  // this.load.image('player', 'assets/players/player-fish.png');
+  
+  // load player    
+  this.load.atlas('player', 'assets/players/player-fish-spritesheet.png', 'assets/players/player-fish.json');
 
   // load obstacles 
   this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
@@ -37,8 +39,14 @@ function preloadScene() {
 };
 
 function createScene() {
-  // turn gravity off 
+  // turn gravity off and set bounds of screen
   this.matter.world.disableGravity();
+  this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
+
+  // load in physics files
+  physics = this.cache.json.get("physics");
+  fishPhysics = this.cache.json.get("fish-physics");
+  
   // background
   window.addEventListener('resize', resize);
   resize();
@@ -49,15 +57,24 @@ function createScene() {
   let scale = Math.min(scaleX, scaleY);
   background.setScale(scale).setScrollFactor(0);
 
-  // player
+  // player 
+  let fishSwim = {
+    key: 'fish-swim',    
+    frames: [
+        {key: "player", frame: "fish1.png"},
+        {key: "player", frame: "fish2.png"}
+    ],
+    frameRate: 3,
+    repeat: -1
+  }
+
+  this.anims.create(fishSwim);
+  this.scale = 0.5
   const screenCenterY = this.cameras.main.height / 2;
-
-  //load in json physics file
-  physics = this.cache.json.get("physics");
-
-  // create player sprite
-  this.player = this.matter.add.sprite(150, screenCenterY, "player", null, { shape: physics.fish });
-  this.player.setScale(0.7).setScrollFactor(0);
+  this.player = this.matter.add.sprite(300, screenCenterY, 'player', null, { shape: fishPhysics.fish1 });
+  this.player.setScale(this.scale).setScrollFactor(0);
+  this.player.anims.load('fish-swim');
+  this.player.anims.play('fish-swim');
 
   // obstacles = this.matter.add.sprite(600, 700, 'rockObstacle', null, {shape: physics.rock});
   // obstacles.setVelocityX(-15);
@@ -74,6 +91,11 @@ function createScene() {
 };
 
 function updateScene() {
+  // set player angle to 0
+  this.player.setAngle(0); // for obstacles, setAngle(0) has worked, 
+  // and maybe setting the y value constant would keep them on the floor
+
+
   // setting the speed that the player moves
   const velocity = 25;
 
@@ -81,7 +103,7 @@ function updateScene() {
   const deadBand = 10
 
   // limits to stop player going off screen
-  const upperLim = this.player.height / 2;
+  const upperLim = this.player.height * this.scale / 2;
   const lowerLim = game.canvas.height - upperLim;
 
   // player direction responds to up and down swipe
@@ -165,10 +187,9 @@ function resize() {
       
 //     });
 
-
-let obstacleArray = [
-  { x: 2200, y: 700, name: 'rockObstacle', outline: "rock", time: 1000 },
-  { x: 2200, y: 900, name: 'rockObstacle', outline: "rock", time: 4000 },
-  // {x: 2200,y: 900, name: 'rockObstacle', time: 7000}
-  { x: 2200, y: 1000, name: 'obstacle-ship', outline: "ship", time: 7000 }
+this.obstacleArray = [
+  // { x: 800, y: 880, name: 'rockObstacle', outline: "rock", time: 0 },
+  { x: 2200, y: 880, name: 'rockObstacle', outline: "rock", time: 1000 },
+  { x: 2200, y: 880, name: 'rockObstacle', outline: "rock", time: 4000 },
+  { x: 2200, y: 930, name: 'obstacle-ship', outline: "ship", time: 7000 }
 ];
