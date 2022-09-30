@@ -39,9 +39,10 @@ function preloadScene() {
 };
 
 function createScene() {
-  // turn gravity off 
+  // turn gravity off and set bounds of screen
   this.matter.world.disableGravity();
-  
+  this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, true, true);
+
   // background
   window.addEventListener('resize', resize);
   resize();
@@ -90,6 +91,11 @@ function createScene() {
 };
 
 function updateScene() {
+  // set player angle to 0
+  this.player.setAngle(0); // for obstacles, setAngle(0) has worked, 
+  // and maybe setting the y value constant would keep them on the floor
+
+
   // setting the speed that the player moves
   const velocity = 25;
 
@@ -181,9 +187,9 @@ function resize() {
       
 //     });
 
-let obstacleArray = [
-  { x: 2200, y: 700, name: 'rockObstacle', outline: "rock", time: 1000 },
-  { x: 2200, y: 900, name: 'rockObstacle', outline: "rock", time: 4000 },
-  // {x: 2200,y: 900, name: 'rockObstacle', time: 7000}
-  { x: 2200, y: 1000, name: 'obstacle-ship', outline: "ship", time: 7000 }
+this.obstacleArray = [
+  // { x: 800, y: 880, name: 'rockObstacle', outline: "rock", time: 0 },
+  { x: 2200, y: 880, name: 'rockObstacle', outline: "rock", time: 1000 },
+  { x: 2200, y: 880, name: 'rockObstacle', outline: "rock", time: 4000 },
+  { x: 2200, y: 930, name: 'obstacle-ship', outline: "ship", time: 7000 }
 ];
