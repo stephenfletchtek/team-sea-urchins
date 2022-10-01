@@ -13,13 +13,7 @@ const config = {
     }
   },
 
-  // scene: [GamePlay, GameOver]
-  scene: {
-    init: GamePlay.prototype.initScene,
-    preload: GamePlay.prototype.preloadScene,
-    create: GamePlay.prototype.createScene,
-    update: GamePlay.prototype.updateScene
-  }
+  scene: [GamePlay, GameOver]
 };
 
 export default new Phaser.Game(config);

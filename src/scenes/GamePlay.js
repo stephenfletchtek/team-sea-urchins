@@ -8,9 +8,9 @@ export default class GamePlay extends Phaser.Scene{
     this.movePlayer;
 	}
 
-  initScene() {};
+  init() {};
 
-  preloadScene() {
+  preload() {
     // load in physics files 
     this.load.json('physics', 'assets/physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
@@ -26,7 +26,7 @@ export default class GamePlay extends Phaser.Scene{
     this.load.image('obstacle-ship', 'assets/obstacles/obstacle-ship-wreck.png');
   };
   
-  createScene() {
+  create() {
     // turn gravity off and set bounds of screen
     this.matter.world.disableGravity();
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
@@ -95,7 +95,7 @@ export default class GamePlay extends Phaser.Scene{
     }
   };
   
-  updateScene() {
+  update() {
     // set player angle to 0
     this.player.setAngle(0); // for obstacles, setAngle(0) has worked, 
     // and maybe setting the y value constant would keep them on the floor
