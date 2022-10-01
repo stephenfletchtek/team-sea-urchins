@@ -1,3 +1,4 @@
+import StartGame from './scenes/StartGame.js'
 import GamePlay from './scenes/GamePlay.js';
 import GameOver from './scenes/GameOver.js';
 
@@ -13,7 +14,7 @@ const config = {
     }
   },
 
-  scene: [GamePlay, GameOver]
+  scene: [StartGame, GamePlay, GameOver]
 };
 
 export default new Phaser.Game(config);
