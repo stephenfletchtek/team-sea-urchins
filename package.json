@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Hello friends",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "3030": "PORT=3030 serve",
     "test": "cypress run"
