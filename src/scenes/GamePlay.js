@@ -7,6 +7,7 @@ export default class GamePlay extends Phaser.Scene {
     this.movePlayer;
     this.obstacles;
     this.ships;
+    this.sharks;
   }
 
   init() { };
@@ -25,6 +26,7 @@ export default class GamePlay extends Phaser.Scene {
     // load obstacles 
     this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
     this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
+    this.load.image('sharkObstacle', 'assets/obstacles/obstacle-shark.png')
   };
 
   create() {
@@ -67,57 +69,59 @@ export default class GamePlay extends Phaser.Scene {
     // *****************
     this.obstacles = this.add.group()
     this.ships = this.add.group()
+    this.sharks = this.add.group()
 
-    // add 6 rocks into the obstacles group and 6 ships into the ships group
+    // add 6 of each obstacle into their respective groups
+    // make sure you don't get more obstacles on the the screen than there are in the group
     for (let i = 0; i < 5; i++) {
       this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock)).setVisible(false);
       this.ships.add(makeImage(this, 'shipObstacle', physics.ship)).setVisible(false);
+      this.sharks.add(makeImage(this, 'sharkObstacle', physics.shark)).setVisible(false)
     }
 
+    // add sharks
     this.time.addEvent({
-      // make sure you don't get more obstacles on the the screen than there are in the group
-      delay: 3000,
+      delay: 5000,
       loop: true,
       callback: () => {
-        // let obstaclePosition = Math.floor(Math.random() * 3);
         let obstaclePosition = Math.floor(Math.random() * 375) + 125
-        this.obstacles.get(this.cameras.main.width, obstaclePosition)
+        this.sharks.get(this.cameras.main.width, obstaclePosition)
           .setActive(true)
           .setVisible(true)
           .setScale(0.5)
       }
     })
 
+    // randomly alternate ships and rocks on bottom
     this.time.addEvent({
       delay: 10000,
       loop: true,
       callback: () => {
-        this.ships.get(this.cameras.main.width, 970)
+        if (Math.round(Math.random()) == 0){
+          this.ships.get(this.cameras.main.width, 970)
           .setActive(true)
           .setVisible(true)
-          .setScale(0.7)
+          .setScale(0.5)
+        } else {
+          this.obstacles.get(this.cameras.main.width, 970)
+          .setActive(true)
+          .setVisible(true)
+          .setScale(0.5)
+        }
       }
     })
 
-    // collisions
+    
+
+    // GameOver on collision
     this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      // console.log("listening to event");
-      // console.log({ a: bodyA, b: bodyB })
-      if (bodyA.parent.label == "fish1") {
-        // console.log("1");
-        if (bodyA.bounds.max.x < 0) {
-          // console.log(bodyA);
+      // console.log("collisionstart");
+      console.log({ a: bodyA, b: bodyB});
+      if ((bodyA.parent.label == "fish1" && bodyB.parent.label == "shark") ||
+       (bodyB.parent.label == "fish1" && bodyB.parent.label == "shark") ) {
           this.scene.start("game-over")
         }
-      } else if (bodyB.parent.label == "fish1") {
-        // console.log("2");
-        // console.log(bodyB);
-        if (bodyB.bounds.max.x < 0) {
-          // console.log(bodyA);
-          this.scene.start("game-over")
-        }
-      }
-    });
+      });
 
     function makeImage(scene, image, physics) {
       return scene.matter.add.image(-200, -200, image, null, { shape: physics });
@@ -125,29 +129,27 @@ export default class GamePlay extends Phaser.Scene {
   };
 
   update() {
-    this.obstacles.incX(-8);
-    this.obstacles.getChildren().forEach(obstacle => {
-      // stop rotation and movement
-      obstacle.setAngle(0);
-      obstacle.setVelocityX(0);
-      obstacle.setVelocityY(0);
+    controlObstacle(this.obstacles, -3)
+    controlObstacle(this.ships, -3)
+    controlObstacle(this.sharks, -8)
 
-      if (obstacle.active && obstacle.x < -200) {
-        this.obstacles.killAndHide(obstacle);
-      }
-    })
+    function controlObstacle(group, speed){
+      group.incX(speed);
+      group.getChildren().forEach(obstacle => {
+        obstacle.setAngle(0);
+        obstacle.setVelocityX(0);
+        obstacle.setVelocityY(0);
 
-    this.ships.incX(-3)
-    this.ships.getChildren().forEach(ship => {
-      // stop rotation and movement
-      ship.setAngle(0);
-      ship.setVelocityX(0);
-      ship.setVelocityY(0);
+        if (obstacle.active && obstacle.x < -200) {
+          group.killAndHide(obstacle)
+        }
+      })    
+    }
 
-      if (ship.active && ship.x < -200) {
-        this.ships.killAndHide(ship);
-      }
-    })
+    // GameOver when out of bounds 
+    if (this.player.x < 150) {
+      this.scene.start("game-over")};
+
     // set player angle to 0
     this.player.setAngle(0);
     if (this.player.x > 300) {
