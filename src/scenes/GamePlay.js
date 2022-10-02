@@ -97,6 +97,26 @@ export default class GamePlay extends Phaser.Scene {
       }
     })
 
+    // collisions
+    this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
+      console.log("listening to event");
+      console.log({ a: bodyA, b: bodyB })
+      if (bodyA.parent.label == "fish1") {
+        console.log("1");
+        if (bodyA.bounds.max.x < 0) {
+          console.log(bodyA);
+          this.scene.start("game-over")
+        }
+      } else if (bodyB.parent.label == "fish1") {
+        console.log("2");
+        console.log(bodyB);
+        if (bodyB.bounds.max.x < 0) {
+          console.log(bodyA);
+          this.scene.start("game-over")
+        }
+      }
+    });
+
     function makeSprite(game, image, physics) {
       return game.matter.add.sprite(-200, -200, image, null, { shape: physics })
     }
@@ -110,7 +130,7 @@ export default class GamePlay extends Phaser.Scene {
       obstacle.setVelocityX(0);
       obstacle.setVelocityY(0);
 
-      if (obstacle.active && obstacle.x < 0) {
+      if (obstacle.active && obstacle.x < -200) {
         this.obstacles.killAndHide(obstacle);
       }
     })
