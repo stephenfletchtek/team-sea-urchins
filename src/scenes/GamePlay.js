@@ -64,7 +64,7 @@ export default class GamePlay extends Phaser.Scene {
     // *****************
     // *** obstacles ***
     // *****************
-    this.obstacles = this.add.group()
+    this.obstacles = this.add.group({ defaultKey: 'shipObstacle' })
 
     // add 3 rocks and 3 ships alternately into the group
     for (let i = 0; i < 6; i++) {
@@ -114,9 +114,9 @@ export default class GamePlay extends Phaser.Scene {
     this.obstacles.incX(-8);
     this.obstacles.getChildren().forEach(obstacle => {
       // stop rotation and movement
-      obstacle.setAngle(0);
-      obstacle.setVelocityX(0);
-      obstacle.setVelocityY(0);
+      // obstacle.setAngle(0);
+      // obstacle.setVelocityX(0);
+      // obstacle.setVelocityY(0);
 
       if (obstacle.active && obstacle.x < -200) {
         this.obstacles.killAndHide(obstacle);
