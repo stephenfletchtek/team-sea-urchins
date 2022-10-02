@@ -6,15 +6,8 @@ export default class GameOver extends Phaser.Scene {
 	init() { };
 
 	preload() {
-		// load in physics files 
-		this.load.json('physics', 'assets/physics.json');
-		this.load.json('fish-physics', 'assets/players/fish-physics.json');
-
 		// load background
 		this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
-
-		// load player    
-		this.load.atlas('player', 'assets/players/player-fish-spritesheet.png', 'assets/players/player-fish.json');
 
 		// load start button
 		this.load.image("start-game-button", "assets/startup/start-game-button.png")
@@ -35,10 +28,23 @@ export default class GameOver extends Phaser.Scene {
 		let scale = Math.min(scaleX, scaleY);
 		background.setScale(scale).setScrollFactor(0);
 
-
-		this.add.text(960, 540, `Game Over!`, {
-			font: "bold 32px Arial",
+		// game over text
+		let width = this.game.renderer.width / 2;
+		let height = this.game.renderer.height / 2;
+		this.add.text(width, height, `GAME OVER`, {
+			font: "bold 60px Arial",
 			fill: "#fff",
-		});
+		}).setDepth(1);
+
+		// start game test
+		let startAgain = this.add.text(width, height + 100, `Start again`, {
+			font: "bold 30px Arial",
+			fill: "#fff",
+		}).setDepth(1);
+		startAgain.setInteractive();
+		startAgain.on("pointerup", () => {
+			console.log("lets play again!")
+			this.scene.start("game")
+		})
 	}
 }
