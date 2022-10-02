@@ -61,7 +61,7 @@ export default class GamePlay extends Phaser.Scene {
     this.player.setScale(this.scale).setScrollFactor(0);
     this.player.anims.load('fish-swim');
     this.player.anims.play('fish-swim');
-
+    
     // *****************
     // *** obstacles ***
     // *****************
@@ -70,8 +70,8 @@ export default class GamePlay extends Phaser.Scene {
 
     // add 6 rocks into the obstacles group and 6 ships into the ships group
     for (let i = 0; i < 5; i++) {
-      this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock));
-      this.ships.add(makeImage(this, 'shipObstacle', physics.ship));
+      this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock)).setVisible(false);
+      this.ships.add(makeImage(this, 'shipObstacle', physics.ship)).setVisible(false);
     }
 
     this.time.addEvent({
@@ -92,7 +92,7 @@ export default class GamePlay extends Phaser.Scene {
       delay: 10000,
       loop: true,
       callback: () => {
-        this.ships.get(this.cameras.main.width, 1100)
+        this.ships.get(this.cameras.main.width, 970)
           .setActive(true)
           .setVisible(true)
           .setScale(0.7)
@@ -105,14 +105,14 @@ export default class GamePlay extends Phaser.Scene {
       // console.log({ a: bodyA, b: bodyB })
       if (bodyA.parent.label == "fish1") {
         // console.log("1");
-        if (bodyA.bounds.max.x < 150) {
+        if (bodyA.bounds.max.x < 0) {
           // console.log(bodyA);
           this.scene.start("game-over")
         }
       } else if (bodyB.parent.label == "fish1") {
         // console.log("2");
         // console.log(bodyB);
-        if (bodyB.bounds.max.x < 150) {
+        if (bodyB.bounds.max.x < 0) {
           // console.log(bodyA);
           this.scene.start("game-over")
         }
@@ -131,7 +131,6 @@ export default class GamePlay extends Phaser.Scene {
       obstacle.setAngle(0);
       obstacle.setVelocityX(0);
       obstacle.setVelocityY(0);
-      // obstacle.setMass(100);
 
       if (obstacle.active && obstacle.x < -200) {
         this.obstacles.killAndHide(obstacle);
