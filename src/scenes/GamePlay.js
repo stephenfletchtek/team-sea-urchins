@@ -6,6 +6,7 @@ export default class GamePlay extends Phaser.Scene {
     this.wasPushed = false;
     this.movePlayer;
     this.obstacles;
+    this.ships;
   }
 
   init() { };
@@ -64,12 +65,13 @@ export default class GamePlay extends Phaser.Scene {
     // *****************
     // *** obstacles ***
     // *****************
-    this.obstacles = this.add.group({ defaultKey: 'shipObstacle' })
+    this.obstacles = this.add.group()
+    this.ships = this.add.group()
 
-    // add 3 rocks and 3 ships alternately into the group
-    for (let i = 0; i < 3; i++) {
+    // add 6 rocks into the obstacles group and 6 ships into the ships group
+    for (let i = 0; i < 5; i++) {
       this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock));
-      this.obstacles.add(makeImage(this, 'shipObstacle', physics.ship));
+      this.ships.add(makeImage(this, 'shipObstacle', physics.ship));
     }
 
     this.time.addEvent({
@@ -77,8 +79,20 @@ export default class GamePlay extends Phaser.Scene {
       delay: 3000,
       loop: true,
       callback: () => {
-        let obstaclePosition = Math.floor(Math.random() * 5);
-        this.obstacles.get(this.cameras.main.width, [125, 360, 595, 780, 900][obstaclePosition])
+        // let obstaclePosition = Math.floor(Math.random() * 3);
+        let obstaclePosition = Math.floor(Math.random() * 375) + 125
+        this.obstacles.get(this.cameras.main.width, obstaclePosition)
+          .setActive(true)
+          .setVisible(true)
+          .setScale(0.5)
+      }
+    })
+
+    this.time.addEvent({
+      delay: 10000,
+      loop: true,
+      callback: () => {
+        this.ships.get(this.cameras.main.width, 1100)
           .setActive(true)
           .setVisible(true)
           .setScale(0.7)
@@ -91,14 +105,14 @@ export default class GamePlay extends Phaser.Scene {
       // console.log({ a: bodyA, b: bodyB })
       if (bodyA.parent.label == "fish1") {
         // console.log("1");
-        if (bodyA.bounds.max.x < 0) {
+        if (bodyA.bounds.max.x < 150) {
           // console.log(bodyA);
           this.scene.start("game-over")
         }
       } else if (bodyB.parent.label == "fish1") {
         // console.log("2");
         // console.log(bodyB);
-        if (bodyB.bounds.max.x < 0) {
+        if (bodyB.bounds.max.x < 150) {
           // console.log(bodyA);
           this.scene.start("game-over")
         }
@@ -117,12 +131,24 @@ export default class GamePlay extends Phaser.Scene {
       obstacle.setAngle(0);
       obstacle.setVelocityX(0);
       obstacle.setVelocityY(0);
+      // obstacle.setMass(100);
 
       if (obstacle.active && obstacle.x < -200) {
         this.obstacles.killAndHide(obstacle);
       }
     })
 
+    this.ships.incX(-3)
+    this.ships.getChildren().forEach(ship => {
+      // stop rotation and movement
+      ship.setAngle(0);
+      ship.setVelocityX(0);
+      ship.setVelocityY(0);
+
+      if (ship.active && ship.x < -200) {
+        this.ships.killAndHide(ship);
+      }
+    })
     // set player angle to 0
     this.player.setAngle(0);
     if (this.player.x > 300) {
