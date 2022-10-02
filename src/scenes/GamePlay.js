@@ -23,7 +23,7 @@ export default class GamePlay extends Phaser.Scene {
 
     // load obstacles 
     this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
-    this.load.image('obstacle-ship', 'assets/obstacles/obstacle-ship-wreck.png');
+    this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
   };
 
   create() {
@@ -36,19 +36,7 @@ export default class GamePlay extends Phaser.Scene {
     let fishPhysics = this.cache.json.get("fish-physics");
 
     // background
-    let canvas = this.sys.game.canvas, width = window.innerWidth, height = window.innerHeight;
-    let wratio = width / height, ratio = canvas.width / canvas.height;
-
-    if (wratio < ratio) {
-      canvas.style.width = width + "px";
-      canvas.style.height = (width / ratio) + "px";
-    } else {
-      canvas.style.width = (height * ratio) + "px";
-      canvas.style.height = height + "px";
-    }
-
     const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
-
     let scaleX = this.cameras.main.width / background.width;
     let scaleY = this.cameras.main.height / background.height;
     let scale = Math.min(scaleX, scaleY);
@@ -79,9 +67,9 @@ export default class GamePlay extends Phaser.Scene {
     this.obstacles = this.add.group()
 
     // add 3 rocks and 3 ships alternately into the group
-    for (let i = 0; i < 3; i++) {
-      this.obstacles.add(makeSprite(this, 'rockObstacle', physics.rock));
-      this.obstacles.add(makeSprite(this, 'obstacle-ship', physics.ship));
+    for (let i = 0; i < 6; i++) {
+      this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock));
+      // this.obstacles.add(makeImage(this, 'shipObstacle', physics.ship));
     }
 
     this.time.addEvent({
@@ -99,26 +87,26 @@ export default class GamePlay extends Phaser.Scene {
 
     // collisions
     this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      console.log("listening to event");
-      console.log({ a: bodyA, b: bodyB })
+      // console.log("listening to event");
+      // console.log({ a: bodyA, b: bodyB })
       if (bodyA.parent.label == "fish1") {
-        console.log("1");
+        // console.log("1");
         if (bodyA.bounds.max.x < 0) {
-          console.log(bodyA);
+          // console.log(bodyA);
           this.scene.start("game-over")
         }
       } else if (bodyB.parent.label == "fish1") {
-        console.log("2");
-        console.log(bodyB);
+        // console.log("2");
+        // console.log(bodyB);
         if (bodyB.bounds.max.x < 0) {
-          console.log(bodyA);
+          // console.log(bodyA);
           this.scene.start("game-over")
         }
       }
     });
 
-    function makeSprite(game, image, physics) {
-      return game.matter.add.sprite(-200, -200, image, null, { shape: physics })
+    function makeImage(scene, image, physics) {
+      return scene.matter.add.image(-200, -200, image, null, { shape: physics });
     }
   };
 
@@ -190,19 +178,4 @@ export default class GamePlay extends Phaser.Scene {
       this.movePlayer = null
     }
   };
-
-  // Additional code
-  resize() {
-    let canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
-    let wratio = width / height, ratio = canvas.width / canvas.height;
-
-    if (wratio < ratio) {
-      canvas.style.width = width + "px";
-      canvas.style.height = (width / ratio) + "px";
-    } else {
-      canvas.style.width = (height * ratio) + "px";
-      canvas.style.height = height + "px";
-    }
-
-  }
 }
