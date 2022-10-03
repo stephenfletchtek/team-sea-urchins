@@ -1,8 +1,8 @@
 import BaseGame from './BaseGame.js';
-import Player from './Player.js'
-import Obstacles from './Obstacles.js'
-import Background from './Background.js';
-import Collision from './Collision.js'
+import Player from '../components/Player.js'
+import Obstacles from '../components/Obstacles.js'
+import Background from '../components/Background.js';
+import Collision from '../components/Collision.js'
 
 export default class GamePlay extends BaseGame {
   constructor() {
