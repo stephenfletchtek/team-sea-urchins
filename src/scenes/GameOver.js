@@ -3,7 +3,7 @@ export default class GameOver extends Phaser.Scene {
 		super('game-over');
 	}
 
-	init() { };
+	init() {};
 
 	preload() {
 		// load background
@@ -13,7 +13,8 @@ export default class GameOver extends Phaser.Scene {
 		this.load.image("start-game-button", "assets/startup/start-game-button.png")
 	}
 
-	create() {
+	create(data) {
+		this.score = data.score
 		// turn gravity off and set bounds of screen
 		this.matter.world.disableGravity();
 		this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
@@ -31,7 +32,7 @@ export default class GameOver extends Phaser.Scene {
 		// game over text
 		let width = this.game.renderer.width / 2;
 		let height = this.game.renderer.height / 2;
-		this.add.text(width, height, `GAME OVER`, {
+		this.add.text(width, height, `GAME OVER\n Your score: ${this.score}`, {
 			font: "bold 60px Arial",
 			fill: "#fff",
 		}).setOrigin(0.5).setDepth(1);

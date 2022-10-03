@@ -5,10 +5,13 @@ export default class GamePlay extends Phaser.Scene {
     this.wasClicked = false;
     this.wasPushed = false;
     this.movePlayer;
-    this.obstacles;
+    this.rocks;
     this.ships;
     this.sharks;
     this.gameSpeed;
+    this.timedEvent;
+    this.displayScore = 0;
+    this.score;
   }
 
   init() { };
@@ -84,14 +87,14 @@ export default class GamePlay extends Phaser.Scene {
     // *****************
     // *** obstacles ***
     // *****************
-    this.obstacles = this.add.group()
+    this.rocks = this.add.group()
     this.ships = this.add.group()
     this.sharks = this.add.group()
 
     // add 6 of each obstacle into their respective groups
     // make sure you don't get more obstacles on the the screen than there are in the group
     for (let i = 0; i < 5; i++) {
-      this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock)).setVisible(false);
+      this.rocks.add(makeImage(this, 'rockObstacle', physics.rock)).setVisible(false);
       this.ships.add(makeImage(this, 'shipObstacle', physics.ship)).setVisible(false);
       this.sharks.add(makeImage(this, 'sharkObstacle', physics.shark)).setVisible(false)
     }
@@ -105,22 +108,24 @@ export default class GamePlay extends Phaser.Scene {
         this.sharks.get(this.cameras.main.width, obstaclePosition)
           .setActive(true)
           .setVisible(true)
-          .setScale(0.5)
+          .setScale(0.7)
       }
     })
 
     // randomly alternate ships and rocks on bottom
     this.time.addEvent({
       delay: 10000,
+      // delay: 5000,
       loop: true,
       callback: () => {
         if (Math.round(Math.random()) == 0){
-          this.ships.get(this.cameras.main.width, 970)
+          this.ships.get(this.cameras.main.width, 870)
           .setActive(true)
           .setVisible(true)
           .setScale(0.5)
+          // .setScale(1.4)
         } else {
-          this.obstacles.get(this.cameras.main.width, 970)
+          this.rocks.get(this.cameras.main.width, 970)
           .setActive(true)
           .setVisible(true)
           .setScale(0.5)
@@ -133,34 +138,65 @@ export default class GamePlay extends Phaser.Scene {
     // GameOver on collision
     this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
       // console.log("collisionstart");
-      console.log({ a: bodyA, b: bodyB});
+      // console.log({ a: bodyA, b: bodyB});
       if ((bodyA.parent.label == "fish1" && bodyB.parent.label == "shark") ||
        (bodyB.parent.label == "fish1" && bodyB.parent.label == "shark") ) {
-          this.scene.start("game-over")
+          this.scene.start("game-over", {score: this.score})
         }
       });
 
     function makeImage(scene, image, physics) {
       return scene.matter.add.image(-200, -200, image, null, { shape: physics });
     }
-  };
 
+    const style = { font: "bold 50px Arial", fill: "#000000" };
+    this.text = this.add.text(this.cameras.main.width / 2, 0, ``, style)
+
+    this.score = 0;
+ 
+  };
+  
   update() {
-    this.gameSpeed = 3;
+
+    this.gameSpeed = 10;
+     
+
+    this.displayScore += 1;
+    this.time.addEvent({ delay: 1000, repeat: 1000000 }, (this.score += 1 * this.gameSpeed/10));
+    if(this.displayScore % 7 == 0){
+      console.log(this.score);
+
+      this.text.setText(
+      `${this.score}`
+      );
+    }
+  //   
+  // const updateTimer = () = {
+    //   this.timeLeft = ((120000 - this.timedEvent.delay*this.timedEvent.getProgress())/1000).toFixed(0)
+    //   this.timerLabel.setText(this.timeFormatted);
+    // }
+    
+
+    // let time = new TimerEvent(config)
+    // time.getElapsed()
+    // console.log(this.Timer.SECOND)
+
+
     
     
-    this.ground1.tilePositionX += this.gameSpeed/6 * 20;
-    this.ground2.tilePositionX += this.gameSpeed/6 * 14;
-    // this.ground3.tilePositionX += this.gameSpeed/6 * 10;
-    this.ground4.tilePositionX += this.gameSpeed/6 * 12;
-    this.ground5.tilePositionX += this.gameSpeed/6 * 8;
-    this.ground6.tilePositionX += this.gameSpeed/6 * 1;
+                                  
+    this.ground1.tilePositionX += 1 * this.gameSpeed;
+    this.ground2.tilePositionX += 0.6 * this.gameSpeed;
+    // this.ground3.tilePositionX += this.gameSpeed * 1/10;
+    this.ground4.tilePositionX += 0.3 * this.gameSpeed;
+    this.ground5.tilePositionX += 0.2 * this.gameSpeed;
+    this.ground6.tilePositionX += 0.05 * this.gameSpeed;
 
 
    
-    controlObstacle(this.obstacles, -3 * this.gameSpeed)
-    controlObstacle(this.ships, -3 * this.gameSpeed)
-    controlObstacle(this.sharks, -8 * this.gameSpeed)
+    controlObstacle(this.rocks, -this.gameSpeed)
+    controlObstacle(this.ships, -this.gameSpeed)
+    controlObstacle(this.sharks, -2 * this.gameSpeed)
 
     function controlObstacle(group, speed){
       group.incX(speed);
@@ -177,7 +213,7 @@ export default class GamePlay extends Phaser.Scene {
 
     // GameOver when out of bounds 
     if (this.player.x < 150) {
-      this.scene.start("game-over")};
+      this.scene.start("game-over", {score: this.score})};
 
     // set player angle to 0
     this.player.setAngle(0);
