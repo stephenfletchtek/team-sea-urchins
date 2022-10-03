@@ -1,7 +1,8 @@
 export default class Player {
   constructor(scene){
     this.scene = scene
-    this.velocity = 25;
+    this.velocity = 25; // player velocity
+    this.deadBand = 10; // swipe 'dead band' ie a small movement is not a swipe
   }
 
   createPlayer() {
@@ -40,33 +41,36 @@ export default class Player {
       this.player.x = 300;
     }
 
-    // swipe 'dead band' ie a small movement is not a swipe
-    const deadBand = 10
-
     // player direction responds to up and down swipe
-    const pointer = this.scene.input.activePointer
-    if (pointer.isDown) {
-      this.wasClicked = true
-      if ((pointer.downY - pointer.y) > deadBand) {
-        this.movePlayer = "up"
-      } else if ((pointer.y - pointer.downY) > deadBand) {
-        this.movePlayer = "down"
-      } else {
-        this.movePlayer = null
-      }
-    } else if (this.wasClicked == true) {
-      this.wasClicked = false
-      this.movePlayer = null
-    }
+    const pointer = this.scene.input.activePointer;
+    this.movePlayer = this.#swipeControl(pointer);
 
     // player direction responds to the up and down keys
     const cursors = this.scene.input.keyboard.createCursorKeys();
-    this.movePlayer = this.#cursorControl(cursors)
+    this.movePlayer = this.#cursorControl(cursors);
 
     // set player velocity
     this.player.setVelocityX(0);
     this.player.setVelocityY(this.#playerVelY())
   };
+
+  #swipeControl(pointer) {
+    if (pointer.isDown) {
+      this.wasClicked = true
+      if ((pointer.downY - pointer.y) > this.deadBand) {
+        return "up";
+      } else if ((pointer.y - pointer.downY) > this.deadBand) {
+        return "down";
+      } else {
+        return null;
+      }
+    } else if (this.wasClicked == true) {
+      this.wasClicked = false;
+      return null;
+    } else {
+      return this.movePlayer;
+    } 
+  }
 
   #cursorControl(cursors){
     if (cursors.down.isDown) {
