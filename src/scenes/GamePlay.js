@@ -1,6 +1,8 @@
-export default class GamePlay extends Phaser.Scene {
+import BaseGame from './BaseGame.js';
+
+export default class GamePlay extends BaseGame {
   constructor() {
-    super('game');
+    super('game-play');
 
     this.wasClicked = false;
     this.wasPushed = false;
@@ -9,25 +11,6 @@ export default class GamePlay extends Phaser.Scene {
     this.ships;
     this.sharks;
   }
-
-  init() { };
-
-  preload() {
-    // load in physics files 
-    this.load.json('physics', 'assets/physics.json');
-    this.load.json('fish-physics', 'assets/players/fish-physics.json');
-
-    // load background
-    this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
-
-    // load player    
-    this.load.atlas('player', 'assets/players/player-fish-spritesheet.png', 'assets/players/player-fish.json');
-
-    // load obstacles 
-    this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
-    this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
-    this.load.image('sharkObstacle', 'assets/obstacles/obstacle-shark.png')
-  };
 
   create() {
     // turn gravity off and set bounds of screen

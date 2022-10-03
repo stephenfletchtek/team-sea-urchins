@@ -1,8 +1,8 @@
-import BaseGame from './BaseGame';
+import BaseGame from './BaseGame.js';
 
 export default class GameStart extends BaseGame {
   constructor() {
-    super("game-start");
+    super('game-start');
   }
 
   create() {
@@ -18,7 +18,7 @@ export default class GameStart extends BaseGame {
     startButton.setInteractive();
     startButton.on("pointerup", () => {
       console.log("lets play!")
-      this.scene.start("game")
+      this.scene.start("game-play")
     })
   }
 }

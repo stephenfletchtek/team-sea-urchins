@@ -1,6 +1,6 @@
 export default class BaseGame extends Phaser.Scene {
-  constructor() {
-    super();
+  constructor(sceneName) {
+    super(sceneName);
   }
 
   preload() {
@@ -10,7 +10,6 @@ export default class BaseGame extends Phaser.Scene {
     // load in physics files 
     this.load.json('physics', 'assets/physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
-    this.load.json('fish-swim', 'assets/players/fish-swim.json');
   
     // load background
     this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
