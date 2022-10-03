@@ -11,6 +11,7 @@ export default class GamePlay extends Phaser.Scene {
     this.gameSpeed;
     this.timedEvent;
     this.displayScore = 0;
+    this.score;
   }
 
   init() { };
@@ -107,20 +108,22 @@ export default class GamePlay extends Phaser.Scene {
         this.sharks.get(this.cameras.main.width, obstaclePosition)
           .setActive(true)
           .setVisible(true)
-          .setScale(0.5)
+          .setScale(0.7)
       }
     })
 
     // randomly alternate ships and rocks on bottom
     this.time.addEvent({
       delay: 10000,
+      // delay: 5000,
       loop: true,
       callback: () => {
         if (Math.round(Math.random()) == 0){
-          this.ships.get(this.cameras.main.width, 970)
+          this.ships.get(this.cameras.main.width, 870)
           .setActive(true)
           .setVisible(true)
           .setScale(0.5)
+          // .setScale(1.4)
         } else {
           this.rocks.get(this.cameras.main.width, 970)
           .setActive(true)
@@ -138,7 +141,7 @@ export default class GamePlay extends Phaser.Scene {
       // console.log({ a: bodyA, b: bodyB});
       if ((bodyA.parent.label == "fish1" && bodyB.parent.label == "shark") ||
        (bodyB.parent.label == "fish1" && bodyB.parent.label == "shark") ) {
-          this.scene.start("game-over")
+          this.scene.start("game-over", {score: this.score})
         }
       });
 
@@ -147,21 +150,25 @@ export default class GamePlay extends Phaser.Scene {
     }
 
     const style = { font: "bold 50px Arial", fill: "#000000" };
-     this.text = this.add.text(this.cameras.main.width / 2, 0, ``, style)
+    this.text = this.add.text(this.cameras.main.width / 2, 0, ``, style)
 
-      this.score = 0;
+    this.score = 0;
  
   };
   
   update() {
-  this.displayScore += 1;
-  this.time.addEvent({ delay: 1000, repeat: 1000000 }, (this.score += 11));
-  if(this.displayScore % 5 == 0){
-    console.log(this.score);
 
-    this.text.setText(
-    `${this.score}`
-  );
+    this.gameSpeed = 10;
+     
+
+    this.displayScore += 1;
+    this.time.addEvent({ delay: 1000, repeat: 1000000 }, (this.score += 1 * this.gameSpeed/10));
+    if(this.displayScore % 7 == 0){
+      console.log(this.score);
+
+      this.text.setText(
+      `${this.score}`
+      );
     }
   //   
   // const updateTimer = () = {
@@ -176,7 +183,6 @@ export default class GamePlay extends Phaser.Scene {
 
 
     
-    this.gameSpeed = 10;
     
                                   
     this.ground1.tilePositionX += 1 * this.gameSpeed;
@@ -207,7 +213,7 @@ export default class GamePlay extends Phaser.Scene {
 
     // GameOver when out of bounds 
     if (this.player.x < 150) {
-      this.scene.start("game-over")};
+      this.scene.start("game-over", {score: this.score})};
 
     // set player angle to 0
     this.player.setAngle(0);
