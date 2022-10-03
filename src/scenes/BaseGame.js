@@ -5,7 +5,13 @@ export default class BaseGame extends Phaser.Scene {
 
   preload() {
     // load start button
-    this.load.image("start-game-button", "assets/startup/start-game-button.png")
+    this.load.image("start-game-button", "assets/titles/start-game-button.png");
+
+    // load end game button
+    this.load.image('end-game-button', 'assets/titles/game-over-button.png');
+
+    // load start again button
+    this.load.image('start-again-button', 'assets/titles/start-again-button.png');
 
     // load in physics files 
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
