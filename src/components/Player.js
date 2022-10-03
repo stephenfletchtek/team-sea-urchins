@@ -61,22 +61,27 @@ export default class Player {
 
     // player direction responds to the up and down keys
     const cursors = this.scene.input.keyboard.createCursorKeys();
-    if (cursors.down.isDown) {
-      this.wasPushed = true
-      this.movePlayer = "down"
-    } else if (cursors.up.isDown) {
-      this.wasPushed = true
-      this.movePlayer = "up"
-    } else if (this.wasPushed == true) {
-      this.wasPushed = false
-      this.movePlayer = null
-    }
+    this.movePlayer = this.#cursorControl(cursors)
 
     // set player velocity
     this.player.setVelocityX(0);
     this.player.setVelocityY(this.#playerVelY())
-
   };
+
+  #cursorControl(cursors){
+    if (cursors.down.isDown) {
+      this.wasPushed = true;
+      return "down";
+    } else if (cursors.up.isDown) {
+      this.wasPushed = true;
+      return "up";
+    } else if (this.wasPushed == true) {
+      this.wasPushed = false;
+      return null;
+    } else {
+      return this.movePlayer;
+    }
+  }
 
   #playerVelY() {
     // limits to stop player going off screen
