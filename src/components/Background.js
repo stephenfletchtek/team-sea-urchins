@@ -13,11 +13,11 @@ export default class Background {
   }
 
   updateMovingBackground(){
-    this.ground1.tilePositionX += this.scene.gameSpeed/6 * 20;
-    this.ground2.tilePositionX += this.scene.gameSpeed/6 * 14;
-    // this.ground3.tilePositionX += this.scene.gameSpeed/6 * 10;
-    this.ground4.tilePositionX += this.scene.gameSpeed/6 * 12;
-    this.ground5.tilePositionX += this.scene.gameSpeed/6 * 8;
-    this.ground6.tilePositionX += this.scene.gameSpeed/6 * 1;
+    this.ground1.tilePositionX += 1 * this.scene.gameSpeed;
+    this.ground2.tilePositionX += 0.6 * this.scene.gameSpeed;
+    // this.ground3.tilePositionX += 0.4 * this.scene.gameSpeed;
+    this.ground4.tilePositionX += 0.3 * this.scene.gameSpeed;
+    this.ground5.tilePositionX += 0.2 * this.scene.gameSpeed;
+    this.ground6.tilePositionX += 0.05 * this.scene.gameSpeed;
   }
 }
