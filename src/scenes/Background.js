@@ -3,7 +3,7 @@ export default class Background {
     this.scene = scene
   }
 
-  makeMovingBackground() {
+  createMovingBackground() {
     const background = this.scene.add.image(0, 0, 'background').setOrigin(0, 0);
     let scaleX = this.scene.cameras.main.width / background.width;
     let scaleY = this.scene.cameras.main.height / background.height;
