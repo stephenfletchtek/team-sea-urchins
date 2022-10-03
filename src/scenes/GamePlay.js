@@ -8,6 +8,7 @@ export default class GamePlay extends Phaser.Scene {
     this.obstacles;
     this.ships;
     this.sharks;
+    this.gameSpeed;
   }
 
   init() { };
@@ -19,8 +20,12 @@ export default class GamePlay extends Phaser.Scene {
 
     // load background
     //svg
-    this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
-    
+    this.load.svg('background1', 'assets/background/layer-1.svg', { width: 1920, height: 1080 });
+    this.load.svg('background2', 'assets/background/layer-2.svg', { width: 1920, height: 1080 });
+    this.load.svg('background3', 'assets/background/layer-3.svg', { width: 1920, height: 1080 });
+    this.load.svg('background4', 'assets/background/layer-4.svg', { width: 1920, height: 1080 });
+    this.load.svg('background5', 'assets/background/layer-5.svg', { width: 1920, height: 1080 }); 
+    this.load.svg('background6', 'assets/background/layer-6.svg', { width: 1920, height: 1080 }); 
 
     // load player    
     this.load.atlas('player', 'assets/players/player-fish-spritesheet.png', 'assets/players/player-fish.json');
@@ -32,6 +37,7 @@ export default class GamePlay extends Phaser.Scene {
   };
 
   create() {
+    
     // turn gravity off and set bounds of screen
     this.matter.world.disableGravity();
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
@@ -42,10 +48,16 @@ export default class GamePlay extends Phaser.Scene {
 
     // background
     let background = this.add.tileSprite(0, 0, 1920, 1080, 'background').setOrigin(0,0);
-    // this.background.autoScroll(-100,0);
     let scaleX = this.cameras.main.width / background.width;
     let scaleY = this.cameras.main.height / background.height;
     let scale = Math.min(scaleX, scaleY);
+
+    this.ground6 = this.add.tileSprite(0, 0, 1920, 1080, 'background6').setOrigin(0,0);
+    this.ground5 = this.add.tileSprite(0, 0, 1920, 1080, 'background5').setOrigin(0,0);
+    this.ground4 = this.add.tileSprite(0, 0, 1920, 1080, 'background4').setOrigin(0,0);
+    // this.ground3 = this.add.tileSprite(0, 0, 1920, 1080, 'background3').setOrigin(0,0);
+    this.ground2 = this.add.tileSprite(0, 0, 1920, 1080, 'background2').setOrigin(0,0);
+    this.ground1 = this.add.tileSprite(0, 0, 1920, 1080, 'background1').setOrigin(0,0);
 
     this.background = background
     this.background.setScale(scale)
@@ -134,14 +146,21 @@ export default class GamePlay extends Phaser.Scene {
   };
 
   update() {
+    this.gameSpeed = 3;
+    
+    
+    this.ground1.tilePositionX += this.gameSpeed/6 * 20;
+    this.ground2.tilePositionX += this.gameSpeed/6 * 14;
+    // this.ground3.tilePositionX += this.gameSpeed/6 * 10;
+    this.ground4.tilePositionX += this.gameSpeed/6 * 12;
+    this.ground5.tilePositionX += this.gameSpeed/6 * 8;
+    this.ground6.tilePositionX += this.gameSpeed/6 * 1;
 
-    this.background.tilePositionX += 5;
 
-
-    const gamespeed = 3
-    controlObstacle(this.obstacles, -3 * gamespeed)
-    controlObstacle(this.ships, -3 * gamespeed)
-    controlObstacle(this.sharks, -8 * gamespeed)
+   
+    controlObstacle(this.obstacles, -3 * this.gameSpeed)
+    controlObstacle(this.ships, -3 * this.gameSpeed)
+    controlObstacle(this.sharks, -8 * this.gameSpeed)
 
     function controlObstacle(group, speed){
       group.incX(speed);
