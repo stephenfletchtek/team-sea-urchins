@@ -58,9 +58,9 @@ export default class Obstacles {
   }
 
   updateObstacles(){
-    controlObstacle(this.obstacles, -3)
-    controlObstacle(this.ships, -3)
-    controlObstacle(this.sharks, -8)
+    controlObstacle(this.obstacles, -3 * this.scene.gameSpeed)
+    controlObstacle(this.ships, -3 * this.scene.gameSpeed)
+    controlObstacle(this.sharks, -8 * this.scene.gameSpeed)
 
     function controlObstacle(group, speed){
       group.incX(speed);

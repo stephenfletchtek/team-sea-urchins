@@ -33,6 +33,11 @@ export default class GamePlay extends BaseGame {
   };
 
   update() {
+    this.gameSpeed = 3;
+
+    // update background
+    this.background.updateMovingBackground();
+
     // update player
     this.player.updatePlayer();
 
