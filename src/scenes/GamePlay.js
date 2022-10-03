@@ -18,7 +18,9 @@ export default class GamePlay extends Phaser.Scene {
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
 
     // load background
+    //svg
     this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
+    
 
     // load player    
     this.load.atlas('player', 'assets/players/player-fish-spritesheet.png', 'assets/players/player-fish.json');
@@ -39,11 +41,14 @@ export default class GamePlay extends Phaser.Scene {
     let fishPhysics = this.cache.json.get("fish-physics");
 
     // background
-    const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
+    let background = this.add.tileSprite(0, 0, 1920, 1080, 'background').setOrigin(0,0);
+    // this.background.autoScroll(-100,0);
     let scaleX = this.cameras.main.width / background.width;
     let scaleY = this.cameras.main.height / background.height;
     let scale = Math.min(scaleX, scaleY);
-    background.setScale(scale).setScrollFactor(0);
+
+    this.background = background
+    this.background.setScale(scale)
 
     // player 
     let fishSwim = {
@@ -129,9 +134,14 @@ export default class GamePlay extends Phaser.Scene {
   };
 
   update() {
-    controlObstacle(this.obstacles, -3)
-    controlObstacle(this.ships, -3)
-    controlObstacle(this.sharks, -8)
+
+    this.background.tilePositionX += 5;
+
+
+    const gamespeed = 3
+    controlObstacle(this.obstacles, -3 * gamespeed)
+    controlObstacle(this.ships, -3 * gamespeed)
+    controlObstacle(this.sharks, -8 * gamespeed)
 
     function controlObstacle(group, speed){
       group.incX(speed);
