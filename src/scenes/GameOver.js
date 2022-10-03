@@ -6,44 +6,48 @@ export default class GameOver extends BaseGame {
 	}
 
 	create(data) {
-		this.score = data.score
 		// background
 		this.setStaticBackground()
 
 		// game over text
-		let width = this.cameras.main.width / 2;
-		let height = this.cameras.main.height / 2;
-		
-		const end_game_image = this.add.image(
+		const gameOverText = this.#gameOverText();
+		gameOverText.setDepth(1);
+	
+		// score
+		const score = this.#score(data);
+		score.setOrigin(0.5).setDepth(1);
+
+		// start game text
+		const startGameButton = this.#startGame()
+		startGameButton.setDepth(1).setInteractive();
+		startGameButton.on('pointerup', () => {
+			// this.music.stop();
+			this.scene.start('game-play');
+			}
+		);
+	}
+
+	#gameOverText(){
+		return this.add.image(
 			this.game.renderer.width / 2,
 			this.game.renderer.height / 2 - 100,
 			'end-game-button'
-		).setDepth(1);
-	
-		this.add.text(
-			width,
-			height + 25,
-			`${this.score}`,
-			{
-				font: 'bold 80px Arial',
-				fill: '#000000'
-			}
-		).setOrigin(0.5).setDepth(1);
+		)
+	}
 
-		// start game text
-		let startAgainButton = this.add.image(
+	#score(data){
+		const width = this.cameras.main.width / 2;
+		const height = this.cameras.main.height / 2;
+		return this.add.text(width, height + 25, data.score,
+			{ font: 'bold 80px Arial', fill: '#000000'}
+		)
+	}
+
+	#startGame(){
+		return this.add.image(
 			this.game.renderer.width / 2,
 			this.game.renderer.height / 2 + 150,
 			'start-again-button'
-		).setDepth(1);
-
-	startAgainButton.setInteractive();
-	startAgainButton.on(
-		'pointerup', () => {
-			console.log('lets play again!');
-			// this.music.stop();
-			this.scene.start('game-play');
-		}
-		);
+		)
 	}
 }
