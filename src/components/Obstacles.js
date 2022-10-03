@@ -5,7 +5,7 @@ export default class Obstacles {
 
   createObstacles() {
     // load in physics files
-    let physics = this.scene.cache.json.get("physics");
+    let physics = this.scene.cache.json.get("obstacles-physics");
 
     // add to group
     this.obstacles = this.scene.add.group()
