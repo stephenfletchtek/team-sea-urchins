@@ -14,7 +14,7 @@ export default class Obstacles {
       loop: true,
       callback: () => {
         let obstacleY = Math.floor(Math.random() * 375) + 125
-        this.#obstacleCallback(this.sharks, obstacleY)
+        this.#obstacleCallback(this.sharks, obstacleY, 0.7)
       }
     })
 
@@ -24,9 +24,9 @@ export default class Obstacles {
       loop: true,
       callback: () => {
         if (Math.round(Math.random()) == 0) {
-          this.#obstacleCallback(this.rocks, 970)
+          this.#obstacleCallback(this.rocks, 970, 0.5)
         } else {
-          this.#obstacleCallback(this.ships, 970)
+          this.#obstacleCallback(this.ships, 870, 0.5)
         }
       }
     })
@@ -61,11 +61,11 @@ export default class Obstacles {
     return scene.matter.add.image(-200, -200, image, null, { shape: physics });
   }
 
-  #obstacleCallback(obstacles, obstacleY) {
+  #obstacleCallback(obstacles, obstacleY, scale) {
     obstacles.get(this.scene.cameras.main.width, obstacleY)
       .setActive(true)
       .setVisible(true)
-      .setScale(0.5)
+      .setScale(scale)
   }
 
   #controlObstacle(group, speed) {
