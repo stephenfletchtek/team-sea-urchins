@@ -6,6 +6,10 @@ export default class GameOver extends BaseGame {
 	}
 
 	create(data) {
+		// music
+		this.music = this.sound.add('gameOverMusic', { loop: true });
+		this.music.play();
+		
 		// background
 		this.setStaticBackground()
 

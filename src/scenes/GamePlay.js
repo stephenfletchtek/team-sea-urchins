@@ -20,6 +20,10 @@ export default class GamePlay extends BaseGame {
   }
 
   create() {
+    // music
+    this.music = this.sound.add('theme', { loop: true });
+    this.music.play();
+
     // turn gravity off and set bounds of screen
     this.matter.world.disableGravity();
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);

@@ -13,6 +13,10 @@ export default class BaseGame extends Phaser.Scene {
     // load start again button
     this.load.image('start-again-button', 'assets/titles/start-again-button.png');
 
+    // load music
+    this.load.audio('theme', 'assets/audio/GamePlay/themellq.mp3');
+    this.load.audio('gameOverMusic', 'assets/audio/GameOver/gameover.mp3');
+
     // load in physics files 
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');

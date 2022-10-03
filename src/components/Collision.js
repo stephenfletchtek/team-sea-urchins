@@ -5,11 +5,10 @@ export default class Collision {
 
   createCollision() {
     this.scene.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      // console.log("collisionstart");
-      // console.log({ a: bodyA, b: bodyB});
       if ((bodyA.parent.label == "fish1" && bodyB.parent.label == "shark") ||
        (bodyB.parent.label == "fish1" && bodyB.parent.label == "shark") ) {
-          this.scene.scene.start("game-over", { score: this.scene.score.score })
+          this.scene.music.stop();
+          this.scene.scene.start("game-over", { score: this.scene.score.score });
         }
       });
   }
