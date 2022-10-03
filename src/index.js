@@ -16,7 +16,9 @@ const config = {
       debug: true
     }
   },
-
+  audio: {
+    disabledWebAudio: false
+  },
   scene: [GameStart, GamePlay, GameOver]
 };
 

@@ -5,7 +5,7 @@ export default class BaseGame extends Phaser.Scene {
 
   preload() {
     // load start button
-    this.load.image("start-game-button", "assets/titles/start-game-button.png");
+    this.load.image('start-game-button', 'assets/titles/start-game-button.png');
 
     // load end game button
     this.load.image('end-game-button', 'assets/titles/game-over-button.png');

@@ -46,7 +46,7 @@ export default class Obstacles {
 
   #populateGroups(){
     // load in physics files
-    const physics = this.scene.cache.json.get("obstacles-physics");
+    const physics = this.scene.cache.json.get('obstacles-physics');
     
     // add 6 of each obstacle into their respective groups
     // make sure you don't get more obstacles on the the screen than there are in the group

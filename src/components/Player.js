@@ -7,7 +7,7 @@ export default class Player extends PlayerController {
 
   createPlayer() {
     // load in player physics files
-    let fishPhysics = this.scene.cache.json.get("fish-physics");
+    const fishPhysics = this.scene.cache.json.get('fish-physics');
 
     // player
     this.scene.scale = 0.5
