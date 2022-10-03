@@ -1,26 +1,11 @@
-export default class GameOver extends Phaser.Scene {
+import BaseGame from './BaseGame.js';
+
+export default class GameOver extends BaseGame {
 	constructor() {
 		super('game-over');
 	}
 
-	init() { };
-
-	preload() {
-		// load background
-		this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
-
-		// load start button
-		this.load.image("start-game-button", "assets/startup/start-game-button.png")
-	}
-
 	create() {
-		// turn gravity off and set bounds of screen
-		this.matter.world.disableGravity();
-		this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
-
-		// load in physics files for player
-		let fishPhysics = this.cache.json.get("fish-physics");
-
 		// background
 		const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
 		let scaleX = this.cameras.main.width / background.width;
@@ -36,7 +21,7 @@ export default class GameOver extends Phaser.Scene {
 			fill: "#fff",
 		}).setOrigin(0.5).setDepth(1);
 
-		// start game test
+		// start game text
 		let startAgain = this.add.text(width, height + 100, `Start again`, {
 			font: "bold 30px Arial",
 			fill: "#fff",

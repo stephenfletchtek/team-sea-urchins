@@ -11,7 +11,7 @@ export default class BaseGame extends Phaser.Scene {
     this.load.json('physics', 'assets/physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
   
-    // load background
+    // load static background
     this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
   
     // load player    
