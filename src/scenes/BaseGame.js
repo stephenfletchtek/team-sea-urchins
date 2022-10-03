@@ -22,4 +22,9 @@ export default class BaseGame extends Phaser.Scene {
     this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
     this.load.image('sharkObstacle', 'assets/obstacles/obstacle-shark.png')
   }
+
+  staticBackground(){
+    // background
+    this.add.image(0, 0, 'background').setOrigin(0, 0);
+  }
 }
