@@ -45,6 +45,7 @@ export default class GameOver extends Phaser.Scene {
 		startAgain.on("pointerup", () => {
 			console.log("lets play again!")
 			this.scene.start("game")
+			this.score = 0
 		})
 	}
 }
