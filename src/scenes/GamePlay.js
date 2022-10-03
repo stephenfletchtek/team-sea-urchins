@@ -2,6 +2,7 @@ import BaseGame from './BaseGame.js';
 import Player from './Player.js'
 import Obstacles from './Obstacles.js'
 import Background from './Background.js';
+import Collision from './Collision.js'
 
 export default class GamePlay extends BaseGame {
   constructor() {
@@ -10,6 +11,7 @@ export default class GamePlay extends BaseGame {
     this.background = new Background(this)
     this.player = new Player(this)
     this.obstacles = new Obstacles(this)
+    this.collision = new Collision(this)
   }
 
   create() {
@@ -27,14 +29,7 @@ export default class GamePlay extends BaseGame {
     this.obstacles.createObstacles();
 
     // GameOver on collision
-    this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      // console.log("collisionstart");
-      // console.log({ a: bodyA, b: bodyB});
-      if ((bodyA.parent.label == "fish1" && bodyB.parent.label == "shark") ||
-       (bodyB.parent.label == "fish1" && bodyB.parent.label == "shark") ) {
-          this.scene.start("game-over")
-        }
-      });
+    this.collision.createCollision()
   };
 
   update() {
