@@ -1,4 +1,6 @@
 import BaseGame from './BaseGame.js';
+import Player from './Player.js'
+import Obstacles from './Obstacles.js'
 
 export default class GamePlay extends BaseGame {
   constructor() {
@@ -17,10 +19,6 @@ export default class GamePlay extends BaseGame {
     this.matter.world.disableGravity();
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
-    // load in physics files
-    let physics = this.cache.json.get("physics");
-    let fishPhysics = this.cache.json.get("fish-physics");
-
     // background
     const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
     let scaleX = this.cameras.main.width / background.width;
@@ -28,72 +26,11 @@ export default class GamePlay extends BaseGame {
     let scale = Math.min(scaleX, scaleY);
     background.setScale(scale).setScrollFactor(0);
 
-    // player 
-    let fishSwim = {
-      key: 'fish-swim',
-      frames: [
-        { key: "player", frame: "fish1.png" },
-        { key: "player", frame: "fish2.png" }
-      ],
-      frameRate: 3,
-      repeat: -1
-    }
+    // player   
+    (new Player(this)).makePlayer();
 
-    this.anims.create(fishSwim);
-    this.scale = 0.5
-    const screenCenterY = this.cameras.main.height / 2;
-    this.player = this.matter.add.sprite(300, screenCenterY, 'player', null, { shape: fishPhysics.fish1 });
-    this.player.setScale(this.scale).setScrollFactor(0);
-    this.player.anims.load('fish-swim');
-    this.player.anims.play('fish-swim');
-    
-    // *****************
-    // *** obstacles ***
-    // *****************
-    this.obstacles = this.add.group()
-    this.ships = this.add.group()
-    this.sharks = this.add.group()
-
-    // add 6 of each obstacle into their respective groups
-    // make sure you don't get more obstacles on the the screen than there are in the group
-    for (let i = 0; i < 5; i++) {
-      this.obstacles.add(makeImage(this, 'rockObstacle', physics.rock)).setVisible(false);
-      this.ships.add(makeImage(this, 'shipObstacle', physics.ship)).setVisible(false);
-      this.sharks.add(makeImage(this, 'sharkObstacle', physics.shark)).setVisible(false)
-    }
-
-    // add sharks
-    this.time.addEvent({
-      delay: 5000,
-      loop: true,
-      callback: () => {
-        let obstaclePosition = Math.floor(Math.random() * 375) + 125
-        this.sharks.get(this.cameras.main.width, obstaclePosition)
-          .setActive(true)
-          .setVisible(true)
-          .setScale(0.5)
-      }
-    })
-
-    // randomly alternate ships and rocks on bottom
-    this.time.addEvent({
-      delay: 10000,
-      loop: true,
-      callback: () => {
-        if (Math.round(Math.random()) == 0){
-          this.ships.get(this.cameras.main.width, 970)
-          .setActive(true)
-          .setVisible(true)
-          .setScale(0.5)
-        } else {
-          this.obstacles.get(this.cameras.main.width, 970)
-          .setActive(true)
-          .setVisible(true)
-          .setScale(0.5)
-        }
-      }
-    })
-
+    // player
+    (new Obstacles(this)).makeObstacles();
     
 
     // GameOver on collision
@@ -105,10 +42,6 @@ export default class GamePlay extends BaseGame {
           this.scene.start("game-over")
         }
       });
-
-    function makeImage(scene, image, physics) {
-      return scene.matter.add.image(-200, -200, image, null, { shape: physics });
-    }
   };
 
   update() {

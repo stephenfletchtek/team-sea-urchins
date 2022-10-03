@@ -17,7 +17,7 @@ export default class BaseGame extends Phaser.Scene {
     // load player    
     this.load.atlas('player', 'assets/players/player-fish-spritesheet.png', 'assets/players/player-fish.json');
   
-    // load obstacles 
+    // load obstacles
     this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
     this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
     this.load.image('sharkObstacle', 'assets/obstacles/obstacle-shark.png')
