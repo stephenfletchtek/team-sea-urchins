@@ -1,6 +1,7 @@
 import BaseGame from './BaseGame.js';
 import Player from './Player.js'
 import Obstacles from './Obstacles.js'
+import Background from './Background.js';
 
 export default class GamePlay extends BaseGame {
   constructor() {
@@ -20,11 +21,7 @@ export default class GamePlay extends BaseGame {
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
     // background
-    const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
-    let scaleX = this.cameras.main.width / background.width;
-    let scaleY = this.cameras.main.height / background.height;
-    let scale = Math.min(scaleX, scaleY);
-    background.setScale(scale).setScrollFactor(0);
+    (new Background(this)).makeMovingBackground();
 
     // player   
     (new Player(this)).makePlayer();
@@ -36,7 +33,7 @@ export default class GamePlay extends BaseGame {
     // GameOver on collision
     this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
       // console.log("collisionstart");
-      console.log({ a: bodyA, b: bodyB});
+      // console.log({ a: bodyA, b: bodyB});
       if ((bodyA.parent.label == "fish1" && bodyB.parent.label == "shark") ||
        (bodyB.parent.label == "fish1" && bodyB.parent.label == "shark") ) {
           this.scene.start("game-over")
