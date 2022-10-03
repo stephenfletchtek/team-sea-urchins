@@ -1,22 +1,22 @@
 import BaseGame from './BaseGame.js';
-import Player from '../components/Player.js'
-import Obstacles from '../components/Obstacles.js'
+import Player from '../components/Player.js';
+import Obstacles from '../components/Obstacles.js';
 import Background from '../components/Background.js';
-import Collision from '../components/Collision.js'
+import Collision from '../components/Collision.js';
+import Score from '../components/Score.js'
 
 export default class GamePlay extends BaseGame {
   constructor() {
     super('game-play');
 
-    this.background = new Background(this)
-    this.player = new Player(this)
-    this.obstacles = new Obstacles(this)
-    this.collision = new Collision(this)
+    this.background = new Background(this);
+    this.player = new Player(this);
+    this.obstacles = new Obstacles(this);
+    this.collision = new Collision(this);
+    this.score = new Score(this);
 
     // this controls speed of moving background and adjusts obstacles in sympathy
     this.gameSpeed = 10;
-    // initialise display score
-    this.displayScore = 0;
   }
 
   create() {
@@ -36,12 +36,8 @@ export default class GamePlay extends BaseGame {
     // GameOver on collision
     this.collision.createCollision()
 
-
     // scores
-    const style = { font: "bold 50px Arial", fill: "#000000" };
-    this.text = this.add.text(this.cameras.main.width / 2, 0, ``, style)
-
-    this.score = 0;
+    this.score.createScore();
   };
 
   update() {
@@ -55,11 +51,6 @@ export default class GamePlay extends BaseGame {
     this.obstacles.updateObstacles();
 
     // update score
-    this.displayScore += 1;
-    this.time.addEvent({ delay: 1000, repeat: 1000000 }, (this.score += 1 * this.gameSpeed/10));
-    if(this.displayScore % 7 == 0){
-      console.log(this.score);
-      this.text.setText(`${this.score}`);
-    }
+    this.score.updateScore();
   }
 }
