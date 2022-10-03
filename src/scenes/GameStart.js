@@ -1,16 +1,8 @@
-export default class StartGame extends Phaser.Scene {
+import BaseGame from './BaseGame';
+
+export default class GameStart extends BaseGame {
   constructor() {
-    super("start-game");
-  }
-
-  init() { };
-
-  preload() {
-    // load background
-    this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
-
-    // load start button
-    this.load.image("start-game-button", "assets/startup/start-game-button.png")
+    super("game-start");
   }
 
   create() {
