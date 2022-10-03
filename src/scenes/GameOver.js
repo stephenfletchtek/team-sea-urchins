@@ -7,7 +7,7 @@ export default class GameOver extends BaseGame {
 
 	create() {
 		// background
-		this.staticBackground()
+		this.setStaticBackground()
 
 		// game over text
 		let width = this.cameras.main.width / 2;

@@ -8,7 +8,7 @@ export default class BaseGame extends Phaser.Scene {
     this.load.image("start-game-button", "assets/startup/start-game-button.png")
 
     // load in physics files 
-    this.load.json('physics', 'assets/physics.json');
+    this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
   
     // load static background
@@ -32,7 +32,7 @@ export default class BaseGame extends Phaser.Scene {
     this.load.image('sharkObstacle', 'assets/obstacles/obstacle-shark.png')
   }
 
-  staticBackground(){
+  setStaticBackground(){
     // background
     this.add.image(0, 0, 'background').setOrigin(0, 0);
   }
