@@ -1,6 +1,7 @@
 export default class Player {
   constructor(scene){
     this.scene = scene
+    this.velocity = 25;
   }
 
   createPlayer() {
@@ -39,15 +40,8 @@ export default class Player {
       this.player.x = 300;
     }
 
-    // setting the speed that the player moves
-    const velocity = 25;
-
     // swipe 'dead band' ie a small movement is not a swipe
     const deadBand = 10
-
-    // limits to stop player going off screen
-    const upperLim = this.player.height * this.scene.scale / 2;
-    const lowerLim = this.scene.sys.game.canvas.height - upperLim;
 
     // player direction responds to up and down swipe
     const pointer = this.scene.input.activePointer
@@ -78,14 +72,24 @@ export default class Player {
       this.movePlayer = null
     }
 
-    // movement for up, down and stop
-    if (this.movePlayer == "down" && this.player.y < lowerLim) {
-      this.player.setVelocityY(velocity)
-    } else if (this.movePlayer == "up" && this.player.y > upperLim) {
-      this.player.setVelocityY(-velocity)
-    } else {
-      this.player.setVelocity(0)
-      this.movePlayer = null
-    }
+    // set player velocity
+    this.player.setVelocityX(0);
+    this.player.setVelocityY(this.#playerVelY())
+
   };
+
+  #playerVelY() {
+    // limits to stop player going off screen
+    const upperLim = this.player.height * this.scene.scale / 2;
+    const lowerLim = this.scene.cameras.main.height - upperLim;
+
+    if (this.movePlayer == "down" && this.player.y < lowerLim) {
+      return this.velocity
+    } else if (this.movePlayer == "up" && this.player.y > upperLim) {
+      return -(this.velocity)
+    } else {
+      this.movePlayer = null
+      return 0
+    }
+  }
 }
