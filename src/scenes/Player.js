@@ -1,12 +1,6 @@
 export default class Player {
   constructor(scene){
     this.scene = scene
-
-    // this.wasClicked = false;
-    // this.wasPushed = false;
-    // this.movePlayer;
-
-    // scene.player
   }
 
   createPlayer() {
@@ -27,21 +21,22 @@ export default class Player {
     this.scene.anims.create(fishSwim);
     this.scene.scale = 0.5
     const screenCenterY = this.scene.cameras.main.height / 2;
-    this.scene.player = this.scene.matter.add.sprite(300, screenCenterY, 'player', null, { shape: fishPhysics.fish1 });
-    this.scene.player.setScale(this.scene.scale).setScrollFactor(0);
-    this.scene.player.anims.load('fish-swim');
-    this.scene.player.anims.play('fish-swim');
+
+    this.player = this.scene.matter.add.sprite(300, screenCenterY, 'player', null, { shape: fishPhysics.fish1 });
+    this.player.setScale(this.scene.scale).setScrollFactor(0);
+    this.player.anims.load('fish-swim');
+    this.player.anims.play('fish-swim');
   }
 
   updatePlayer() {
     // GameOver when out of bounds 
-    if (this.scene.player.x < 150) {
+    if (this.player.x < 150) {
       this.scene.scene.start("game-over")};
 
     // set player angle to 0
-    this.scene.player.setAngle(0);
-    if (this.scene.player.x > 300) {
-      this.scene.player.x = 300;
+    this.player.setAngle(0);
+    if (this.player.x > 300) {
+      this.player.x = 300;
     }
 
     // setting the speed that the player moves
@@ -51,7 +46,7 @@ export default class Player {
     const deadBand = 10
 
     // limits to stop player going off screen
-    const upperLim = this.scene.player.height * this.scene.scale / 2;
+    const upperLim = this.player.height * this.scene.scale / 2;
     const lowerLim = this.scene.sys.game.canvas.height - upperLim;
 
     // player direction responds to up and down swipe
@@ -84,12 +79,12 @@ export default class Player {
     }
 
     // movement for up, down and stop
-    if (this.movePlayer == "down" && this.scene.player.y < lowerLim) {
-      this.scene.player.setVelocityY(velocity)
-    } else if (this.movePlayer == "up" && this.scene.player.y > upperLim) {
-      this.scene.player.setVelocityY(-velocity)
+    if (this.movePlayer == "down" && this.player.y < lowerLim) {
+      this.player.setVelocityY(velocity)
+    } else if (this.movePlayer == "up" && this.player.y > upperLim) {
+      this.player.setVelocityY(-velocity)
     } else {
-      this.scene.player.setVelocity(0)
+      this.player.setVelocity(0)
       this.movePlayer = null
     }
   };

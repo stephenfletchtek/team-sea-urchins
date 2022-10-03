@@ -8,7 +8,7 @@ export default class GamePlay extends BaseGame {
     super('game-play');
 
     this.background = new Background(this)
-    this.pplayer = new Player(this)
+    this.player = new Player(this)
     this.obstacles = new Obstacles(this)
   }
 
@@ -21,11 +21,10 @@ export default class GamePlay extends BaseGame {
     this.background.createMovingBackground();
 
     // create player   
-    this.pplayer.createPlayer();
+    this.player.createPlayer();
 
     // create obstacles
     this.obstacles.createObstacles();
-    
 
     // GameOver on collision
     this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
@@ -40,7 +39,7 @@ export default class GamePlay extends BaseGame {
 
   update() {
     // update player
-    this.pplayer.updatePlayer();
+    this.player.updatePlayer();
 
     // update obstacles
     this.obstacles.updateObstacles();
