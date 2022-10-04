@@ -33,9 +33,9 @@ export default class Obstacles {
   }
 
   updateObstacles() {
-    this.#controlObstacle(this.rocks, -3 * this.scene.gameSpeed)
-    this.#controlObstacle(this.ships, -3 * this.scene.gameSpeed)
-    this.#controlObstacle(this.sharks, -8 * this.scene.gameSpeed)
+    this.#controlObstacle(this.rocks, -this.scene.gameSpeed)
+    this.#controlObstacle(this.ships, -this.scene.gameSpeed)
+    this.#controlObstacle(this.sharks, -2 * this.scene.gameSpeed)
   }
 
   #createGroups() {

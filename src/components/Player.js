@@ -21,7 +21,9 @@ export default class Player extends PlayerController {
   updatePlayer() {
     // GameOver when out of bounds
     if (this.player.x < 150) {
-      this.scene.scene.start("game-over")};
+      this.scene.music.stop()
+      this.scene.scene.start("game-over")
+    };
 
     // set player angle to 0
     this.player.setAngle(0);
