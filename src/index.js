@@ -1,4 +1,4 @@
-import StartGame from './scenes/StartGame.js'
+import GameStart from './scenes/GameStart.js';
 import GamePlay from './scenes/GamePlay.js';
 import GameOver from './scenes/GameOver.js';
 
@@ -16,8 +16,10 @@ const config = {
       debug: true
     }
   },
-
-  scene: [StartGame, GamePlay, GameOver]
+  audio: {
+    disabledWebAudio: false
+  },
+  scene: [GameStart, GamePlay, GameOver]
 };
 
 export default new Phaser.Game(config);
