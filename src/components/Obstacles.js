@@ -10,7 +10,7 @@ export default class Obstacles {
 
     // add sharks
     this.scene.time.addEvent({
-      delay: 1000,
+      delay: 5000,
       // delay: 5000,
       loop: true,
       callback: () => {
@@ -21,14 +21,14 @@ export default class Obstacles {
 
     // randomly alternate ships and rocks on bottom
     this.scene.time.addEvent({
-      delay: 1000,
+      delay: 3000,
       // delay: 10000,
       loop: true,
       callback: () => {
         if (Math.round(Math.random()) == 0) {
-          this.#obstacleCallback(this.rocks, 970, 0.5);
+          this.#obstacleCallback(this.rocks, 870, 0.9);
         } else {
-          this.#obstacleCallback(this.ships, 870, 0.5);
+          this.#obstacleCallback(this.ships, 870, 1.4);
         }
       },
     });
@@ -53,10 +53,7 @@ export default class Obstacles {
     // add 6 of each obstacle into their respective groups
     // make sure you don't get more obstacles on the the screen than there are in the group
     for (let i = 0; i < 5; i++) {
-      this.rocks
-        .add(this.#makeImage(this.scene, 'rockObstacle', physics.rock))
-        .setScale(2)
-        .setVisible(false);
+      this.rocks.add(this.#makeImage(this.scene, 'rockObstacle', physics.rock)).setVisible(false);
       this.ships.add(this.#makeImage(this.scene, 'shipObstacle', physics.ship)).setVisible(false);
       this.sharks
         .add(this.#makeImage(this.scene, 'sharkObstacle', physics.shark))
@@ -83,7 +80,7 @@ export default class Obstacles {
       obstacle.setVelocityX(0);
       obstacle.setVelocityY(0);
 
-      if (obstacle.active && obstacle.x < -200) {
+      if (obstacle.active && obstacle.x + obstacle.width < 0) {
         group.killAndHide(obstacle);
       }
     });
