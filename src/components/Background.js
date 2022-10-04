@@ -5,7 +5,7 @@ export default class Background {
 
   createMovingBackground() {
     this.scene.add.image(0, 0, 'background6').setOrigin(0,0); // solid colour blue
-    this.ground5 = this.scene.add.tileSprite( 0, 0, 1920, 1080, 'background5').setOrigin(0,0);
+    this.ground5 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background5').setOrigin(0,0);
     this.ground4 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background4').setOrigin(0,0);
     this.ground3 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background3').setOrigin(0,0);
     this.ground2 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background2').setOrigin(0,0);
