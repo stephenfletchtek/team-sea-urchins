@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "3030": "PORT=3030 serve",
-    "test": "cypress run"
+    "test": "cypress run",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
