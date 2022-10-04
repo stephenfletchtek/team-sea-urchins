@@ -20,8 +20,6 @@ export default class PreStart extends BaseGame {
       });
     }
 
-    this.cameras.main.fadeIn(3000);
-
     const preGameButton = this.add
       .image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'pre-game-button')
       .setScale(0.5)
@@ -50,6 +48,7 @@ export default class PreStart extends BaseGame {
       tween.on('complete', () => {
         // this.cameras.main.fadeOut(1500);
         console.log('load StartGame scene');
+
         this.scene.start('game-start', { music: this.music });
       });
     });
