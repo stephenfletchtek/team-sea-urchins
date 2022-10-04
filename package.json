@@ -24,6 +24,12 @@
     "phaser3-rex-plugins": "^1.1.73",
     "serve": "^14.0.1"
   },
+  "prettier": {
+    "printWidth": 100,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "devDependencies": {
     "cypress": "^10.9.0"
   },

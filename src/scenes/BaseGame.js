@@ -4,6 +4,8 @@ export default class BaseGame extends Phaser.Scene {
   }
 
   preload() {
+    // pre game button
+    this.load.image('pre-game-button', '/assets/titles/pre-start-button.png');
     // load start button
     this.load.image('start-game-button', 'assets/titles/start-game-button.png');
 
@@ -16,6 +18,8 @@ export default class BaseGame extends Phaser.Scene {
     // load music
     this.load.audio('theme', 'assets/audio/GamePlay/themellq.mp3');
     this.load.audio('gameOverMusic', 'assets/audio/GameOver/gameover.mp3');
+    this.load.audio('gameOverMusic', 'assets/audio/GameOver/gameover.mp3');
+    this.load.audio('startGameMusic', 'assets/audio/startGame/startGameMusicUB.mp3');
 
     // load in physics files
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
