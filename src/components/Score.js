@@ -7,7 +7,7 @@ export default class Score {
     this.tick = 0;
     this.score = 0;
     const style = { font: "bold 50px Arial", fill: "#000000" };
-    this.text = this.scene.add.text(this.scene.cameras.main.width / 2, 0, ``, style)
+    this.text = this.scene.add.text(this.scene.cameras.main.width / 2, 50, ``, style).setOrigin(0.5)
   }
 
   updateScore(){
