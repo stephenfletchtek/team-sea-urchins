@@ -10,7 +10,8 @@
   "scripts": {
     "start": "serve",
     "3030": "PORT=3030 serve",
-    "test": "cypress run"
+    "test": "cypress run",
+    "heroku-postbuild": "ng build --configuration=production"
   },
   "repository": {
     "type": "git",
