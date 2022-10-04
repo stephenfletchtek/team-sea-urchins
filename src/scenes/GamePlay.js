@@ -43,7 +43,7 @@ export default class GamePlay extends BaseGame {
     // scores
     this.score.createScore();
   };
-
+  
   update() {
     // update background
     this.background.updateMovingBackground();
