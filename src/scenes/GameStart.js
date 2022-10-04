@@ -3,12 +3,9 @@ import BaseGame from './BaseGame.js';
 export default class GameStart extends BaseGame {
   constructor() {
     super('game-start');
-    this.music;
   }
 
   create(data) {
-    this.music = data.music;
-
     // background
     this.setStaticBackground();
 
@@ -33,7 +30,7 @@ export default class GameStart extends BaseGame {
 
     startButton.setDepth(1).setInteractive();
     startButton.on('pointerup', () => {
-      this.music.destroy();
+      data.music.destroy();
       this.scene.start('game-play');
     });
   }

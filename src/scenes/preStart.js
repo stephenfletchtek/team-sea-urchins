@@ -3,7 +3,6 @@ import BaseGame from './BaseGame.js';
 export default class PreStart extends BaseGame {
   constructor() {
     super('pre-start');
-    this.music;
   }
 
   create() {
