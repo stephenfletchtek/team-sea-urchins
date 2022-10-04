@@ -8,7 +8,7 @@
     },
   "type": "module",
   "scripts": {
-    "start": "serve",
+    "start": "npm run start",
     "3030": "PORT=3030 serve",
     "test": "cypress run"
   },
