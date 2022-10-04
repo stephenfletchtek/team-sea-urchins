@@ -1,3 +1,4 @@
+import PreStart from './scenes/preStart.js';
 import GameStart from './scenes/GameStart.js';
 import GamePlay from './scenes/GamePlay.js';
 import GameOver from './scenes/GameOver.js';
@@ -11,15 +12,16 @@ const config = {
     height: 1080,
   },
   physics: {
-    default: "matter",
+    default: 'matter',
     matter: {
-      debug: true
-    }
+      debug: true,
+    },
   },
   audio: {
-    disabledWebAudio: false
+    disabledWebAudio: false,
   },
-  scene: [GameStart, GamePlay, GameOver]
+  scene: [PreStart, GameStart, GamePlay, GameOver],
 };
 
 export default new Phaser.Game(config);
+PreStart;
