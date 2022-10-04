@@ -18,7 +18,7 @@ export default class BaseGame extends Phaser.Scene {
     // load music
     this.load.audio('theme', 'assets/audio/gamePlay/themeLLQ.mp3');
     this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
-    this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
+    // this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
     this.load.audio('startGameMusic', 'assets/audio/startGame/startGameMusicUB.mp3');
 
     // load in physics files
