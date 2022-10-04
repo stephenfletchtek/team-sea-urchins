@@ -32,32 +32,6 @@ export default class BaseGame extends Phaser.Scene {
     });
 
     // load moving background
-<<<<<<< HEAD
-    this.load.svg('background1', 'assets/background/layer-1.svg', {
-      width: 1920,
-      height: 1080,
-    });
-    this.load.svg('background2', 'assets/background/layer-2.svg', {
-      width: 1920,
-      height: 1080,
-    });
-    this.load.svg('background3', 'assets/background/layer-3.svg', {
-      width: 1920,
-      height: 1080,
-    });
-    this.load.svg('background4', 'assets/background/layer-4.svg', {
-      width: 1920,
-      height: 1080,
-    });
-    this.load.svg('background5', 'assets/background/layer-5.svg', {
-      width: 1920,
-      height: 1080,
-    });
-    this.load.svg('background6', 'assets/background/layer-6.svg', {
-      width: 1920,
-      height: 1080,
-    });
-=======
     this.load.svg('background0', 'assets/background/layer-0.svg', { width: 1920, height: 1080 });
     this.load.svg('background1', 'assets/background/layer-1.svg', { width: 1920, height: 1080 });
     this.load.svg('background2', 'assets/background/layer-2.svg', { width: 1920, height: 1080 });
@@ -65,7 +39,6 @@ export default class BaseGame extends Phaser.Scene {
     this.load.svg('background4', 'assets/background/layer-4.svg', { width: 1920, height: 1080 });
     this.load.svg('background5', 'assets/background/layer-5.svg', { width: 1920, height: 1080 }); 
     this.load.svg('background6', 'assets/background/layer-6.svg', { width: 1920, height: 1080 }); 
->>>>>>> main
 
     // load player
     this.load.atlas(
