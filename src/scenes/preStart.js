@@ -20,11 +20,13 @@ export default class PreStart extends BaseGame {
       });
     }
 
+    // display Title button
     const preGameButton = this.add
       .image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'pre-game-button')
       .setScale(0.5)
       .setInteractive();
 
+    // animate title button
     let throb = this.tweens.add({
       targets: preGameButton,
       scale: 2,
@@ -34,8 +36,8 @@ export default class PreStart extends BaseGame {
       ease: 'sine',
     });
 
-    // enterText.on('pointerup', () => {
     preGameButton.on('pointerup', () => {
+      // button fadeout triggers scene change
       let tween = this.tweens.add(
         {
           targets: preGameButton,
@@ -46,19 +48,9 @@ export default class PreStart extends BaseGame {
         this,
       );
       tween.on('complete', () => {
-        // this.cameras.main.fadeOut(1500);
         console.log('load StartGame scene');
-
         this.scene.start('game-start', { music: this.music });
       });
     });
   }
 }
-
-// var tween = this.tweens.add({
-//   targets: image,
-//   x: 500,
-//   ease: 'Power1',
-//   duration: 3000,
-// });
-// tween.on('complete', listener);

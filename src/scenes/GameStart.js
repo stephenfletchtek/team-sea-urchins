@@ -14,7 +14,7 @@ export default class GameStart extends BaseGame {
 
     this.cameras.main.fadeIn(4000);
 
-    // start game button at beginning
+    // start game button
     const startButton = this.add.image(
       this.game.renderer.width / 2,
       this.game.renderer.height / 2,
