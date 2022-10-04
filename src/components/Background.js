@@ -10,7 +10,8 @@ export default class Background {
     this.ground3 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background3').setOrigin(0,0);
     this.ground2 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background2').setOrigin(0,0);
     this.ground1 = this.scene.add.tileSprite(0, 0, 1920, 1080, 'background1').setOrigin(0,0);
-    this.scene.add.image(0, 0, 'background0').setOrigin(0,0); // sunlight
+    this.sunlight = this.scene.add.image(960, -350, 'background0');
+
   }
 
   updateMovingBackground(){
@@ -19,5 +20,6 @@ export default class Background {
     this.ground3.tilePositionX += 0.4 * this.scene.gameSpeed;
     this.ground4.tilePositionX += 0.3 * this.scene.gameSpeed;
     this.ground5.tilePositionX += 0.2 * this.scene.gameSpeed;
+    this.sunlight.rotation += 0.0007 * this.scene.gameSpeed;
   }
 }
