@@ -3,7 +3,7 @@ import GamePlay from './scenes/GamePlay.js';
 import GameOver from './scenes/GameOver.js';
 
 const config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   scale: {
     mode: Phaser.Scale.FIT,
     parent: 'game',

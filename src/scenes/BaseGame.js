@@ -25,6 +25,7 @@ export default class BaseGame extends Phaser.Scene {
     this.load.svg('background', 'assets/background/whole-background.svg', { width: 1920, height: 1080 });
   
     // load moving background
+    this.load.svg('background0', 'assets/background/layer-0.svg', { width: 1920, height: 1080 });
     this.load.svg('background1', 'assets/background/layer-1.svg', { width: 1920, height: 1080 });
     this.load.svg('background2', 'assets/background/layer-2.svg', { width: 1920, height: 1080 });
     this.load.svg('background3', 'assets/background/layer-3.svg', { width: 1920, height: 1080 });
