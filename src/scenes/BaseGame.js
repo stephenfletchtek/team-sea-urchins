@@ -4,6 +4,9 @@ export default class BaseGame extends Phaser.Scene {
   }
 
   preload() {
+    //during development
+    this.sound.setVolume(0.1);
+
     // pre game button
     this.load.image('pre-game-button', '/assets/titles/pre-start-button.png');
     // load start button
@@ -37,8 +40,8 @@ export default class BaseGame extends Phaser.Scene {
     this.load.svg('background2', 'assets/background/layer-2.svg', { width: 1920, height: 1080 });
     this.load.svg('background3', 'assets/background/layer-3.svg', { width: 1920, height: 1080 });
     this.load.svg('background4', 'assets/background/layer-4.svg', { width: 1920, height: 1080 });
-    this.load.svg('background5', 'assets/background/layer-5.svg', { width: 1920, height: 1080 }); 
-    this.load.svg('background6', 'assets/background/layer-6.svg', { width: 1920, height: 1080 }); 
+    this.load.svg('background5', 'assets/background/layer-5.svg', { width: 1920, height: 1080 });
+    this.load.svg('background6', 'assets/background/layer-6.svg', { width: 1920, height: 1080 });
 
     // load player
     this.load.atlas(
