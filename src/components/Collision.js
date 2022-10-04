@@ -9,11 +9,13 @@ export default class Collision {
         (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'shark') ||
         (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'shark')
       ) {
-        this.scene.cameras.main.shake(1000).on('complete', () => {
-          this.scene.music.stop();
+
+        // this.scene.cameras.main.shake(1000).on('complete', () => {
+          this.scene.music.stop();        
           this.scene.scene.start('game-over', { score: this.scene.score.score });
-        });
+        // });
       }
     });
   }
+
 }
