@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server",
+    "start": "webpack & node server",
     "3030": "PORT=3030 serve",
     "test": "cypress run"
   },
