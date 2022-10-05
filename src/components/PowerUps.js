@@ -78,7 +78,9 @@ export default class PowerUp {
       obstacle.setAngle(0);
       obstacle.setVelocityX(0);
       obstacle.setVelocityY(0);
-
+      if (obstacle.y > 1040) {
+        obstacle.y = 1040;
+      }
       if (obstacle.active && obstacle.x < -200) {
         group.killAndHide(obstacle);
       }

@@ -3,6 +3,6 @@ export default class Gravities extends Phaser.Plugins.BasePlugin {
     super(pluginManager);
 
     this.fishGravity = 0;
-    this.gravity = 15;
+    this.gravity = 25;
   }
 }
