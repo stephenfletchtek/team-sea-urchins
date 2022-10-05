@@ -3,7 +3,8 @@ import Player from '../components/Player.js';
 import Obstacles from '../components/Obstacles.js';
 import Background from '../components/Background.js';
 import Collision from '../components/Collision.js';
-import Score from '../components/Score.js'
+import Score from '../components/Score.js';
+import PowerUp from '../components/PowerUps.js';
 
 export default class GamePlay extends BaseGame {
   constructor() {
@@ -14,6 +15,7 @@ export default class GamePlay extends BaseGame {
     this.obstacles = new Obstacles(this);
     this.collision = new Collision(this);
     this.score = new Score(this);
+    this.powerups = new PowerUp(this);
 
     // this controls speed of moving background and adjusts obstacles in sympathy
     this.gameSpeed = 10;
@@ -37,6 +39,9 @@ export default class GamePlay extends BaseGame {
     // create obstacles
     this.obstacles.createObstacles();
 
+    // create powerups
+    this.powerups.createPowerUps();
+
     // GameOver on collision
     this.collision.createCollision()
 
@@ -53,6 +58,9 @@ export default class GamePlay extends BaseGame {
 
     // update obstacles
     this.obstacles.updateObstacles();
+
+    // update powerups
+    this.powerups.updatePowerUps();
 
     // update score
     this.score.updateScore();

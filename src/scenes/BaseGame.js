@@ -24,6 +24,7 @@ export default class BaseGame extends Phaser.Scene {
     // load in physics files
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
+    this.load.json('worm-physics', 'assets/powerups/powerups-physics.json');
 
     // load static background
     this.load.svg('background', 'assets/background/whole-background.svg', {
@@ -51,6 +52,9 @@ export default class BaseGame extends Phaser.Scene {
     this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
     this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
     this.load.image('sharkObstacle', 'assets/obstacles/obstacle-shark.png');
+
+    // load powerups
+    this.load.image('wormPower', 'assets/powerups/powerup-worm.png');
   }
 
   setStaticBackground() {

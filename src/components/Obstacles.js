@@ -8,7 +8,6 @@ export default class Obstacles {
     this.physics = this.scene.cache.json.get('obstacles-physics');
     
     this.tick = 0;
-    this.shark = null;
 
     // create and populate obstacle groups
     this.#createGroups()
