@@ -44,5 +44,4 @@ export default class Collision {
       (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'worm')
     )
   }
-
 }
