@@ -36,7 +36,7 @@ export default class GamePlay extends BaseGame {
     // create background
     this.background.createMovingBackground();
 
-    // create player   
+    // create player
     this.player.createPlayer();
 
     // create obstacles
@@ -46,12 +46,12 @@ export default class GamePlay extends BaseGame {
     this.powerups.createPowerUps();
 
     // GameOver on collision
-    this.collision.createCollision()
+    this.collision.createCollision();
 
     // scores
     this.score.createScore();
-  };
-  
+  }
+
   update() {
     // update background
     this.background.updateMovingBackground();
@@ -68,10 +68,13 @@ export default class GamePlay extends BaseGame {
     // update score
     this.score.updateScore();
 
-    //increase game speed for difficulty
-    this.tick += 1
+    //increase game speed for difficulty // and speed up music
+    this.tick += 1;
     if (this.tick % 500 === 0) {
-      this.gameSpeed += 2
+      // this.music.setRate(this.music.rate + 0.04);
+      // setTimeout(() => {
+      this.gameSpeed += 2;
+      // }, 100);
     }
   }
 }
