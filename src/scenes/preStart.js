@@ -47,7 +47,6 @@ export default class PreStart extends BaseGame {
         this,
       );
       tween.on('complete', () => {
-        console.log('load StartGame scene');
         this.scene.start('game-start', { music: this.music });
       });
     });

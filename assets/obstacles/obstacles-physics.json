@@ -3,7 +3,7 @@
 	"rock": {
 		"type": "fromPhysicsEditor",
 		"label": "rock",
-		"isStatic": false,
+		"isStatic": true,
 		"density": 0,
 		"restitution": 0,
 		"friction": 0,
@@ -12,7 +12,7 @@
 		"collisionFilter": {
 			"group": 0,
 			"category": 1,
-			"mask": 255
+			"mask": 2
 		},
 		"fixtures": [
 			{
@@ -88,7 +88,7 @@
   "ship": {
 		"type": "fromPhysicsEditor",
 		"label": "ship",
-		"isStatic": false,
+		"isStatic": true,
 		"density": 0.1,
 		"restitution": 0,
 		"friction": 0.1,

@@ -9,10 +9,13 @@ export default class Player extends PlayerController {
     // load in player physics files
     const fishPhysics = this.scene.cache.json.get('fish-physics');
 
+    // fish X, Y position
+    this.playerX = 500;
+    const playerY = this.scene.cameras.main.height / 2;
+    
     // player
-    this.scene.scale = 0.5
-    const screenCenterY = this.scene.cameras.main.height / 2;
-    this.player = this.scene.matter.add.sprite(300, screenCenterY, 'player', null, { shape: fishPhysics.fish1 });
+    this.scene.scale = 0.5;
+    this.player = this.scene.matter.add.sprite(this.playerX, playerY, 'player', null, { shape: fishPhysics.fish1 });
     this.player.setScale(this.scene.scale).setScrollFactor(0);
     
     this.#playerAnimation();
@@ -27,8 +30,8 @@ export default class Player extends PlayerController {
 
     // set player angle to 0
     this.player.setAngle(0);
-    if (this.player.x > 300) {
-      this.player.x = 300;
+    if (this.player.x > this.playerX) {
+      this.player.x = this.playerX;
     }
 
     // player direction responds to up and down swipe
