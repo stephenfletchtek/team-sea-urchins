@@ -40,9 +40,9 @@ export default class PlayerController {
         return "up";
       } else if ((pointer.y - pointer.downY) > this.deadBand) {
         return "down";
-      } else if ((pointer.downX - pointer.x) > 10){
+      } else if ((pointer.downX - pointer.x) > this.deadBand) {
         return "left";
-      } else if ((pointer.x - pointer.downX) > 10) {
+      } else if ((pointer.x - pointer.downX) > this.deadBand) {
         return "right";
       } else {
         return null;
