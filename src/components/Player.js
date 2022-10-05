@@ -18,7 +18,7 @@ export default class Player extends PlayerController {
     const playerY = this.scene.cameras.main.height / 2;
 
     // player
-    this.scene.scale = 0.5;
+    this.scene.scale = 0.3;
     this.player = this.scene.matter.add.sprite(this.playerX, playerY, 'player', null, {
       shape: fishPhysics.fish1,
     });
