@@ -21,6 +21,10 @@ export default class GameOver extends BaseGame {
 		const score = this.#score(data);
 		score.setOrigin(0.5).setDepth(1);
 
+		// highscore
+		this.highscore.addHighscore(data.score);
+		console.log(this.highscore.getHighscore())
+
 		// start game text
 		const startGameButton = this.#startGame()
 		startGameButton.setDepth(1).setInteractive( { useHandCursor: true  } );
