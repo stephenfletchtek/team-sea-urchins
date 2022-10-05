@@ -19,6 +19,11 @@ export default class Player extends PlayerController {
     this.player.setScale(this.scene.scale).setScrollFactor(0);
     
     this.#playerAnimation();
+
+    // create pointers and cursors
+    // this.#createKeys();
+    this.pointer = this.scene.input.activePointer;
+    this.cursors = this.scene.input.keyboard.createCursorKeys();
   }
 
   updatePlayer() {
@@ -32,12 +37,11 @@ export default class Player extends PlayerController {
     this.player.setAngle(0);
 
     // player direction responds to up and down swipe
-    const pointer = this.scene.input.activePointer;
-    this.movePlayer = this.swipeControl(pointer);
+    this.movePlayer = this.swipeControl(this.pointer);
 
     // player direction responds to the up and down keys
-    const cursors = this.scene.input.keyboard.createCursorKeys();
-    this.movePlayer = this.cursorControl(cursors);
+    this.movePlayer = this.cursorControl(this.cursors);
+
     this.player.setVelocity(this.playerVelX(), this.playerVelY())
   };
 
@@ -56,4 +60,15 @@ export default class Player extends PlayerController {
     this.player.anims.load('fish-swim');
     this.player.anims.play('fish-swim');
   }
+
+  /*
+  #createKeys() {
+    let keyA; let keyS; let keyD; let keyW;
+    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+  }
+  */
+  
 }
