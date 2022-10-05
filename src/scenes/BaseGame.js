@@ -24,6 +24,7 @@ export default class BaseGame extends Phaser.Scene {
     // load in physics files
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
+    this.load.json('powerup-physics', 'assets/powerup/powerup-physics.json');
 
     // load static background
     this.load.svg('background', 'assets/background/whole-background.svg', {
@@ -45,6 +46,13 @@ export default class BaseGame extends Phaser.Scene {
       'player',
       'assets/players/player-fish-spritesheet.png',
       'assets/players/player-fish.json',
+    );
+
+    // load powerup
+    this.load.atlas(
+      'bubbles',
+      'assets/powerup/bubbles-spritesheet.png',
+      'assets/powerup/bubbles.json',
     );
 
     // load obstacles

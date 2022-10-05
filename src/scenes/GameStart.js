@@ -1,13 +1,19 @@
 import BaseGame from './BaseGame.js';
+import PowerUp from '../components/Powerup.js'
 
 export default class GameStart extends BaseGame {
   constructor() {
     super('game-start');
+
+    this.powerup = new PowerUp(this);
   }
 
   create(data) {
     // background
     this.setStaticBackground();
+
+    // bubbles
+    this.powerup.createPowerup();
 
     this.cameras.main.fadeIn(4000);
 
