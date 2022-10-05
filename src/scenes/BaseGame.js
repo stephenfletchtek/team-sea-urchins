@@ -6,19 +6,11 @@ export default class BaseGame extends Phaser.Scene {
   preload() {
     // // force landscape on mobile
     // this.scene.scene.scale.forceOrientation('')
-    console.log(this.scene.scene);
     if (!this.game.device.desktop) {
       this.scene.scene.scale.updateOrientation(true, false);
       // this.scene.scene.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
       // this.scene.scene.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
     }
-
-    // if (!this.game.device.desktop) {
-    //   //In mobile force the orientation
-    //   this.scale.forceOrientation(true, false);
-    //   this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
-    //   this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
-    // }
 
     // window.addEventListener('load', () => {
     //   // setTimeout to 1 second will prevent a bug if you using a splash screen

@@ -35,17 +35,18 @@ export default class PreStart extends BaseGame {
       ease: 'sine',
     });
 
-    preGameButton.on(
-      'pointerup',
-      function () {
-        if (this.scale.isFullscreen) {
-          this.scale.stopFullscreen();
-        } else {
-          this.scale.startFullscreen();
-        }
-      },
-      this,
-    );
+    // make fullscreen on user interaction
+    // preGameButton.on(
+    //   'pointerup',
+    //   function () {
+    //     if (this.scale.isFullscreen) {
+    //       this.scale.stopFullscreen();
+    //     } else {
+    //       this.scale.startFullscreen();
+    //     }
+    //   },
+    //   this,
+    // );
 
     preGameButton.on('pointerup', () => {
       // button fadeout triggers scene change

@@ -33,5 +33,11 @@ export default class GameStart extends BaseGame {
       data.music.destroy();
       this.scene.start('game-play');
     });
+
+    console.log(this.scene);
+    this.scene.scene.input.keyboard.on('keyup', () => {
+      data.music.destroy();
+      this.scene.start('game-play');
+    });
   }
 }
