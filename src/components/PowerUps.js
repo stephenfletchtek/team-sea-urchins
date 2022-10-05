@@ -20,17 +20,17 @@ export default class PowerUp {
 
     // add cans of worms
     if (this.tick % 50 == 0) {
-      let XPosWorms = Math.floor(Math.random() * 1200) + 480;
+      let XPosWorms = Math.floor(Math.random() * 1920) + 81;
       this.#powerupCallback(this.worms, XPosWorms, -100, 0.5);
     }
 
     // add bubbles
     if (this.tick % 50 == 0) {
-      let XPosBubbles = Math.floor(Math.random() * 1200) + 480;
+      let XPosBubbles = Math.floor(Math.random() * 1920) + 81;
       this.#powerupCallback(this.bubbles, XPosBubbles, 1200, 0.4);
     }
 
-    this.#controlPowerUp(this.worms, 0, 1, -101, 1200);
+    this.#controlPowerUp(this.worms, -1, 1, -101, 1200);
     // this.#controlPowerUp(this.octopusStephen, -1.5 * this.scene.gameSpeed, -200, 1300);
     this.#controlPowerUp(this.bubbles, -1, -1, -200, 1300);
   }
@@ -45,7 +45,7 @@ export default class PowerUp {
     // make sure you don't get more objects on the the screen than there are in the group!
     for (let i = 0; i < 1; i++) {
       this.worms.add(
-        this.scene.matter.add.image(0, 0, 'wormPower', null, { shape: this.physics.worm }),
+        this.scene.matter.add.image(-200, -200, 'wormPower', null, { shape: this.physics.worm }),
       );
       // this.octopusStephen.add(
       //   this.scene.matter.add.image(-200, -200, 'octopusStephen', null, {
@@ -64,7 +64,7 @@ export default class PowerUp {
   }
 
   #bubblesAnimation() {
-    let bubbleImage = this.scene.matter.add.sprite(0, 0, 'bubblePower', null, {
+    let bubbleImage = this.scene.matter.add.sprite(-200, -200, 'bubblePower', null, {
       shape: this.physics.bubbles,
     });
 
@@ -98,7 +98,7 @@ export default class PowerUp {
         powerup.y = 1040;
       }
 
-      if (powerup.active && (powerup.y < upperLim || powerup.y > lowerLim)) {
+      if (powerup.active && (powerup.y < upperLim || powerup.x < -80)) {
         group.killAndHide(powerup);
       }
     });
