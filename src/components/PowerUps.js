@@ -19,25 +19,46 @@ export default class PowerUp {
     this.tick += 1;
 
     // add cans of worms
-    if (this.tick % 50 == 0) {
+    if (this.tick % 25 != 0) {
       let XPosWorms = Math.floor((Math.random() * 1920) / 1.6) + 1920 * 0.6;
       this.#powerupCallback(this.worms, XPosWorms, -100, 0.5);
     }
+    // add stephens
+    if (this.tick % 78 == 0) {
+      let XPosBubbles = Math.floor(Math.random() * 1920) + 1920 * 0.45;
+      this.#powerupCallback(this.octopusStephen, XPosBubbles, 600, 0.4);
+    }
 
     // add bubbles
-    if (this.tick % 50 == 0) {
+    if (this.tick % 25 == 0) {
       let XPosBubbles = Math.floor(Math.random() * 1920) + 1920 * 0.45;
       this.#powerupCallback(this.bubbles, XPosBubbles, 1200, 0.4);
     }
 
-    this.#controlPowerUp(this.worms, -1, 1, -101, 1200);
-    // this.#controlPowerUp(this.octopusStephen, -1.5 * this.scene.gameSpeed, -200, 1300);
+    let stephenY = 0;
+    stephenY = this.#stephenY(stephenY);
+    // console.log(this.#stephenY(stephenY) / this.scene.gameSpeed);
+
+    this.#controlPowerUp(this.octopusStephen, -1.5, 0, -150, 1200);
     this.#controlPowerUp(this.bubbles, -1, -1, -200, 1300);
+    this.#controlPowerUp(this.worms, -1, 0.6, -200, 1300);
+  }
+
+  #stephenY(stephenY) {
+    if (this.tick % 25 == 0) {
+      if (Math.random() < 0.5) {
+        stephenY = -1;
+      } else {
+        stephenY = 1;
+      }
+      // stephenY += Math.random() * (Math.random() > 0.5 ? 1 : -1);
+    }
+    return stephenY;
   }
 
   #createGroups() {
     this.worms = this.scene.add.group();
-    // this.octopusStephen = this.scene.add.group();
+    this.octopusStephen = this.scene.add.group();
     this.bubbles = this.scene.add.group();
   }
 
@@ -47,11 +68,11 @@ export default class PowerUp {
       this.worms.add(
         this.scene.matter.add.image(-200, -200, 'wormPower', null, { shape: this.physics.worm }),
       );
-      // this.octopusStephen.add(
-      //   this.scene.matter.add.image(-200, -200, 'octopusStephen', null, {
-      //     shape: this.physics.octopusStephen,
-      //   }),
-      // );
+      this.octopusStephen.add(
+        this.scene.matter.add.image(-200, -200, 'octopusStephen', null, {
+          shape: this.physics.octopusStephen,
+        }),
+      );
       this.bubbles.add(this.#bubblesAnimation());
     }
   }

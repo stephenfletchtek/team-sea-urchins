@@ -28,6 +28,7 @@ export default class Player extends PlayerController {
 
   updatePlayer() {
     this.fishGravity = this.scene.scene.systems.plugins.plugins[0].plugin.fishGravity;
+    this.fishSpeed = this.scene.scene.systems.plugins.plugins[0].plugin.fishSpeed;
 
     // GameOver when out of bounds
     if (this.player.x < 150) {
@@ -51,7 +52,7 @@ export default class Player extends PlayerController {
 
     // set player velocity
     this.player.setVelocityX(0);
-    this.player.setVelocityY(this.playerVelY() + this.fishGravity);
+    this.player.setVelocityY(this.playerVelY() * this.fishSpeed + this.fishGravity);
   }
 
   #playerAnimation() {

@@ -1,4 +1,4 @@
-import Gravities from './components/Gravities.js';
+import Handling from './components/Handling.js';
 import PreStart from './scenes/preStart.js';
 import GameStart from './scenes/GameStart.js';
 import GamePlay from './scenes/GamePlay.js';
@@ -18,7 +18,7 @@ const config = {
       // key is plugin key, plugin is class, start true/false if there
       // is a start method to run, mapping is the name tagged of this
       // to access the plugin class
-      { key: 'gravities', plugin: Gravities, mapping: 'gravities' },
+      { key: 'handling', plugin: Handling, mapping: 'handling' },
     ],
   },
   physics: {
