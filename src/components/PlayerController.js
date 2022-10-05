@@ -55,7 +55,12 @@ export default class PlayerController {
     } 
   }
 
-  cursorControl(cursors){
+  cursorControl(cursors) {
+    this.#verticalCursor(cursors)
+    this.#horizontalCursor(cursors)
+  }
+
+  #verticalCursor(cursors) {
     if (cursors.down.isDown) {
       this.wasUD = true;
       this.movePlayer.y = 'down'
@@ -66,6 +71,9 @@ export default class PlayerController {
       this.wasUD = false
       this.movePlayer.y = ''
     }
+  }
+
+  #horizontalCursor(cursors) {
     if (cursors.left.isDown) {
       this.wasXY = true;
       this.movePlayer.x = 'left'
