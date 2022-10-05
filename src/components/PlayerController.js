@@ -3,6 +3,10 @@ export default class PlayerController {
     this.scene = scene
     this.velocity = 25; // player velocity
     this.deadBand = 20; // swipe 'dead band' ie a small movement is not a swipe
+    this.movePlayer = { x: '', y: '' };
+    this.wasUD = false;
+    this.wasXY = false;
+    this.wasClicked = false
   }
   
   playerVelX() {
@@ -36,28 +40,37 @@ export default class PlayerController {
   swipeControl(pointer) {
     if (pointer.isDown) {
       this.wasClicked = true
-      if ((pointer.downY - pointer.y) > this.deadBand) {
-        return "up";
-      } else if ((pointer.y - pointer.downY) > this.deadBand) {
-        return "down";
-      } else if ((pointer.downX - pointer.x) > this.deadBand) {
-        return "left";
-      } else if ((pointer.x - pointer.downX) > this.deadBand) {
-        return "right";
-      } else {
-        return null;
-      }
+      this.#verticalSwipe(pointer)
+      this.#horizontalSwipe(pointer)
     } else if (this.wasClicked == true) {
-      this.wasClicked = false;
-      return null;
-    } else {
-      return this.movePlayer;
+      this.wasClicked = false
+      this.movePlayer = { x: '', y: '' }
     } 
   }
 
   cursorControl(cursors) {
     this.#verticalCursor(cursors)
     this.#horizontalCursor(cursors)
+  }
+
+  #verticalSwipe(pointer) {
+    if ((pointer.y - this.centreY) > this.deadBand) {
+      this.movePlayer.y = 'down'
+    } else if ((this.centreY - pointer.y) > this.deadBand) {
+        this.movePlayer.y = 'up'
+    } else {
+      this.movePlayer.y = ''
+    }
+  }
+
+  #horizontalSwipe(pointer) {
+    if ((this.centreX - pointer.x) > this.deadBand) {
+      this.movePlayer.x = 'left'
+    } else if ((pointer.x - this.centreX) > this.deadBand) {
+      this.movePlayer.x = 'right'
+    } else {
+      this.movePlayer.x = ''
+    }
   }
 
   #verticalCursor(cursors) {
