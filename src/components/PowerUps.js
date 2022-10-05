@@ -12,23 +12,23 @@ export default class PowerUp {
     // create and populate obstacle groups
     this.#createGroups();
     this.#populateGroups();
-    this.#bubbleAnimation();
+    // this.#bubbleAnimation();
   }
 
   updatePowerUps() {
     this.tick += 1;
 
     // add cans of worms
-    if (this.tick % 50000 == 0) {
+    if (this.tick % 500 == 0) {
       let YPos = Math.floor(Math.random() * 300) + 100;
       this.#obstacleCallback(this.worms, YPos, 0.5);
-    } else if (this.tick % 10 == 0) {
+    } else if (this.tick % 2500 == 0) {
       let YPos = Math.floor(Math.random() * 300) + 100;
       this.#obstacleCallback(this.octopusStephen, YPos, 0.5);
     }
 
     // add bubbles
-    if (this.tick % 1000 == 0) {
+    if (this.tick % 2000 == 0) {
       let YPos = Math.floor(Math.random() * 300) + 100;
       this.#obstacleCallback(this.bubbles, YPos + 150, 0.5);
     }
@@ -85,23 +85,23 @@ export default class PowerUp {
     });
   }
 
-  #bubbleAnimation() {
-    let bubbling = {
-      key: 'bubbling',
-      frames: [
-        { key: 'bubbles', frame: 'bubbles1.png' },
-        { key: 'bubbles', frame: 'bubbles2.png' },
-        { key: 'bubbles', frame: 'bubbles3.png' },
-      ],
-      frameRate: 10,
-      repeat: -1,
-    };
+  // #bubbleAnimation() {
+  //   let bubbling = {
+  //     key: 'bubbling',
+  //     frames: [
+  //       { key: 'bubbles', frame: 'bubbles1.png' },
+  //       { key: 'bubbles', frame: 'bubbles2.png' },
+  //       { key: 'bubbles', frame: 'bubbles3.png' },
+  //     ],
+  //     frameRate: 10,
+  //     repeat: -1,
+  //   };
 
-    //
-    this.scene.anims.create(bubbling);
-    this.bubbles.getChildren().forEach((bubble) => {
-      bubble.anims.load('bubbling');
-      bubble.anims.play('bubbling');
-    });
-  }
+  //   //
+  //   this.scene.anims.create(bubbling);
+  //   this.bubbles.getChildren().forEach((bubble) => {
+  //     bubble.anims.load('bubbling');
+  //     bubble.anims.play('bubbling');
+  //   });
+  // }
 }

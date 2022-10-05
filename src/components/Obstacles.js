@@ -18,13 +18,13 @@ export default class Obstacles {
     this.tick += 1;
 
     // add sharks
-    if (this.tick % 100 == 0) {
+    if (this.tick % 325 == 0) {
       let obstacleY = Math.floor(Math.random() * 350) + 150;
       this.#obstacleCallback(this.sharks, obstacleY, 0.7);
     }
 
     // add random mix of rocks and ships
-    if (this.tick % 325 == 0) {
+    if (this.tick % 100 == 0) {
       if (Math.random() < 0.7) {
         this.#obstacleCallback(this.rocks, 920, 0.9);
       } else {
@@ -59,7 +59,9 @@ export default class Obstacles {
   }
 
   #makeImage(scene, image, physics) {
-    return scene.matter.add.image(-200, -200, image, null, { shape: physics });
+    return scene.matter.add
+      .image(-200, -200, image, null, { shape: physics })
+      .setIgnoreGravity(true);
   }
 
   #obstacleCallback(obstacles, obstacleY, scale) {

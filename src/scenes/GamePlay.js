@@ -27,13 +27,14 @@ export default class GamePlay extends BaseGame {
     this.music.play();
 
     // turn gravity off and set bounds of screen
-    this.matter.world.disableGravity();
+    // this.matter.world.disableGravity();
+    this.matter.world.setGravity(0, this.gravity);
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
     // create background
     this.background.createMovingBackground();
 
-    // create player   
+    // create player
     this.player.createPlayer();
 
     // create obstacles
@@ -43,12 +44,12 @@ export default class GamePlay extends BaseGame {
     this.powerups.createPowerUps();
 
     // GameOver on collision
-    this.collision.createCollision()
+    this.collision.createCollision();
 
     // scores
     this.score.createScore();
-  };
-  
+  }
+
   update() {
     // update background
     this.background.updateMovingBackground();

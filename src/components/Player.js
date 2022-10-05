@@ -3,6 +3,7 @@ import PlayerController from './PlayerController.js';
 export default class Player extends PlayerController {
   constructor(scene) {
     super(scene);
+    this.fishGravity = 0;
   }
 
   createPlayer() {
@@ -12,18 +13,13 @@ export default class Player extends PlayerController {
     // fish X, Y position
     this.playerX = 500;
     const playerY = this.scene.cameras.main.height / 2;
-    
+
     // player
     this.scene.scale = 0.5;
-<<<<<<< HEAD
-    const screenCenterY = this.scene.cameras.main.height / 2;
-    this.player = this.scene.matter.add.sprite(300, screenCenterY, 'player', null, {
+    this.player = this.scene.matter.add.sprite(this.playerX, playerY, 'player', null, {
       shape: fishPhysics.fish1,
     });
-=======
-    this.player = this.scene.matter.add.sprite(this.playerX, playerY, 'player', null, { shape: fishPhysics.fish1 });
->>>>>>> main
-    this.player.setScale(this.scene.scale).setScrollFactor(0);
+    this.player.setScale(this.scene.scale).setScrollFactor(0).setIgnoreGravity(true);
 
     this.#playerAnimation();
   }
@@ -51,7 +47,7 @@ export default class Player extends PlayerController {
 
     // set player velocity
     this.player.setVelocityX(0);
-    this.player.setVelocityY(this.playerVelY());
+    this.player.setVelocityY(this.playerVelY() + this.fishGravity);
   }
 
   #playerAnimation() {
