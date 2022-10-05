@@ -12,7 +12,7 @@ export default class Collision {
         // });
       }
 
-      if (this.#fishNworms(boadyA, bodyB)) {
+      if (this.#fishNworms(bodyA, bodyB)) {
         console.log('worms!')
       }
     });
