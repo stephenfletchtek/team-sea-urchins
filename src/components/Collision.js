@@ -13,6 +13,11 @@ export default class Collision {
       }
 
       if (this.#fishNworms(bodyA, bodyB)) {
+        const wormGroup = this.scene.powerups.worms
+        wormGroup.getChildren().forEach(worm => {
+          
+        })
+
         console.log('worms!')
       }
     });
