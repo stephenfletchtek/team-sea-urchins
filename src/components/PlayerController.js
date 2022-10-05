@@ -2,7 +2,7 @@ export default class PlayerController {
   constructor(scene) {
     this.scene = scene
     this.velocity = 25; // player velocity
-    this.deadBand = 10; // swipe 'dead band' ie a small movement is not a swipe
+    this.deadBand = 20; // swipe 'dead band' ie a small movement is not a swipe
   }
   
   playerVelX() {
@@ -10,9 +10,9 @@ export default class PlayerController {
   const leftLim = this.player.width * this.scene.scale / 2 + 20;
   const rightLim = this.scene.cameras.main.width - leftLim;
 
-    if (this.movePlayer == "left" && this.player.x > leftLim) {
+    if (this.movePlayer.x == "left" && this.player.x > leftLim) {
       return -(this.velocity);
-    } else if (this.movePlayer == "right" && this.player.x < rightLim) {
+    } else if (this.movePlayer.x == "right" && this.player.x < rightLim) {
       return this.velocity;
     } else {
       return 0;
@@ -24,9 +24,9 @@ export default class PlayerController {
     const upperLim = this.player.height * this.scene.scale / 2;
     const lowerLim = this.scene.cameras.main.height - upperLim;
 
-    if (this.movePlayer == "down" && this.player.y < lowerLim) {
+    if (this.movePlayer.y == "down" && this.player.y < lowerLim) {
       return this.velocity;
-    } else if (this.movePlayer == "up" && this.player.y > upperLim) {
+    } else if (this.movePlayer.y == "up" && this.player.y > upperLim) {
       return -(this.velocity);
     } else {
       return 0;
@@ -57,22 +57,24 @@ export default class PlayerController {
 
   cursorControl(cursors){
     if (cursors.down.isDown) {
-      this.wasPushed = true;
-      return "down";
+      this.wasUD = true;
+      this.movePlayer.y = 'down'
     } else if (cursors.up.isDown) {
-      this.wasPushed = true;
-      return "up";
-    } else if (cursors.left.isDown) {
-      this.wasPushed = true;
-      return "left"
+      this.wasUD = true;
+      this.movePlayer.y = 'up'
+    } else if (this.wasUD == true) {
+      this.wasUD = false
+      this.movePlayer.y = ''
+    }
+    if (cursors.left.isDown) {
+      this.wasXY = true;
+      this.movePlayer.x = 'left'
     } else if (cursors.right.isDown) {
-      this.wasPushed = true;
-      return "right"
-    } else if (this.wasPushed == true) {
-      this.wasPushed = false;
-      return null;
-    } else {
-      return this.movePlayer;
+      this.wasXY = true;
+      this.movePlayer.x = 'right'
+    } else if (this.wasXY == true) {
+      this.wasXY = false;
+      this.movePlayer.x = ''
     }
   }
 }

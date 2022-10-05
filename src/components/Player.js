@@ -21,6 +21,9 @@ export default class Player extends PlayerController {
     this.#playerAnimation();
 
     // create pointers and cursors
+    this.movePlayer = { x: '', y: '' }
+    this.wasUD = false
+    this.wasXY = false
     // this.#createKeys();
     this.pointer = this.scene.input.activePointer;
     this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -37,10 +40,10 @@ export default class Player extends PlayerController {
     this.player.setAngle(0);
 
     // player direction responds to up and down swipe
-    this.movePlayer = this.swipeControl(this.pointer);
+    // this.movePlayer = this.swipeControl(this.pointer);
 
     // player direction responds to the up and down keys
-    this.movePlayer = this.cursorControl(this.cursors);
+    this.cursorControl(this.cursors);
 
     this.player.setVelocity(this.playerVelX(), this.playerVelY())
   };
