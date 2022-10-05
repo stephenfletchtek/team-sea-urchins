@@ -21,10 +21,10 @@ export default class Player extends PlayerController {
     this.#playerAnimation();
 
     // create pointers and cursors
-    this.pointer = this.scene.input.activePointer;
-    this.cursors = this.scene.input.keyboard.createCursorKeys();
-    this.centreX = this.scene.cameras.main.width / 2;
-    this.centreY = this.scene.cameras.main.height / 2
+    this.#pointersNCursors()
+
+    // limits to stop player going off screen
+    this.#screenBoundry()
   }
 
   updatePlayer() {
@@ -60,6 +60,20 @@ export default class Player extends PlayerController {
     this.scene.anims.create(fishSwim);
     this.player.anims.load('fish-swim');
     this.player.anims.play('fish-swim');
+  }
+
+  #pointersNCursors() {
+    this.pointer = this.scene.input.activePointer;
+    this.cursors = this.scene.input.keyboard.createCursorKeys();
+    this.centreX = this.scene.cameras.main.width / 2;
+    this.centreY = this.scene.cameras.main.height / 2
+  }
+
+  #screenBoundry() {
+    this.leftLim = this.player.width * this.scene.scale / 2 + 20;
+    this.rightLim = this.scene.cameras.main.width - this.leftLim;
+    this.upperLim = this.player.height * this.scene.scale / 2;
+    this.lowerLim = this.scene.cameras.main.height - this.upperLim;
   }
 
   /*
