@@ -1,7 +1,6 @@
 export default class BaseGame extends Phaser.Scene {
   constructor(sceneName) {
     super(sceneName);
-    this.gravity = 30;
   }
 
   preload() {

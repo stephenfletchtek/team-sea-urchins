@@ -1,3 +1,4 @@
+import Gravities from './components/Gravities.js';
 import PreStart from './scenes/preStart.js';
 import GameStart from './scenes/GameStart.js';
 import GamePlay from './scenes/GamePlay.js';
@@ -10,6 +11,15 @@ const config = {
     parent: 'game',
     width: 1920,
     height: 1080,
+  },
+  plugins: {
+    global: [
+      //make the Player global to all scenes (and other plugins)
+      // key is plugin key, plugin is class, start true/false if there
+      // is a start method to run, mapping is the name tagged of this
+      // to access the plugin class
+      { key: 'gravities', plugin: Gravities, mapping: 'gravities' },
+    ],
   },
   physics: {
     default: 'matter',
@@ -24,4 +34,3 @@ const config = {
 };
 
 export default new Phaser.Game(config);
-PreStart;

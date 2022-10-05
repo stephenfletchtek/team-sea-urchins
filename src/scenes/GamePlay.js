@@ -28,7 +28,8 @@ export default class GamePlay extends BaseGame {
 
     // turn gravity off and set bounds of screen
     // this.matter.world.disableGravity();
-    this.matter.world.setGravity(0, this.gravity);
+    this.gravities.fishGravity = 0;
+    this.matter.world.setGravity(0, this.gravities.gravity);
     this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
     // create background

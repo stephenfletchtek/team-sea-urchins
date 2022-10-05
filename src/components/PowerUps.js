@@ -19,9 +19,9 @@ export default class PowerUp {
     this.tick += 1;
 
     // add cans of worms
-    if (this.tick % 500 == 0) {
+    if (this.tick % 100 == 0) {
       let YPos = Math.floor(Math.random() * 300) + 100;
-      this.#obstacleCallback(this.worms, YPos, 0.5);
+      this.#obstacleCallback(this.worms, 0, 0.5);
     } else if (this.tick % 2500 == 0) {
       let YPos = Math.floor(Math.random() * 300) + 100;
       this.#obstacleCallback(this.octopusStephen, YPos, 0.5);
@@ -33,8 +33,8 @@ export default class PowerUp {
       this.#obstacleCallback(this.bubbles, YPos + 150, 0.5);
     }
 
-    this.#controlObstacle(this.worms, -2.5 * this.scene.gameSpeed);
-    this.#controlObstacle(this.octopusStephen, -2.5 * this.scene.gameSpeed);
+    this.#controlObstacle(this.worms, -this.scene.gameSpeed);
+    this.#controlObstacle(this.octopusStephen, -1.5 * this.scene.gameSpeed);
     this.#controlObstacle(this.bubbles, -2.5 * this.scene.gameSpeed);
   }
 

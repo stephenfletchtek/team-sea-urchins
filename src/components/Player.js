@@ -3,10 +3,13 @@ import PlayerController from './PlayerController.js';
 export default class Player extends PlayerController {
   constructor(scene) {
     super(scene);
-    this.fishGravity = 0;
+    this.scene = scene;
   }
 
   createPlayer() {
+    //load in fish gravity
+    // this.fishGravity = this.scene.scene.systems.plugins.plugins[0].plugin.fishGravity;
+
     // load in player physics files
     const fishPhysics = this.scene.cache.json.get('fish-physics');
 
@@ -20,11 +23,12 @@ export default class Player extends PlayerController {
       shape: fishPhysics.fish1,
     });
     this.player.setScale(this.scene.scale).setScrollFactor(0).setIgnoreGravity(true);
-
     this.#playerAnimation();
   }
 
   updatePlayer() {
+    this.fishGravity = this.scene.scene.systems.plugins.plugins[0].plugin.fishGravity;
+
     // GameOver when out of bounds
     if (this.player.x < 150) {
       this.scene.music.stop();
