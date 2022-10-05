@@ -23,16 +23,13 @@ export default class Player extends PlayerController {
 
   updatePlayer() {
     // GameOver when out of bounds
-    if (this.player.x < 150) {
+    if (this.player.x < (this.player.width * this.scene.scale / 2)) {
       this.scene.music.stop()
       this.scene.scene.start("game-over", { score: this.scene.score.score } )
     };
 
     // set player angle to 0
     this.player.setAngle(0);
-    if (this.player.x > this.playerX) {
-      this.player.x = this.playerX;
-    }
 
     // player direction responds to up and down swipe
     const pointer = this.scene.input.activePointer;
@@ -41,10 +38,7 @@ export default class Player extends PlayerController {
     // player direction responds to the up and down keys
     const cursors = this.scene.input.keyboard.createCursorKeys();
     this.movePlayer = this.cursorControl(cursors);
-
-    // set player velocity
-    this.player.setVelocityX(0);
-    this.player.setVelocityY(this.playerVelY())
+    this.player.setVelocity(this.playerVelX(), this.playerVelY())
   };
 
   #playerAnimation() {
