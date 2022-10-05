@@ -87,6 +87,6 @@ export default class PowerUp {
       if (powerup.active && (powerup.y < upperLim || powerup.y > lowerLim)) {
         group.killAndHide(powerup)
       }
-    })    
+    })
   }
 }
