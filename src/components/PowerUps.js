@@ -20,13 +20,13 @@ export default class PowerUp {
 
     // add cans of worms
     if (this.tick % 50 == 0) {
-      let XPosWorms = Math.floor(Math.random() * 1920) + 81;
+      let XPosWorms = Math.floor((Math.random() * 1920) / 1.6) + 1920 * 0.6;
       this.#powerupCallback(this.worms, XPosWorms, -100, 0.5);
     }
 
     // add bubbles
     if (this.tick % 50 == 0) {
-      let XPosBubbles = Math.floor(Math.random() * 1920) + 81;
+      let XPosBubbles = Math.floor(Math.random() * 1920) + 1920 * 0.45;
       this.#powerupCallback(this.bubbles, XPosBubbles, 1200, 0.4);
     }
 
@@ -103,24 +103,4 @@ export default class PowerUp {
       }
     });
   }
-
-  // #bubbleAnimation() {
-  //   let bubbling = {
-  //     key: 'bubbling',
-  //     frames: [
-  //       { key: 'bubbles', frame: 'bubbles1.png' },
-  //       { key: 'bubbles', frame: 'bubbles2.png' },
-  //       { key: 'bubbles', frame: 'bubbles3.png' },
-  //     ],
-  //     frameRate: 10,
-  //     repeat: -1,
-  //   };
-
-  //   //
-  //   this.scene.anims.create(bubbling);
-  //   this.bubbles.getChildren().forEach((bubble) => {
-  //     bubble.anims.load('bubbling');
-  //     bubble.anims.play('bubbling');
-  //   });
-  // }
 }

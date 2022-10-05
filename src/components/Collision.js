@@ -15,10 +15,26 @@ export default class Collision {
 
       if (this.#fishNWorms(bodyA, bodyB) && this.hasHit == false) {
         this.scene.score.score += 1000;
-        console.log(this.scene.plugins.plugins[0].plugin.fishGravity);
-        this.scene.plugins.plugins[0].plugin.fishGravity += 5;
+        if (this.scene.plugins.plugins[0].plugin.fishGravity < 20) {
+          this.scene.plugins.plugins[0].plugin.fishGravity += 5;
+        }
         this.hasHit = true;
         this.#kill(this.scene.powerups.worms);
+        this.scene.time.addEvent({
+          delay: 1000,
+          callback: () => {
+            this.hasHit = false;
+          },
+        });
+      }
+
+      if (this.#fishNBubbles(bodyA, bodyB) && this.hasHit == false) {
+        this.scene.score.score += 1000;
+        if (this.scene.plugins.plugins[0].plugin.fishGravity > -20) {
+          this.scene.plugins.plugins[0].plugin.fishGravity -= 5;
+        }
+        this.hasHit = true;
+        this.#kill(this.scene.powerups.bubbles);
         this.scene.time.addEvent({
           delay: 1000,
           callback: () => {
@@ -33,6 +49,13 @@ export default class Collision {
     group.getChildren().forEach((powerUp) => {
       group.killAndHide(powerUp);
     });
+  }
+
+  #fishNBubbles(bodyA, bodyB) {
+    return (
+      (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'bubbles') ||
+      (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'bubbles')
+    );
   }
 
   #fishNShark(bodyA, bodyB) {
