@@ -51,6 +51,13 @@ export default class BaseGame extends Phaser.Scene {
       'assets/players/player-fish.json',
     );
 
+    // load powerup
+    this.load.atlas(
+      'bubbles',
+      'assets/powerups/bubbles-spritesheet.png',
+      'assets/powerups/bubbles.json',
+    );
+
     // load obstacles
     this.load.svg('rockObstacle', 'assets/obstacles/obstacle-rock.svg');
     this.load.image('shipObstacle', 'assets/obstacles/obstacle-ship-wreck.png');
@@ -58,6 +65,7 @@ export default class BaseGame extends Phaser.Scene {
 
     // load powerups
     this.load.image('wormPower', 'assets/powerups/powerup-worm.png');
+    this.load.image('octopusStephen', 'assets/powerups/octopus-stephen.png');
   }
 
   setStaticBackground() {

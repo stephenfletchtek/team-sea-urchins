@@ -1,39 +1,59 @@
 export default class PowerUp {
-  constructor(scene){ 
-    this.scene = scene
+  constructor(scene) {
+    this.scene = scene;
   }
 
   createPowerUps() {
     // load in physics files
     this.physics = this.scene.cache.json.get('worm-physics');
-    
+
     this.tick = 0;
 
     // create and populate obstacle groups
-    this.#createGroups()
-    this.#populateGroups()
+    this.#createGroups();
+    this.#populateGroups();
+    this.#bubbleAnimation();
   }
 
   updatePowerUps() {
-    this.tick += 1
+    this.tick += 1;
 
     // add cans of worms
-    if (this.tick % 50 == 0){
+    if (this.tick % 50000 == 0) {
       let YPos = Math.floor(Math.random() * 300) + 100;
-      this.#obstacleCallback(this.worms, YPos, 0.5)
+      this.#obstacleCallback(this.worms, YPos, 0.5);
+    } else if (this.tick % 10 == 0) {
+      let YPos = Math.floor(Math.random() * 300) + 100;
+      this.#obstacleCallback(this.octopusStephen, YPos, 0.5);
     }
 
-    this.#controlObstacle(this.worms, -2.5 * this.scene.gameSpeed)
+    // add bubbles
+    if (this.tick % 1000 == 0) {
+      let YPos = Math.floor(Math.random() * 300) + 100;
+      this.#obstacleCallback(this.bubbles, YPos + 150, 0.5);
+    }
+
+    this.#controlObstacle(this.worms, -2.5 * this.scene.gameSpeed);
+    this.#controlObstacle(this.octopusStephen, -2.5 * this.scene.gameSpeed);
+    this.#controlObstacle(this.bubbles, -2.5 * this.scene.gameSpeed);
   }
 
   #createGroups() {
     this.worms = this.scene.add.group();
+    this.octopusStephen = this.scene.add.group();
+    this.bubbles = this.scene.add.group();
   }
 
-  #populateGroups(){  
+  #populateGroups() {
     // make sure you don't get more objects on the the screen than there are in the group!
     for (let i = 0; i < 1; i++) {
       this.worms.add(this.#makeImage(this.scene, 'wormPower', this.physics.worm)).setVisible(false);
+      this.octopusStephen
+        .add(this.#makeImage(this.scene, 'octopusStephen', this.physics.octopus))
+        .setVisible(false);
+      this.bubbles
+        .add(this.#makeImage(this.scene, 'bubbles', this.physics.bubbles))
+        .setVisible(false);
     }
   }
 
@@ -43,24 +63,44 @@ export default class PowerUp {
 
   #obstacleCallback(group, YPos, scale) {
     // only add child if there is one available in the pool
-    if (group.countActive() < group.getLength()){
-      group.get(this.scene.cameras.main.width, YPos)
-      .setActive(true)
-      .setVisible(true)
-      .setScale(scale)          
+    if (group.countActive() < group.getLength()) {
+      group
+        .get(this.scene.cameras.main.width, YPos)
+        .setActive(true)
+        .setVisible(true)
+        .setScale(scale);
     }
   }
 
   #controlObstacle(group, speed) {
     group.incX(speed);
-    group.getChildren().forEach(obstacle => {
+    group.getChildren().forEach((obstacle) => {
       obstacle.setAngle(0);
       obstacle.setVelocityX(0);
       obstacle.setVelocityY(0);
 
       if (obstacle.active && obstacle.x < -200) {
-        group.killAndHide(obstacle)
+        group.killAndHide(obstacle);
       }
-    })    
+    });
+  }
+
+  #bubbleAnimation() {
+    let bubbling = {
+      key: 'bubbling',
+      frames: [
+        { key: 'bubbles', frame: 'bubbles1.png' },
+        { key: 'bubbles', frame: 'bubbles2.png' },
+        { key: 'bubbles', frame: 'bubbles3.png' },
+      ],
+      frameRate: 10,
+      repeat: -1,
+    };
+
+    this.scene.anims.create(bubbling);
+    this.bubbles.getChildren().forEach((bubble) => {
+      bubble.anims.load('bubbling');
+      bubble.anims.play('bubbling');
+    });
   }
 }

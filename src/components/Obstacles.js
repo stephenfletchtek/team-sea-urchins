@@ -25,17 +25,10 @@ export default class Obstacles {
 
     // add random mix of rocks and ships
     if (this.tick % 325 == 0) {
-<<<<<<< Updated upstream
-      if (Math.random() < 7) {
+      if (Math.random() < 0.7) {
         this.#obstacleCallback(this.rocks, 920, 0.9);
       } else {
         this.#obstacleCallback(this.ships, 950, 1.1);
-=======
-      if (Math.round(Math.random()) == 0) {
-        this.#obstacleCallback(this.rocks, 920, 0.9);
-      } else {
-        this.#obstacleCallback(this.ships, 950, 1.2);
->>>>>>> Stashed changes
       }
     }
 
@@ -51,20 +44,8 @@ export default class Obstacles {
   }
 
   #populateGroups() {
-<<<<<<< Updated upstream
     // make sure you don't get more obstacles on the the screen than there are in the group!
     for (let i = 0; i < 2; i++) {
-=======
-    // add 6 of each obstacle into their respective groups
-    // make sure you don't get more obstacles on the the screen than there are in the group
-    for (let i = 0; i < 2; i++) {
-      this.rocks
-        .add(this.#makeImage(this.scene, 'rockObstacle', this.physics.rock))
-        .setVisible(false);
-      this.ships
-        .add(this.#makeImage(this.scene, 'shipObstacle', this.physics.ship))
-        .setVisible(false);
->>>>>>> Stashed changes
       this.sharks
         .add(this.#makeImage(this.scene, 'sharkObstacle', this.physics.shark))
         .setVisible(false);
@@ -82,7 +63,6 @@ export default class Obstacles {
   }
 
   #obstacleCallback(obstacles, obstacleY, scale) {
-<<<<<<< Updated upstream
     // only add obstacle if there is one available in the pool
     if (obstacles.countActive() < obstacles.getLength()) {
       obstacles
@@ -91,13 +71,6 @@ export default class Obstacles {
         .setVisible(true)
         .setScale(scale);
     }
-=======
-    obstacles
-      .get(this.scene.cameras.main.width, obstacleY)
-      .setActive(true)
-      .setVisible(true)
-      .setScale(scale);
->>>>>>> Stashed changes
   }
 
   #controlObstacle(group, speed) {
