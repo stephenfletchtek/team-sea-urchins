@@ -48,8 +48,7 @@ export default class PreStart extends BaseGame {
     //   this,
     // );
 
-    preGameButton.on('pointerup', () => {
-      // button fadeout triggers scene change
+    const loadGameStart = () => {
       let tween = this.tweens.add(
         {
           targets: preGameButton,
@@ -62,6 +61,15 @@ export default class PreStart extends BaseGame {
       tween.on('complete', () => {
         this.scene.start('game-start', { music: this.music });
       });
+    };
+
+    // button fadeout then scene change
+    preGameButton.on('pointerup', () => {
+      loadGameStart();
+    });
+
+    this.scene.scene.input.keyboard.on('keyup', () => {
+      loadGameStart();
     });
   }
 }
