@@ -22,6 +22,9 @@ export default class GamePlay extends BaseGame {
   }
 
   create() {
+    // frames
+    this.tick = 0;
+
     // music
     this.music = this.sound.add('theme', { loop: true });
     this.music.play();
@@ -64,5 +67,12 @@ export default class GamePlay extends BaseGame {
 
     // update score
     this.score.updateScore();
+
+    //increase speed
+    this.tick += 1
+    console.log(this.tick)
+    if (this.tick % 500 === 0) {
+      this.gameSpeed += 2
+    }
   }
 }
