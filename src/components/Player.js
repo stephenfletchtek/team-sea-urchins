@@ -1,8 +1,8 @@
 import PlayerController from './PlayerController.js';
 
 export default class Player extends PlayerController {
-  constructor(scene){
-    super(scene)
+  constructor(scene) {
+    super(scene);
   }
 
   createPlayer() {
@@ -10,20 +10,22 @@ export default class Player extends PlayerController {
     const fishPhysics = this.scene.cache.json.get('fish-physics');
 
     // player
-    this.scene.scale = 0.5
+    this.scene.scale = 0.5;
     const screenCenterY = this.scene.cameras.main.height / 2;
-    this.player = this.scene.matter.add.sprite(300, screenCenterY, 'player', null, { shape: fishPhysics.fish1 });
+    this.player = this.scene.matter.add.sprite(300, screenCenterY, 'player', null, {
+      shape: fishPhysics.fish1,
+    });
     this.player.setScale(this.scene.scale).setScrollFactor(0);
-    
+
     this.#playerAnimation();
   }
 
   updatePlayer() {
     // GameOver when out of bounds
     if (this.player.x < 150) {
-      this.scene.music.stop()
-      this.scene.scene.start("game-over", { score: this.scene.score.score } )
-    };
+      this.scene.music.stop();
+      this.scene.scene.start('game-over', { score: this.scene.score.score });
+    }
 
     // set player angle to 0
     this.player.setAngle(0);
@@ -41,19 +43,19 @@ export default class Player extends PlayerController {
 
     // set player velocity
     this.player.setVelocityX(0);
-    this.player.setVelocityY(this.playerVelY())
-  };
+    this.player.setVelocityY(this.playerVelY());
+  }
 
   #playerAnimation() {
     let fishSwim = {
       key: 'fish-swim',
       frames: [
-        { key: "player", frame: "fish1.png" },
-        { key: "player", frame: "fish2.png" }
+        { key: 'player', frame: 'fish1.png' },
+        { key: 'player', frame: 'fish2.png' },
       ],
       frameRate: 3,
-      repeat: -1
-    }
+      repeat: -1,
+    };
 
     this.scene.anims.create(fishSwim);
     this.player.anims.load('fish-swim');
