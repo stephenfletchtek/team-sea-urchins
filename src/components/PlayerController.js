@@ -36,15 +36,13 @@ export default class PlayerController {
   swipeControl(pointer) {
     if (pointer.isDown) {
       this.wasClicked = true
-      console.log(pointer.x - pointer.downX)
       if ((pointer.downY - pointer.y) > this.deadBand) {
         return "up";
       } else if ((pointer.y - pointer.downY) > this.deadBand) {
         return "down";
-      } else if ((pointer.downX < pointer.x)) {
-        console.log('left')
+      } else if ((pointer.x < pointer.downX)) {
         return "left";
-      } else if ((pointer.x > pointer.downX)) {
+      } else if ((pointer.downX < pointer.x)) {
         return "right";
       } else {
         return null;
