@@ -11,6 +11,10 @@ export default class Collision {
           this.scene.scene.start('game-over', { score: this.scene.score.score });
         // });
       }
+
+      if (this.#fishNworms(boadyA, bodyB)) {
+        console.log('worms!')
+      }
     });
   }
 
@@ -18,6 +22,13 @@ export default class Collision {
     return (
       (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'shark') ||
       (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'shark')
+    )
+  }
+
+  #fishNworms(bodyA, bodyB){
+    return (
+      (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'worm') ||
+      (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'worm')
     )
   }
 
