@@ -12,6 +12,14 @@
 
 <body>
   <div id="game"></div>
+  <script>		
+    // Check touch input
+    var IS_TOUCH	= false;
+    window.addEventListener('touchstart', function()
+    {			
+      IS_TOUCH	= true;
+    });
+  </script>
   <script src="phaser.min.js"></script>
   <script type="module" src="./src/index.js"></script>
 </body>
