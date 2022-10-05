@@ -97,6 +97,7 @@ export default class PowerUp {
       repeat: -1,
     };
 
+    //
     this.scene.anims.create(bubbling);
     this.bubbles.getChildren().forEach((bubble) => {
       bubble.anims.load('bubbling');
