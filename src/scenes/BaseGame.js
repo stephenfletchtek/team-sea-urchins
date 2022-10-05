@@ -19,13 +19,14 @@ export default class BaseGame extends Phaser.Scene {
     this.load.image('start-again-button', 'assets/titles/start-again-button.png');
 
     // load faster text when game speed increases
-    this.load.image('faster-title', 'assets/titles/faster-title.png')
+    this.load.image('faster-title', 'assets/titles/faster-title.png');
 
     // load music
     this.load.audio('theme', 'assets/audio/gamePlay/themeLLQ.mp3');
     this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
     // this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
     this.load.audio('startGameMusic', 'assets/audio/startGame/startGameMusicUB.mp3');
+    this.load.audio('FASTER', 'assets/audio/gamePlay/FASTER.mp3');
 
     // load in physics files
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
