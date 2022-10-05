@@ -68,9 +68,8 @@ export default class GamePlay extends BaseGame {
     // update score
     this.score.updateScore();
 
-    //increase speed
+    //increase game speed for difficulty
     this.tick += 1
-    console.log(this.tick)
     if (this.tick % 500 === 0) {
       this.gameSpeed += 2
     }
