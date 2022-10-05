@@ -23,7 +23,7 @@ export default class GameOver extends BaseGame {
 
 		// start game text
 		const startGameButton = this.#startGame()
-		startGameButton.setDepth(1).setInteractive();
+		startGameButton.setDepth(1).setInteractive( { useHandCursor: true  } );
 		startGameButton.on('pointerup', () => {
 			this.music.stop();
 			this.scene.start('game-play');

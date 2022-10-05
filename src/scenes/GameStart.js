@@ -28,7 +28,7 @@ export default class GameStart extends BaseGame {
       this,
     );
 
-    startButton.setDepth(1).setInteractive();
+    startButton.setDepth(1).setInteractive( { useHandCursor: true  } );
     startButton.on('pointerup', () => {
       data.music.destroy();
       this.scene.start('game-play');

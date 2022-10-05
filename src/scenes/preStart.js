@@ -23,7 +23,7 @@ export default class PreStart extends BaseGame {
     const preGameButton = this.add
       .image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'pre-game-button')
       .setScale(0.5)
-      .setInteractive();
+      .setInteractive( { useHandCursor: true  } );
 
     // animate title button
     let throb = this.tweens.add({
