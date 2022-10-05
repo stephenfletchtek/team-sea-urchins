@@ -4,6 +4,9 @@ export default class BaseGame extends Phaser.Scene {
   }
 
   preload() {
+    //during development
+    this.sound.setVolume(0.1);
+
     // pre game button
     this.load.image('pre-game-button', '/assets/titles/pre-start-button.png');
     // load start button
@@ -16,9 +19,9 @@ export default class BaseGame extends Phaser.Scene {
     this.load.image('start-again-button', 'assets/titles/start-again-button.png');
 
     // load music
-    this.load.audio('theme', 'assets/audio/GamePlay/themellq.mp3');
-    this.load.audio('gameOverMusic', 'assets/audio/GameOver/gameover.mp3');
-    this.load.audio('gameOverMusic', 'assets/audio/GameOver/gameover.mp3');
+    this.load.audio('theme', 'assets/audio/gamePlay/themeLLQ.mp3');
+    this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
+    // this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
     this.load.audio('startGameMusic', 'assets/audio/startGame/startGameMusicUB.mp3');
 
     // load in physics files
@@ -38,8 +41,8 @@ export default class BaseGame extends Phaser.Scene {
     this.load.svg('background2', 'assets/background/layer-2.svg', { width: 1920, height: 1080 });
     this.load.svg('background3', 'assets/background/layer-3.svg', { width: 1920, height: 1080 });
     this.load.svg('background4', 'assets/background/layer-4.svg', { width: 1920, height: 1080 });
-    this.load.svg('background5', 'assets/background/layer-5.svg', { width: 1920, height: 1080 }); 
-    this.load.svg('background6', 'assets/background/layer-6.svg', { width: 1920, height: 1080 }); 
+    this.load.svg('background5', 'assets/background/layer-5.svg', { width: 1920, height: 1080 });
+    this.load.svg('background6', 'assets/background/layer-6.svg', { width: 1920, height: 1080 });
 
     // load player
     this.load.atlas(

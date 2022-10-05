@@ -18,17 +18,17 @@ export default class Obstacles {
     this.tick += 1
 
     // add sharks
-    if (this.tick % 40 == 0){
-      let obstacleY = Math.floor(Math.random() * 375) + 125;
+    if (this.tick % 100 == 0){
+      let obstacleY = Math.floor(Math.random() * 350) + 150;
       this.#obstacleCallback(this.sharks, obstacleY, 0.7)
     }
 
     // add random mix of rocks and ships
-    if (this.tick % 1000 == 0){
+    if (this.tick % 325 == 0){
       if (Math.round(Math.random()) == 0) {
         this.#obstacleCallback(this.rocks, 970, 0.5)
       } else {
-        this.#obstacleCallback(this.ships, 870, 0.5)
+        this.#obstacleCallback(this.ships, 950, 0.85)
       }
     }
 
