@@ -40,4 +40,8 @@ export default class GameStart extends BaseGame {
       this.scene.start('game-play');
     });
   }
+
+  update() {
+    this.powerup.updatePowerup();
+  }
 }
