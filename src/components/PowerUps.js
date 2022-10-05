@@ -5,7 +5,7 @@ export default class PowerUp {
 
   createPowerUps() {
     // load in physics files
-    this.physics = this.scene.cache.json.get('worm-physics');
+    this.physics = this.scene.cache.json.get('powerup-physics');
 
     this.tick = 0;
 
@@ -19,70 +19,87 @@ export default class PowerUp {
     this.tick += 1;
 
     // add cans of worms
-    if (this.tick % 100 == 0) {
-      let YPos = Math.floor(Math.random() * 300) + 100;
-      this.#obstacleCallback(this.worms, 0, 0.5);
-    } else if (this.tick % 2500 == 0) {
-      let YPos = Math.floor(Math.random() * 300) + 100;
-      this.#obstacleCallback(this.octopusStephen, YPos, 0.5);
+    if (this.tick % 50 == 0) {
+      let XPosWorms = Math.floor(Math.random() * 1200) + 480;
+      this.#powerupCallback(this.worms, XPosWorms, -100, 0.5);
     }
 
     // add bubbles
-    if (this.tick % 2000 == 0) {
-      let YPos = Math.floor(Math.random() * 300) + 100;
-      this.#obstacleCallback(this.bubbles, YPos + 150, 0.5);
+    if (this.tick % 50 == 0) {
+      let XPosBubbles = Math.floor(Math.random() * 1200) + 480;
+      this.#powerupCallback(this.bubbles, XPosBubbles, 1200, 0.4);
     }
 
-    this.#controlObstacle(this.worms, -this.scene.gameSpeed);
-    this.#controlObstacle(this.octopusStephen, -1.5 * this.scene.gameSpeed);
-    this.#controlObstacle(this.bubbles, -2.5 * this.scene.gameSpeed);
+    this.#controlPowerUp(this.worms, 0, 1, -101, 1200);
+    // this.#controlPowerUp(this.octopusStephen, -1.5 * this.scene.gameSpeed, -200, 1300);
+    this.#controlPowerUp(this.bubbles, -1, -1, -200, 1300);
   }
 
   #createGroups() {
     this.worms = this.scene.add.group();
-    this.octopusStephen = this.scene.add.group();
+    // this.octopusStephen = this.scene.add.group();
     this.bubbles = this.scene.add.group();
   }
 
   #populateGroups() {
     // make sure you don't get more objects on the the screen than there are in the group!
     for (let i = 0; i < 1; i++) {
-      this.worms.add(this.#makeImage(this.scene, 'wormPower', this.physics.worm)).setVisible(false);
-      this.octopusStephen
-        .add(this.#makeImage(this.scene, 'octopusStephen', this.physics.octopus))
-        .setVisible(false);
-      this.bubbles
-        .add(this.#makeImage(this.scene, 'bubbles', this.physics.bubbles))
-        .setVisible(false);
+      this.worms.add(
+        this.scene.matter.add.image(0, 0, 'wormPower', null, { shape: this.physics.worm }),
+      );
+      // this.octopusStephen.add(
+      //   this.scene.matter.add.image(-200, -200, 'octopusStephen', null, {
+      //     shape: this.physics.octopusStephen,
+      //   }),
+      // );
+      this.bubbles.add(this.#bubblesAnimation());
     }
   }
 
-  #makeImage(scene, image, physics) {
-    return scene.matter.add.image(-200, -200, image, null, { shape: physics });
-  }
-
-  #obstacleCallback(group, YPos, scale) {
+  #powerupCallback(group, XPos, YPos, scale) {
     // only add child if there is one available in the pool
     if (group.countActive() < group.getLength()) {
-      group
-        .get(this.scene.cameras.main.width, YPos)
-        .setActive(true)
-        .setVisible(true)
-        .setScale(scale);
+      group.get(XPos, YPos).setActive(true).setVisible(true).setScale(scale);
     }
   }
 
-  #controlObstacle(group, speed) {
-    group.incX(speed);
-    group.getChildren().forEach((obstacle) => {
-      obstacle.setAngle(0);
-      obstacle.setVelocityX(0);
-      obstacle.setVelocityY(0);
-      if (obstacle.y > 1040) {
-        obstacle.y = 1040;
+  #bubblesAnimation() {
+    let bubbleImage = this.scene.matter.add.sprite(0, 0, 'bubblePower', null, {
+      shape: this.physics.bubbles,
+    });
+
+    let bubblesMove = {
+      key: 'bubbles-move',
+      frames: [
+        { key: 'bubblePower', frame: 'bubbles1.png' },
+        { key: 'bubblePower', frame: 'bubbles2.png' },
+        { key: 'bubblePower', frame: 'bubbles3.png' },
+      ],
+      frameRate: 2,
+      repeat: -1,
+    };
+
+    this.scene.anims.create(bubblesMove);
+    bubbleImage.anims.load('bubbles-move');
+    bubbleImage.anims.play('bubbles-move');
+
+    return bubbleImage;
+  }
+
+  #controlPowerUp(group, VelX, VelY, upperLim, lowerLim) {
+    group.incX(VelX * this.scene.gameSpeed);
+    group.incY(VelY * this.scene.gameSpeed);
+    group.getChildren().forEach((powerup) => {
+      powerup.setAngle(0);
+      powerup.setVelocityX(0);
+      powerup.setVelocityY(0);
+
+      if (powerup.y > 1040) {
+        powerup.y = 1040;
       }
-      if (obstacle.active && obstacle.x < -200) {
-        group.killAndHide(obstacle);
+
+      if (powerup.active && (powerup.y < upperLim || powerup.y > lowerLim)) {
+        group.killAndHide(powerup);
       }
     });
   }
