@@ -18,22 +18,26 @@ export default class BaseGame extends Phaser.Scene {
     // load start again button
     this.load.image('start-again-button', 'assets/titles/start-again-button.png');
 
+    // load faster text when game speed increases
+    this.load.image('faster-title', 'assets/titles/faster-title.png');
+
     // load music
     this.load.audio('theme', 'assets/audio/gamePlay/themeLLQ.mp3');
     this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
-    // this.load.audio('gameOverMusic', 'assets/audio/gameOver/gameover.mp3');
     this.load.audio('startGameMusic', 'assets/audio/startGame/startGameMusicUB.mp3');
+    this.load.audio('FASTER', 'assets/audio/gamePlay/FASTER.mp3');
 
     // load in physics files
     this.load.json('obstacles-physics', 'assets/obstacles/obstacles-physics.json');
     this.load.json('fish-physics', 'assets/players/fish-physics.json');
-    this.load.json('worm-physics', 'assets/powerups/powerups-physics.json');
+    this.load.json('powerup-physics', 'assets/powerups/powerups-physics.json');
 
     // load static background
     this.load.svg('background', 'assets/background/whole-background.svg', {
       width: 1920,
       height: 1080,
     });
+
 
     // load moving background
     this.load.svg('background0', 'assets/background/layer-0.svg', { width: 3500, height: 3481 });
@@ -58,6 +62,12 @@ export default class BaseGame extends Phaser.Scene {
 
     // load powerups
     this.load.image('wormPower', 'assets/powerups/powerup-worm.png');
+    this.load.image('octopusStephen', 'assets/powerups/octopus-stephen.png');
+    this.load.atlas(
+      'bubblePower',
+      'assets/powerups/bubbles-spritesheet.png',
+      'assets/powerups/bubbles.json',
+    );
   }
 
   setStaticBackground() {

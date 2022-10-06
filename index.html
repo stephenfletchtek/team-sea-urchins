@@ -7,11 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/public/stylesheets/style.css" />
   <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-  <title>fishGame</title>
+  <title>FishRunner</title>
 </head>
 
 <body>
   <div id="game"></div>
+  <script>		
+    // Check touch input. Set IS_TOUCH available to whole project! to identify mobile browser.
+    var IS_TOUCH	= false;
+    window.addEventListener('touchstart', function()
+    {			
+      IS_TOUCH	= true;
+    });
+  </script>
   <script src="phaser.min.js"></script>
   <script type="module" src="./src/index.js"></script>
 </body>

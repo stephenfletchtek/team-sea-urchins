@@ -23,7 +23,7 @@ export default class PreStart extends BaseGame {
     const preGameButton = this.add
       .image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'pre-game-button')
       .setScale(0.5)
-      .setInteractive( { useHandCursor: true  } );
+      .setInteractive({ useHandCursor: true });
 
     // animate title button
     let throb = this.tweens.add({
@@ -35,8 +35,20 @@ export default class PreStart extends BaseGame {
       ease: 'sine',
     });
 
-    preGameButton.on('pointerup', () => {
-      // button fadeout triggers scene change
+    // make fullscreen on user interaction
+    // preGameButton.on(
+    //   'pointerup',
+    //   function () {
+    //     if (this.scale.isFullscreen) {
+    //       this.scale.stopFullscreen();
+    //     } else {
+    //       this.scale.startFullscreen();
+    //     }
+    //   },
+    //   this,
+    // );
+
+    const loadGameStart = () => {
       let tween = this.tweens.add(
         {
           targets: preGameButton,
@@ -49,6 +61,15 @@ export default class PreStart extends BaseGame {
       tween.on('complete', () => {
         this.scene.start('game-start', { music: this.music });
       });
+    };
+
+    // button fadeout then scene change
+    preGameButton.on('pointerup', () => {
+      loadGameStart();
+    });
+
+    this.scene.scene.input.keyboard.on('keyup', () => {
+      loadGameStart();
     });
   }
 }
