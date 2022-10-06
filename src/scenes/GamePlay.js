@@ -40,7 +40,7 @@ export default class GamePlay extends BaseGame {
     // create background
     console.log(IS_TOUCH)
     if (IS_TOUCH) {
-      // this.setStaticBackground();
+      this.setStaticBackground();
     } else {
       this.background.createMovingBackground();
     }
