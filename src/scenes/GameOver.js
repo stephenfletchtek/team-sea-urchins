@@ -42,7 +42,7 @@ export default class GameOver extends BaseGame {
 	#score(data){
 		const width = this.cameras.main.width / 2;
 		const height = this.cameras.main.height / 2;
-		return this.add.text(width, height + 25, data.score,
+		return this.add.text(width, height + 25, data.score.toFixed(0),
 			{ font: 'bold 80px Arial', fill: '#000000'}
 		)
 	}

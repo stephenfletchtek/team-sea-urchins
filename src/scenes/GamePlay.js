@@ -19,9 +19,13 @@ export default class GamePlay extends BaseGame {
 
     // this controls speed of moving background and adjusts obstacles in sympathy
     this.gameSpeed = 10;
+    this.fasterTitle;
   }
 
   create() {
+    // frames
+    this.tick = 0;
+
     // music
     this.music = this.sound.add('theme', { loop: true });
     this.music.play();
@@ -50,6 +54,9 @@ export default class GamePlay extends BaseGame {
 
     // scores
     this.score.createScore();
+
+    // display faster title
+    // this.fasterTitle = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'faster-title').setVisible(false)
   }
 
   update() {
@@ -67,5 +74,31 @@ export default class GamePlay extends BaseGame {
 
     // update score
     this.score.updateScore();
+
+    //increase game speed for difficulty, increment music speed
+    this.tick += 1;
+    console.log(this.gameSpeed);
+    if ((this.tick + 500) % 1500 === 0) {
+      this.music.setRate(this.music.rate + 0.04);
+      setTimeout(() => {
+        this.gameSpeed += 2;
+        this.fasterTitle = this.add
+          .image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'faster-title')
+          .setVisible(false);
+        this.tweens.add({
+          targets: this.fasterTitle.setVisible(true),
+          alpha: -5,
+          duration: 8000,
+        });
+      }, 100);
+    }
+
+    // change music with difficulty
+    if (this.tick % 10000 === 0) {
+      let music1 = this.sound.add('FASTER', { loop: true });
+      music1.play();
+      this.music.destroy();
+      this.music = music1;
+    }
   }
 }

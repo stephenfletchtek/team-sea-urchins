@@ -9,6 +9,7 @@ export default class Collision {
       if (this.#fishNShark(bodyA, bodyB)) {
         // this.scene.cameras.main.shake(1000).on('complete', () => {
         this.scene.music.stop();
+        this.scene.gameSpeed = 10;
         this.scene.scene.start('game-over', { score: this.scene.score.score });
         // });
       }
