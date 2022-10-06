@@ -72,11 +72,11 @@ export default class GamePlay extends BaseGame {
     // update score
     this.score.updateScore();
 
-    //increase game speed for difficulty
+    //increase game speed and music for difficulty
     this.tick += 1;
     console.log(this.gameSpeed);
     if (this.tick % 500 === 0) {
-      this.music.setRate(this.music.rate + 0.04);
+      this.music.setRate(this.music.rate + 0.025);
       setTimeout(() => {
       this.gameSpeed += 2;
       this.fasterTitle = this.add
