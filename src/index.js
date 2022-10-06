@@ -14,15 +14,16 @@ const config = {
   },
   plugins: {
     global: [
-      //make the Player global to all scenes (and other plugins)
+      // make the Player global to all scenes (and other plugins)
       // key is plugin key, plugin is class, start true/false if there
       // is a start method to run, mapping is the name tagged of this
       // to access the plugin class
-      { key: 'handling', plugin: Handling, mapping: 'handling' },
+      { key: 'handling', plugin: Handling, mapping: 'handling', start: true },
     ],
   },
   physics: {
     default: 'matter',
+    fps: 5,
     matter: {
       debug: true,
     },

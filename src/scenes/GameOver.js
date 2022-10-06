@@ -29,8 +29,7 @@ export default class GameOver extends BaseGame {
       this.scene.start('game-play');
     });
 
-    // console.log(this.scene.scene.input.keyboard.prototype());
-    // this.scene.scene.input.keyboard[0].on('keyup', () => {
+    // this.scene.scene.input.keyboard.on('keyup', () => {
     //   this.music.stop();
     //   this.scene.start('game-play');
     // });

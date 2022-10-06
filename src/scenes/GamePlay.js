@@ -35,7 +35,7 @@ export default class GamePlay extends BaseGame {
     this.handling.fishGravity = 0;
     this.handling.fishSpeed = 1;
     this.matter.world.setGravity(0, this.handling.gravity);
-    this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
+    // this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
     // create background
     this.background.createMovingBackground();
@@ -77,7 +77,6 @@ export default class GamePlay extends BaseGame {
 
     //increase game speed for difficulty, increment music speed
     this.tick += 1;
-    console.log(this.gameSpeed);
     if ((this.tick + 500) % 1500 === 0) {
       this.music.setRate(this.music.rate + 0.04);
       setTimeout(() => {

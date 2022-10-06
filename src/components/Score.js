@@ -19,7 +19,7 @@ export default class Score {
 
     // print score every 7th frame
     if (this.tick % 7 == 0) {
-      this.text.setText(`${Math.floor(this.score)} ${IS_TOUCH}`);
+      this.text.setText(`${Math.floor(this.score)}`);
     }
   }
 }

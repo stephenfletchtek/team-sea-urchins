@@ -7,8 +7,9 @@ export default class Player extends PlayerController {
   }
 
   createPlayer() {
-    //load in fish gravity
-    // this.fishGravity = this.scene.scene.systems.plugins.plugins[0].plugin.fishGravity;
+    // load in fish gravity
+    this.fishGravity = this.scene.plugins.get('handling').fishGravity;
+    this.fishSpeed = this.scene.plugins.get('handling').fishSpeed;
 
     // load in player physics files
     const fishPhysics = this.scene.cache.json.get('fish-physics');
@@ -33,8 +34,9 @@ export default class Player extends PlayerController {
   }
 
   updatePlayer() {
-    this.fishGravity = this.scene.scene.systems.plugins.plugins[0].plugin.fishGravity;
-    this.fishSpeed = this.scene.scene.systems.plugins.plugins[0].plugin.fishSpeed;
+    this.fishGravity = this.scene.plugins.get('handling').fishGravity;
+    this.fishSpeed = this.scene.plugins.get('handling').fishSpeed;
+    this.velocity = this.scene.plugins.get('handling').velocity
 
     // GameOver when out of bounds
     if (this.player.x < (this.player.width * this.scene.scale / 2)) {
@@ -46,11 +48,11 @@ export default class Player extends PlayerController {
     this.player.setAngle(0);
 
     // player bounds
-    if (this.player.y > 1080) {
-      this.player.y = 1080;
+    if (this.player.y > 1080 - this.scene.scale * this.player.height / 2) {
+      this.player.y = 1080 - this.scene.scale * this.player.height / 2;
     }
-    if (this.player.y < 0) {
-      this.player.y = 0;
+    if (this.player.y < 0 + this.scene.scale * this.player.height / 2) {
+      this.player.y = 0 + this.scene.scale * this.player.height / 2;
     }
 
     // player direction responds to up and down swipe
@@ -59,7 +61,7 @@ export default class Player extends PlayerController {
     // player direction responds to the up and down keys
     this.cursorControl(this.cursors);
 
-    this.player.setVelocity(this.playerVelX(), this.playerVelY())
+    this.player.setVelocity(this.playerVelX() * this.fishSpeed, (this.playerVelY() * this.fishSpeed)+ this.fishGravity)
   };
 
   #playerAnimation() {
@@ -86,20 +88,7 @@ export default class Player extends PlayerController {
   }
 
   #screenBoundry() {
-    this.leftLim = this.player.width * this.scene.scale / 2 + 20;
+    this.leftLim = this.player.width * this.scene.scale / 2 + 10;
     this.rightLim = this.scene.cameras.main.width - this.leftLim;
-    this.upperLim = this.player.height * this.scene.scale / 2;
-    this.lowerLim = this.scene.cameras.main.height - this.upperLim;
-  }
-
-  /*
-  #createKeys() {
-    let keyA; let keyS; let keyD; let keyW;
-    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-  }
-  */
-  
+  }  
 }

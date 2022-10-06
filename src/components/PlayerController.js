@@ -1,18 +1,19 @@
 export default class PlayerController {
   constructor(scene) {
     this.scene = scene;
-    this.velocity = 25; // player velocity
     this.deadBand = 100; // central band on screen won't move the player
     this.movePlayer = { x: '', y: '' };
     this.wasUD = false;
     this.wasXY = false;
     this.wasClicked = false;
+    this.velocity;
+    this.noCollision = true;
   }
   
   playerVelX() {
     if (this.movePlayer.x == "left" && this.player.x > this.leftLim) {
       return -(this.velocity);
-    } else if (this.movePlayer.x == "right" && this.player.x < this.rightLim) {
+    } else if (this.movePlayer.x == "right" && this.player.x < this.rightLim && this.noCollision) {
       return this.velocity;
     } else {
       return 0;
@@ -20,9 +21,9 @@ export default class PlayerController {
   }
 
   playerVelY() {
-    if (this.movePlayer.y == "down" && this.player.y < this.lowerLim) {
+    if (this.movePlayer.y == "down") {
       return this.velocity;
-    } else if (this.movePlayer.y == "up" && this.player.y > this.upperLim) {
+    } else if (this.movePlayer.y == "up") {
       return -(this.velocity);
     } else {
       return 0;

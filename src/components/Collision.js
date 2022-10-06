@@ -5,7 +5,7 @@ export default class Collision {
 
   createCollision() {
     this.hasHit = false;
-    this.scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
+    this.scene.matter.world.on('collisionactive', (event, bodyA, bodyB) => {
       if (this.#fishNShark(bodyA, bodyB)) {
         // this.scene.cameras.main.shake(1000).on('complete', () => {
         this.scene.music.stop();
@@ -16,8 +16,8 @@ export default class Collision {
 
       if (this.#fishNWorms(bodyA, bodyB) && this.hasHit == false) {
         this.scene.score.score += 1000;
-        if (this.scene.plugins.plugins[0].plugin.fishGravity < 20) {
-          this.scene.plugins.plugins[0].plugin.fishGravity += 5;
+        if (this.scene.plugins.get('handling').fishGravity < 20) {
+          this.scene.plugins.get('handling').fishGravity += 5;
         }
         this.hasHit = true;
         this.#kill(this.scene.powerups.worms);
@@ -31,8 +31,8 @@ export default class Collision {
 
       if (this.#fishNBubbles(bodyA, bodyB) && this.hasHit == false) {
         this.scene.score.score += 1000;
-        if (this.scene.plugins.plugins[0].plugin.fishGravity > -20) {
-          this.scene.plugins.plugins[0].plugin.fishGravity -= 5;
+        if (this.scene.plugins.get('handling').fishGravity > -20) {
+          this.scene.plugins.get('handling').fishGravity -= 5;
         }
         this.hasHit = true;
         this.#kill(this.scene.powerups.bubbles);
@@ -45,8 +45,8 @@ export default class Collision {
       }
 
       if (this.#fishNStephen(bodyA, bodyB) && this.hasHit == false) {
-        if (this.scene.plugins.plugins[0].plugin.fishSpeed < 20) {
-          this.scene.plugins.plugins[0].plugin.fishSpeed += 0.5;
+        if (this.scene.plugins.get('handling').fishSpeed < 20) {
+          this.scene.plugins.get('handling').fishSpeed += 1.5;
         }
         this.hasHit = true;
         this.#kill(this.scene.powerups.octopusStephen);
@@ -59,9 +59,29 @@ export default class Collision {
         this.scene.time.addEvent({
           delay: 5000,
           callback: () => {
-            this.scene.plugins.plugins[0].plugin.fishSpeed = 1;
+            this.scene.plugins.get('handling').fishSpeed = 1;
           },
         });
+      }
+
+      if (this.#fishNRocks(bodyA, bodyB)) {
+        this.scene.player.noCollision = false;
+        this.scene.time.addEvent({
+          delay: 500,
+          callback: () => {
+            this.scene.player.noCollision = true;
+          },
+        })
+      }
+
+      if (this.#fishNShips(bodyA, bodyB)) {
+        this.scene.player.noCollision = false;
+        this.scene.time.addEvent({
+          delay: 500,
+          callback: () => {
+            this.scene.player.noCollision = true;
+          },
+        })
       }
     });
   }
@@ -97,6 +117,20 @@ export default class Collision {
     return (
       (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'worm') ||
       (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'worm')
+    );
+  }
+
+  #fishNRocks(bodyA, bodyB) {
+    return (
+      (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'rock') ||
+      (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'rock')
+    );
+  }
+
+  #fishNShips(bodyA, bodyB) {
+    return (
+      (bodyA.parent.label == 'fish1' && bodyB.parent.label == 'ship') ||
+      (bodyB.parent.label == 'fish1' && bodyB.parent.label == 'ship')
     );
   }
 }
