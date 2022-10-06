@@ -4,7 +4,10 @@ export default class Collision {
   }
 
   createCollision() {
-    this.hasHit = false;
+    this.hitWorms = false;
+    this.hitBubbles = false;
+    this.hitStephen = false;
+
     this.scene.matter.world.on('collisionactive', (event, bodyA, bodyB) => {
       if (this.#fishNShark(bodyA, bodyB)) {
         // this.scene.cameras.main.shake(1000).on('complete', () => {
@@ -14,46 +17,46 @@ export default class Collision {
         // });
       }
 
-      if (this.#fishNWorms(bodyA, bodyB) && this.hasHit == false) {
+      if (this.#fishNWorms(bodyA, bodyB) && this.hitWorms == false) {
         this.scene.score.score += 1000;
         if (this.scene.plugins.get('handling').fishGravity < 20) {
           this.scene.plugins.get('handling').fishGravity += 5;
         }
-        this.hasHit = true;
+        this.hitWorms = true;
         this.#kill(this.scene.powerups.worms);
         this.scene.time.addEvent({
           delay: 1000,
           callback: () => {
-            this.hasHit = false;
+            this.hitWorms = false;
           },
         });
       }
 
-      if (this.#fishNBubbles(bodyA, bodyB) && this.hasHit == false) {
+      if (this.#fishNBubbles(bodyA, bodyB) && this.hitBubbles == false) {
         this.scene.score.score += 1000;
         if (this.scene.plugins.get('handling').fishGravity > -20) {
           this.scene.plugins.get('handling').fishGravity -= 5;
         }
-        this.hasHit = true;
+        this.hitBubbles = true;
         this.#kill(this.scene.powerups.bubbles);
         this.scene.time.addEvent({
           delay: 1000,
           callback: () => {
-            this.hasHit = false;
+            this.hitBubbles = false;
           },
         });
       }
 
-      if (this.#fishNStephen(bodyA, bodyB) && this.hasHit == false) {
+      if (this.#fishNStephen(bodyA, bodyB) && this.hitStephen == false) {
         if (this.scene.plugins.get('handling').fishSpeed < 20) {
           this.scene.plugins.get('handling').fishSpeed += 1.5;
         }
-        this.hasHit = true;
+        this.hitStephen = true;
         this.#kill(this.scene.powerups.octopusStephen);
         this.scene.time.addEvent({
           delay: 1000,
           callback: () => {
-            this.hasHit = false;
+            this.hitStephen = false;
           },
         });
         this.scene.time.addEvent({
