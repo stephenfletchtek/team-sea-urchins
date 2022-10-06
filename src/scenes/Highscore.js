@@ -4,7 +4,6 @@ export default class Highscore extends Phaser.Plugins.BasePlugin {
       super(pluginManager);
 
       this.highscores = [];
-      this.name = '';
   }
 
   getHighscore() {
