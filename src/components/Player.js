@@ -31,6 +31,9 @@ export default class Player extends PlayerController {
 
     // limits to stop player going off screen
     this.#screenBoundry()
+
+    // player collision with rocks and ships
+    this.noCollision = true;
   }
 
   updatePlayer() {
@@ -53,6 +56,9 @@ export default class Player extends PlayerController {
     }
     if (this.player.y < 0 + this.scene.scale * this.player.height / 2) {
       this.player.y = 0 + this.scene.scale * this.player.height / 2;
+    }
+    if (this.player.x > 1920 - this.scene.scale * this.player.width / 2) {
+      this.player.x = 1920 - this.scene.scale * this.player.width / 2;
     }
 
     // player direction responds to up and down swipe
@@ -88,7 +94,6 @@ export default class Player extends PlayerController {
   }
 
   #screenBoundry() {
-    this.leftLim = this.player.width * this.scene.scale / 2 + 10;
-    this.rightLim = this.scene.cameras.main.width - this.leftLim;
+    this.leftLim = this.player.width * this.scene.scale / 2 + 15;
   }  
 }

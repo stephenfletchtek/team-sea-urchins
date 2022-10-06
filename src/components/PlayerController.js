@@ -7,13 +7,12 @@ export default class PlayerController {
     this.wasXY = false;
     this.wasClicked = false;
     this.velocity;
-    this.noCollision = true;
   }
   
   playerVelX() {
     if (this.movePlayer.x == "left" && this.player.x > this.leftLim) {
       return -(this.velocity);
-    } else if (this.movePlayer.x == "right" && this.player.x < this.rightLim && this.noCollision) {
+    } else if (this.movePlayer.x == "right" && this.noCollision) {
       return this.velocity;
     } else {
       return 0;
