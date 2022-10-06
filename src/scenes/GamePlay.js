@@ -76,8 +76,8 @@ export default class GamePlay extends BaseGame {
     this.tick += 1;
     console.log(this.gameSpeed);
     if (this.tick % 500 === 0) {
-      // this.music.setRate(this.music.rate + 0.04);
-      // setTimeout(() => {
+      this.music.setRate(this.music.rate + 0.04);
+      setTimeout(() => {
       this.gameSpeed += 2;
       this.fasterTitle = this.add
         .image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'faster-title')
@@ -87,7 +87,7 @@ export default class GamePlay extends BaseGame {
         alpha: -5,
         duration: 8000,
       });
-      // }, 100);
+      }, 100);
     }
   }
 }
