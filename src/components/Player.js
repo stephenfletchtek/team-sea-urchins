@@ -24,6 +24,12 @@ export default class Player extends PlayerController {
     });
     this.player.setScale(this.scene.scale).setScrollFactor(0).setIgnoreGravity(true);
     this.#playerAnimation();
+
+    // create pointers and cursors
+    this.#pointersNCursors()
+
+    // limits to stop player going off screen
+    this.#screenBoundry()
   }
 
   updatePlayer() {
@@ -31,29 +37,22 @@ export default class Player extends PlayerController {
     this.fishSpeed = this.scene.scene.systems.plugins.plugins[0].plugin.fishSpeed;
 
     // GameOver when out of bounds
-    if (this.player.x < 150) {
-      this.scene.music.stop();
-      this.scene.scene.start('game-over', { score: this.scene.score.score });
-    }
+    if (this.player.x < (this.player.width * this.scene.scale / 2)) {
+      this.scene.music.stop()
+      this.scene.scene.start("game-over", { score: this.scene.score.score } )
+    };
 
     // set player angle to 0
     this.player.setAngle(0);
-    if (this.player.x > this.playerX) {
-      this.player.x = this.playerX;
-    }
 
     // player direction responds to up and down swipe
-    const pointer = this.scene.input.activePointer;
-    this.movePlayer = this.swipeControl(pointer);
+    this.swipeControl(this.pointer);
 
     // player direction responds to the up and down keys
-    const cursors = this.scene.input.keyboard.createCursorKeys();
-    this.movePlayer = this.cursorControl(cursors);
+    this.cursorControl(this.cursors);
 
-    // set player velocity
-    this.player.setVelocityX(0);
-    this.player.setVelocityY(this.playerVelY() * this.fishSpeed + this.fishGravity);
-  }
+    this.player.setVelocity(this.playerVelX(), this.playerVelY())
+  };
 
   #playerAnimation() {
     let fishSwim = {
@@ -70,4 +69,29 @@ export default class Player extends PlayerController {
     this.player.anims.load('fish-swim');
     this.player.anims.play('fish-swim');
   }
+
+  #pointersNCursors() {
+    this.pointer = this.scene.input.activePointer;
+    this.cursors = this.scene.input.keyboard.createCursorKeys();
+    this.centreX = this.scene.cameras.main.width / 2;
+    this.centreY = this.scene.cameras.main.height / 2
+  }
+
+  #screenBoundry() {
+    this.leftLim = this.player.width * this.scene.scale / 2 + 20;
+    this.rightLim = this.scene.cameras.main.width - this.leftLim;
+    this.upperLim = this.player.height * this.scene.scale / 2;
+    this.lowerLim = this.scene.cameras.main.height - this.upperLim;
+  }
+
+  /*
+  #createKeys() {
+    let keyA; let keyS; let keyD; let keyW;
+    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+  }
+  */
+  
 }

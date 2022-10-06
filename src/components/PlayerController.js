@@ -2,54 +2,92 @@ export default class PlayerController {
   constructor(scene) {
     this.scene = scene;
     this.velocity = 25; // player velocity
-    this.deadBand = 10; // swipe 'dead band' ie a small movement is not a swipe
+    this.deadBand = 100; // central band on screen won't move the player
+    this.movePlayer = { x: '', y: '' };
+    this.wasUD = false;
+    this.wasXY = false;
+    this.wasClicked = false;
+  }
+  
+  playerVelX() {
+    if (this.movePlayer.x == "left" && this.player.x > this.leftLim) {
+      return -(this.velocity);
+    } else if (this.movePlayer.x == "right" && this.player.x < this.rightLim) {
+      return this.velocity;
+    } else {
+      return 0;
+    }
   }
 
   playerVelY() {
-    // limits to stop player going off screen
-    const upperLim = (this.player.height * this.scene.scale) / 2;
-    const lowerLim = this.scene.cameras.main.height - upperLim;
-
-    if (this.movePlayer == 'down' && this.player.y < lowerLim) {
+    if (this.movePlayer.y == "down" && this.player.y < this.lowerLim) {
       return this.velocity;
-    } else if (this.movePlayer == 'up' && this.player.y > upperLim) {
-      return -this.velocity;
+    } else if (this.movePlayer.y == "up" && this.player.y > this.upperLim) {
+      return -(this.velocity);
     } else {
-      this.movePlayer = null;
       return 0;
     }
   }
 
   swipeControl(pointer) {
     if (pointer.isDown) {
-      this.wasClicked = true;
-      if (pointer.downY - pointer.y > this.deadBand) {
-        return 'up';
-      } else if (pointer.y - pointer.downY > this.deadBand) {
-        return 'down';
-      } else {
-        return null;
-      }
+      this.wasClicked = true
+      this.#verticalSwipe(pointer)
+      this.#horizontalSwipe(pointer)
     } else if (this.wasClicked == true) {
-      this.wasClicked = false;
-      return null;
-    } else {
-      return this.movePlayer;
-    }
+      this.wasClicked = false
+      this.movePlayer = { x: '', y: '' }
+    } 
   }
 
   cursorControl(cursors) {
-    if (cursors.down.isDown) {
-      this.wasPushed = true;
-      return 'down';
-    } else if (cursors.up.isDown) {
-      this.wasPushed = true;
-      return 'up';
-    } else if (this.wasPushed == true) {
-      this.wasPushed = false;
-      return null;
+    this.#verticalCursor(cursors)
+    this.#horizontalCursor(cursors)
+  }
+
+  #verticalSwipe(pointer) {
+    if ((pointer.y - this.centreY) > this.deadBand) {
+      this.movePlayer.y = 'down'
+    } else if ((this.centreY - pointer.y) > this.deadBand) {
+        this.movePlayer.y = 'up'
     } else {
-      return this.movePlayer;
+      this.movePlayer.y = ''
+    }
+  }
+
+  #horizontalSwipe(pointer) {
+    if ((this.centreX - pointer.x) > this.deadBand) {
+      this.movePlayer.x = 'left'
+    } else if ((pointer.x - this.centreX) > this.deadBand) {
+      this.movePlayer.x = 'right'
+    } else {
+      this.movePlayer.x = ''
+    }
+  }
+
+  #verticalCursor(cursors) {
+    if (cursors.down.isDown) {
+      this.wasUD = true;
+      this.movePlayer.y = 'down'
+    } else if (cursors.up.isDown) {
+      this.wasUD = true;
+      this.movePlayer.y = 'up'
+    } else if (this.wasUD == true) {
+      this.wasUD = false
+      this.movePlayer.y = ''
+    }
+  }
+
+  #horizontalCursor(cursors) {
+    if (cursors.left.isDown) {
+      this.wasXY = true;
+      this.movePlayer.x = 'left'
+    } else if (cursors.right.isDown) {
+      this.wasXY = true;
+      this.movePlayer.x = 'right'
+    } else if (this.wasXY == true) {
+      this.wasXY = false;
+      this.movePlayer.x = ''
     }
   }
 }
