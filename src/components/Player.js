@@ -45,6 +45,14 @@ export default class Player extends PlayerController {
     // set player angle to 0
     this.player.setAngle(0);
 
+    // player bounds
+    if (this.player.y > 1080) {
+      this.player.y = 1080;
+    }
+    if (this.player.y < 0) {
+      this.player.y = 0;
+    }
+
     // player direction responds to up and down swipe
     this.swipeControl(this.pointer);
 
