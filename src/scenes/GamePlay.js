@@ -38,7 +38,6 @@ export default class GamePlay extends BaseGame {
     // this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
     // create background
-    console.log(IS_TOUCH)
     if (IS_TOUCH) {
       this.setStaticBackground();
     } else {
