@@ -28,10 +28,18 @@ export default class GameStart extends BaseGame {
       this,
     );
 
-    startButton.setDepth(1).setInteractive({ useHandCursor: true });
-    startButton.on('pointerup', () => {
+    const loadGamePlay = () => {
       data.music.destroy();
       this.scene.start('game-play');
+    };
+
+    startButton.setDepth(1).setInteractive({ useHandCursor: true });
+    startButton.on('pointerup', () => {
+      loadGamePlay();
+    });
+
+    this.scene.scene.input.keyboard.on('keyup', () => {
+      loadGamePlay();
     });
   }
 }

@@ -4,6 +4,35 @@ export default class BaseGame extends Phaser.Scene {
   }
 
   preload() {
+    // // force landscape on mobile
+    // this.scene.scene.scale.forceOrientation('')
+    // if (!this.game.device.desktop) {
+    //   this.scene.scene.scale.updateOrientation(true, false);
+    // this.scene.scene.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
+    // this.scene.scene.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
+
+    // window.addEventListener('load', () => {
+    //   // setTimeout to 1 second will prevent a bug if you using a splash screen
+    //   window.setTimeout(() => {
+    //     // fix the height to 720
+    //     const DEFAULT_HEIGHT = 720;
+    //     // adjust the width dynamically based on the device screen ratio
+    //     const DEFAULT_WIDTH = (window.innerWidth / window.innerHeight) * DEFAULT_HEIGHT;
+
+    //     const config = {
+    //       //...
+    //       scale: {
+    //         mode: Phaser.Scale.FIT,
+    //         autoCenter: Phaser.Scale.CENTER_BOTH,
+    //         width: DEFAULT_WIDTH,
+    //         height: DEFAULT_HEIGHT,
+    //       },
+    //       //...
+    //     };
+    //     new Phaser.Game(config);
+    //   }, 1000);
+    // });
+
     //during development
     this.sound.setVolume(0.1);
 
