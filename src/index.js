@@ -25,7 +25,7 @@ const config = {
     default: 'matter',
     fps: 5,
     matter: {
-      debug: true,
+      debug: false,
     },
   },
   audio: {

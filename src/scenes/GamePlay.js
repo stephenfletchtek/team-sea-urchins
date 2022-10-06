@@ -38,7 +38,12 @@ export default class GamePlay extends BaseGame {
     // this.matter.world.setBounds(0, 0, 1920, 1080, 1, false, false, false, true);
 
     // create background
-    this.background.createMovingBackground();
+    console.log(IS_TOUCH)
+    if (IS_TOUCH) {
+      // this.setStaticBackground();
+    } else {
+      this.background.createMovingBackground();
+    }
 
     // create player
     this.player.createPlayer();
@@ -61,7 +66,9 @@ export default class GamePlay extends BaseGame {
 
   update() {
     // update background
-    this.background.updateMovingBackground();
+    if (IS_TOUCH == false) {
+      this.background.updateMovingBackground();
+    }
 
     // update player
     this.player.updatePlayer();
