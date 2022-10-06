@@ -33,9 +33,9 @@ export default class BaseGame extends Phaser.Scene {
     this.load.json('powerup-physics', 'assets/powerups/powerups-physics.json');
 
     // load static background
-    this.load.svg('background', 'assets/background/whole-background.svg', {
-      width: 1920,
-      height: 1080,
+    this.load.svg('background', 'assets/background/whole-background1.svg', {
+      width: 480,
+      height: 270,
     });
 
 
@@ -63,6 +63,7 @@ export default class BaseGame extends Phaser.Scene {
     // load powerups
     this.load.image('wormPower', 'assets/powerups/powerup-worm.png');
     this.load.image('octopusStephen', 'assets/powerups/octopus-stephen.png');
+    this.load.image('bubblePower1', 'assets/powerups/bubbles1.png');
     this.load.atlas(
       'bubblePower',
       'assets/powerups/bubbles-spritesheet.png',
@@ -72,6 +73,6 @@ export default class BaseGame extends Phaser.Scene {
 
   setStaticBackground() {
     // background
-    this.add.image(0, 0, 'background').setOrigin(0, 0);
+    this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(4);
   }
 }
