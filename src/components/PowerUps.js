@@ -74,26 +74,30 @@ export default class PowerUp {
   }
 
   #bubblesAnimation() {
-    let bubbleImage = this.scene.matter.add.sprite(-200, -200, 'bubblePower', null, {
-      shape: this.physics.bubbles,
-    });
+    if (IS_TOUCH) {
+      return this.scene.matter.add.image(-200, -200, 'bubblePower', null, { shape: this.physics.bubbles });
+    } else {
+      let bubbleImage = this.scene.matter.add.sprite(-200, -200, 'bubblePower', null, {
+        shape: this.physics.bubbles,
+      });
 
-    let bubblesMove = {
-      key: 'bubbles-move',
-      frames: [
-        { key: 'bubblePower', frame: 'bubbles1.png' },
-        { key: 'bubblePower', frame: 'bubbles2.png' },
-        { key: 'bubblePower', frame: 'bubbles3.png' },
-      ],
-      frameRate: 2,
-      repeat: -1,
-    };
+      let bubblesMove = {
+        key: 'bubbles-move',
+        frames: [
+          { key: 'bubblePower', frame: 'bubbles1.png' },
+          { key: 'bubblePower', frame: 'bubbles2.png' },
+          { key: 'bubblePower', frame: 'bubbles3.png' },
+        ],
+        frameRate: 2,
+        repeat: -1,
+      };
 
-    this.scene.anims.create(bubblesMove);
-    bubbleImage.anims.load('bubbles-move');
-    bubbleImage.anims.play('bubbles-move');
+      this.scene.anims.create(bubblesMove);
+      bubbleImage.anims.load('bubbles-move');
+      bubbleImage.anims.play('bubbles-move');
 
-    return bubbleImage;
+      return bubbleImage;
+    }
   }
 
   #controlPowerUp(group, VelX, VelY, upperLim, scale) {

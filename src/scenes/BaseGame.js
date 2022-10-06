@@ -63,6 +63,7 @@ export default class BaseGame extends Phaser.Scene {
     // load powerups
     this.load.image('wormPower', 'assets/powerups/powerup-worm.png');
     this.load.image('octopusStephen', 'assets/powerups/octopus-stephen.png');
+    this.load.image('bubblePower1', 'assets/powerups/bubbles1.png');
     this.load.atlas(
       'bubblePower',
       'assets/powerups/bubbles-spritesheet.png',
