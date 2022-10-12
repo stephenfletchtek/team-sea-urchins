@@ -1,14 +1,10 @@
-# Welcome to our Under the Sea game!
+# Welcome to our ReefRunner game!
 
-## dev - delete me 
-got to https://www.codeandweb.com/physicseditor, get physics editor 
-open it, load in an image file (not svg)
-try the magic wand tool, the shape should have a red outline
-to do manually, right click on the object where you want a vertex to add one
-Publish 
-this give you a json file with the fixtures of the object for collision physics  
+A sidescroller game underneath the sea where the aim is to get the highest score possible. The longer you last in the game without being killed by a shark or being pushed of the screen by a rock of ship, the higher your score! Extra features such as bubbles make you rise up and a can of worms brings you down. Don't avoid them though as they add 1000 points to your score. Also, don't forget to catch octopus Stephen, as he will make you go twice as fast to make it easier to catch those bubbles and worms and avoid any obstacles.
 
+This game is using Phaser as the main framework with JavaScript and HTML/CSS. Playable on both your laptop (recommended on Chrome) and phone.
 
+[Start playing!](https://reefrunner.herokuapp.com/)
 
 ## Dependencies
 
@@ -33,7 +29,9 @@ npm install cypress --save-dev
 npm install -g @cypress/chrome-recorder
 ```
 
-### Start
+## Servers
+
+#### Start
 
 1. Start the server
    ```bash
@@ -53,7 +51,7 @@ npm run 3030
 <!-- npm install cypress --save-dev
 npx cypress open -->
 
-### Test
+## Testing
 
 - Run all cypress tests
   ```bash
