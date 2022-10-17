@@ -5,11 +5,11 @@
   "main": "index.js",
   "engines": {
     "node": "18.8.0"
-    },
+  },
   "type": "module",
   "scripts": {
-    "start": "serve",
     "3030": "PORT=3030 serve",
+    "start": "serve",
     "test": "cypress run"
   },
   "repository": {
